@@ -1,0 +1,10 @@
+\babel@toc {english}{}
+\contentsline {section}{\numberline {1}Notes \& Preface}{2}{section.1}
+\contentsline {section}{\numberline {2}Lecture 1}{2}{section.2}
+\contentsline {subsection}{What is Data Science?}{2}{section*.2}
+\contentsline {subsection}{Topics}{2}{section*.3}
+\contentsline {subsection}{Tools}{2}{section*.4}
+\contentsline {subsection}{Conda}{3}{section*.5}
+\contentsline {section}{\numberline {3}Test Section}{3}{section.3}
+\contentsline {subsection}{Lower Level}{3}{section*.6}
+\contentsline {section}{\numberline {4}Closing Thoughts}{3}{section.4}
