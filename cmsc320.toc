@@ -7,4 +7,4 @@
 \contentsline {subsection}{Conda}{3}{section*.5}
 \contentsline {section}{\numberline {3}Test Section}{3}{section.3}
 \contentsline {subsection}{Lower Level}{3}{section*.6}
-\contentsline {section}{\numberline {4}Closing Thoughts}{3}{section.4}
+\contentsline {section}{\numberline {4}Footnotes}{3}{section.4}

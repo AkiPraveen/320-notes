@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1588114945 "cmsc320.tex" "cmsc320.pdf" "cmsc320" 1588114945
+["pdflatex"] 1588115259 "cmsc320.tex" "cmsc320.pdf" "cmsc320" 1588115260
   "/etc/texmf/web2c/texmf.cnf" 1579084374 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc" 1480098667 7307 8f544a778f53cb535460674c7875f737 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
@@ -36,7 +36,6 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm" 1480098717 688 37338d6ab346c2f1466b29e195316aa4 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs5.tfm" 1480098717 684 3a51bd4fd9600428d5264cf25f04bb9a ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs7.tfm" 1480098717 692 1b6510779f0f05e9cbf03e0f6c8361e6 ""
-  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1480098733 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1480098733 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb" 1507586689 60285 4bd53385238c9637f401a80f9f492449 ""
   "/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1480098806 71627 94eb9990bed73c364d7f53f960cc8c5b ""
@@ -262,13 +261,13 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1520210507 32485 c64754543d8ac501bea6e75e209ea521 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1579084420 2700761 ac0584cc9514ab21918550a6948c4ee2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1579084432 4134830 0d1f858e796b5645f4c647ab5e989ffe ""
-  "cmsc320.aux" 1588114862 2194 ba763c91e888fad6c3e4a0b5f1ed3cf5 ""
-  "cmsc320.tex" 1588114945 7682 d3b3b7a6bd7ac175514e7024972fb1a1 ""
-  "cmsc320.toc" 1588114862 515 f852d3909ee6b940cb6cf3ef8fc9caf2 ""
+  "cmsc320.aux" 1588115259 2304 bee82ef22c6d83b9cb11e5721935ceec ""
+  "cmsc320.tex" 1588115195 7421 95cc7587476bea9828554edf1a2372f9 ""
+  "cmsc320.toc" 1588115259 557 8e7daab5263d06fe0add46320330afa4 ""
   "notes.sty" 1588054034 8119 e12fe5efee01f281629a9b1c01a1d87c ""
   "umd_cs.jpg" 1588054040 2893 be774892ac0b49f3314dabd3866a9f6d ""
   (generated)
-  "cmsc320.toc"
-  "cmsc320.log"
   "cmsc320.pdf"
+  "cmsc320.log"
   "cmsc320.aux"
+  "cmsc320.toc"
