@@ -5,6 +5,17 @@
 \contentsline {subsection}{Topics}{2}{section*.3}
 \contentsline {subsection}{Tools}{2}{section*.4}
 \contentsline {subsection}{Conda}{3}{section*.5}
-\contentsline {section}{\numberline {3}Test Section}{3}{section.3}
-\contentsline {subsection}{Lower Level}{3}{section*.6}
-\contentsline {section}{\numberline {4}Footnotes}{3}{section.4}
+\contentsline {section}{\numberline {3}Lecture 2}{3}{section.3}
+\contentsline {subsection}{Literate Programming}{3}{section*.6}
+\contentsline {subsection}{Jupyter Notebook + Alternatives}{3}{section*.7}
+\contentsline {subsection}{List Comprehensions in Python}{3}{section*.8}
+\contentsline {subsection}{Using Python3}{4}{section*.9}
+\contentsline {subsection}{Python vs. R for Data Scientists}{4}{section*.10}
+\contentsline {subsection}{The Classic Statistical View of Data}{4}{section*.11}
+\contentsline {subsubsection}{Nominal Data}{5}{section*.12}
+\contentsline {subsubsection}{Ordinal Data}{5}{section*.13}
+\contentsline {subsubsection}{Interval and Ratio Data}{5}{section*.14}
+\contentsline {subsection}{Data Science at a Glance}{6}{section*.15}
+\contentsline {section}{\numberline {4}Test Section}{6}{section.4}
+\contentsline {subsection}{Lower Level}{6}{section*.16}
+\contentsline {section}{\numberline {5}Footnotes}{6}{section.5}
