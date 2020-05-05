@@ -34,6 +34,7 @@
 \usepackage[utf8]{inputenc}
  
 \usepackage{listings}
+\lstloadlanguages{Python}
 \usepackage{xcolor}
 \usetikzlibrary{patterns}
 \usepackage[many]{tcolorbox}
@@ -104,6 +105,11 @@
     shading=axis,
     bottom color={rgb:red,222;green,222;blue,222},
     top color=white,shading angle=45]
+
+
+\newtcolorbox{myproof}[1][]{
+   enhanced,arc=0pt, frame hidden, borderline west = {1pt}{0pt}{black}, #1
+}
 
 \begin{document}
 % \renewcommand\familydefault{\sfdefault}
@@ -220,20 +226,20 @@ This course will be centered around Jupyter Notebook.
 
 To make lists in Python, you can use loops or the \texttt{map()} function, but a \textit{pythonic} way of doing this would be to use a list comprehension. Below is a simple example.\newline
 
-\begin{tcolorbox}
+\begin{myproof}
 \textbf{Example:} Make a list of all the squares of \texttt{\{0,1,2,3,4,5,6,7,8,9\}}\newline\newline
 \textbf{List Comprehension:}\newline
 \texttt{squares = [i * i for i in range(10)]}
-\end{tcolorbox}
+\end{myproof}
 
 A good way of thinking about this is that it allows you to build sets like a mathematician. This is a common theme in data science, where we can find the intersection between a lot of math stuff and computer science stuff. It's good to know how lists are generated in a mathematical sense in Python for that reason. Here's an example where we translate mathematical notation into a Python list comprehension.\\
 
-\begin{tcolorbox}
+\begin{myproof}
 \textbf{Example:} Make a list of all odd natural numbers from 0 to 999\\\\
 \textbf{Math Notation:}\\ $E =$ \{$x$ | $x$ in $\mathbb{N} \land x$ is odd $\land x<1000$ \}\\\\
 \textbf{List Comprehension:}\\
 \texttt{E = [x for x in range(1000) if x \% 2 != 0]}
-\end{tcolorbox}
+\end{myproof}
 
 \subsection{Using Python3}
 
@@ -330,19 +336,19 @@ A type of categorical data, nominal data value have names and describe the state
 
 The key here is that there can be no quantitative values assigned to each of these categories, as that would allow us to do math with them and would defeat the purpose of these labels. These values \textbf{cannot be easily compared}, so they have no material value. \textit{E.g. being single is not quantitatively better than being married (objectively), and vice versa}.\\
 
-\begin{tcolorbox}
+\begin{myproof}
 \textbf{Example:} What is your marital status?
 \begin{itemize}
 	\item Married
 	\item Divorced (separated)
 	\item Single
 \end{itemize}
-\end{tcolorbox}
+\end{myproof}
 
 \subsubsection{Ordinal Data}
 
 Ordinal data represents values that have names that describe the state of things, but in this case, there \textbf{is} an ordering of those values. This is what sets it apart from nominal data. \\ 
-\begin{tcolorbox}
+\begin{myproof}
 \textbf{Example:} What did you think of the movie?
 \begin{itemize}
 	\item Strongly liked
@@ -351,7 +357,7 @@ Ordinal data represents values that have names that describe the state of things
 	\item Disliked
 	\item Strongly Disliked
 \end{itemize}
-\end{tcolorbox}
+\end{myproof}
 
 Given how subjective some of these things can be, the distinction between nominal and ordinal can be \textbf{blurry} at times. For example, going back to our nominal example, some people may think that being single is quantitatively better than being married.
 
@@ -361,11 +367,11 @@ Interval and Ratio data are pretty similar, and both can be used to measure thin
 
 \textbf{Interval} data scales with fixed but arbitrary values. That might sound silly, but a good example is \textbf{dates}. Below is an example of two data comparisons of interval data that seem arbitrary, but indeed hold integer value.\\
 
-\begin{tcolorbox}
+\begin{myproof}
 \textbf{Example:} The following two operations are equal. \\\\
 \texttt{10/1/2019 - 9/1/2019} \\
 \texttt{10/1/2018 - 9/1/2018}
-\end{tcolorbox}
+\end{myproof}
 
 The measures don't look like integer values at first, but we can quantify them by marking them with days.\\
 
@@ -375,52 +381,289 @@ Here's what sets \textbf{Interval} data apart, however. You have \textbf{no meth
 
 Differentiating between the two is usually a case-by-case basis thing, which is what I'm thinking is the best way to handle any conflicts I end up running into between ratio and interval data.\\
 
-\begin{tcolorbox}
+\begin{myproof}
 \textbf{Example:} Interval data \\\\
-Temperature on the scale of Celsius or Fahrenheit is interval-type data because $0\degree$ is set to an arbitrarily fixed point. Also, we can't scale it properly- $30\degree F$ isn't twice as hot as $15\degree F$.
-\end{tcolorbox}
-
-\begin{tcolorbox}
+Temperature on the scale of Celsius or Fahrenheit is interval-type data because $0\degree$ is set to an arbitrarily fixed point. Also, we can't scale it properly- $30\degree F$ isn't twice as hot as $15\degree F$.\\\\
 \textbf{Example:} Ratio data \\\\
 Temperature on the Kelvin scale is ratio data. $0K$ is set at legitimate absolute zero, and $50K$ is truly twice as cold as $100K$.
-\end{tcolorbox}
+\end{myproof}
 
 \subsection{Data Science at a Glance}
 
+Data science is basically manipulating and computing using data. As such, we need to shift our thinking from writing \textbf{imperative} code to manipulate \textbf{data structures} to creating \textbf{sequences and pipelines} to conduct operations on \textbf{data}. That stuff is covered more in 420 and 424, for reference.\newline
 
+More often than not, we have to take the data that we've found and make it easily understandable for humans. This is called Data Representation.\newline
 
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Data Representation} $\rightarrow$ The natural way to think about data, in a human way.
+\end{tcolorbox}
 
+Here are some ways that we think about data in this class:\newline
 
+\begin{itemize}
+	\item \textbf{One Dimensional Arrays} $\rightarrow$ E.g. \texttt{<'red', 'blue', 'green'>} or \texttt{<0,3,4>}. We can use functions like map, fold and filter to manipulate these.
+	\item \textbf{N-Dimensional Arrays} $\rightarrow$ Also known as \textbf{tensors}.
+	\begin{itemize}
+		\item For example, a Tensor of dimensions \texttt{[6,4]} is just a $6\times 4$ matrix.
+		\item Similarly, a Tensor of dimensions \texttt{[4,4,2]} is a 3D array.
+		\item Here, we can start to make use of \textbf{Linear Algebra} for further data manipulation. Some example operations that we can use to mess with tensors:
+		\begin{itemize}
+			\item Matrix/Tensor Multiplications
+			\item Transpose
+			\item Vector Multiplication
+			\item Matrix Factorization (we will explore this later)
+		\end{itemize}
+	\end{itemize}
+	\item \textbf{Sets} of objects, or \textbf{Key/Value Pairs}
+	\item \textbf{Tables/Relations} $\rightarrow$ This goes into relational databases, which is the basis of \texttt{SQL}. We'll go into this later.
+	\item \textbf{Hierarchies/Trees/Graphs} $\rightarrow$ This sort of spills over into data structures, but they've got some additional nuances included with them.
+	\begin{itemize}
+		\item They tend to make use of 'path' queries
+		\item Graph and Tree Algorithms will be useful here, efficiency is key
+		\item Example: networks are represented this way, we'll cover that later in this class
+	\end{itemize}
+\end{itemize}
 
+\section{Lecture 3}
 
+\subsection{Acquiring Data}
 
-\section{Test Section}
+Here are some examples of how we can grab data from places. Pretty obvious, common sense stuff. We're going to explore all of these as we move forward.
 
-\subsection{Lower Level}
+\begin{itemize}
+	\item Direct download from online or loading it from local storage
+	\item Generate the data locally via a simulation or equivalent program
+	\item Query data from a database 
+	\item Query data from an API
+	\item Scrape data from a website
+\end{itemize}
 
-Here's a cool code example.
+When you pull from APIs, you're going to want to be using HTTP Requests.
+
+\subsection{RESTful APIs}
+
+This stands for REpresentational State Transfer APIs, and it's basically a standard that enforces that APIs do a few things. It says that they should support these basic operations:
+
+\begin{itemize}
+	\item \texttt{GET} $\rightarrow$ Query a data entry
+	\item \texttt{POST} $\rightarrow$ Create a new data entry
+	\item \texttt{PUT} $\rightarrow$ Update an existing data entry
+	\item \texttt{DELETE} $\rightarrow$ Delete an existing data entry
+\end{itemize}
+
+RESTful APIs are also supposed to be stateless. That is, with every API request, you send a token of who you are, and you get a current capture of the data at that time/edit the data.\newline
+
+A good example of a REST API is Github, where you can use REST API calls on your repositories.\newline
+
+There are other guiding principles and miscellaneous guidelines for RESTful APIs, which can all be found at \texttt{https:/restfulapi.net}\newline
+
+\begin{tcolorbox}[title=Aside: GRAPHQL,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+\textbf{GraphQL} $\rightarrow$ REST has been adopted by many developers and is widely regarded as the traditional way to send data over HTTP. GraphQL, on the other hand, is a revolutionary new player that's presented as a way to \textit{replace} legacy REST APIs \textit{(back4apps)}
+\end{tcolorbox}
+
+\subsection{Oauth}
+
+If you want to grant an app access to your identity without actually giving it your username and password, is there a way to do that? The answer is \textbf{yes}, because this is a common software engineering problem.\newline
+
+\textbf{OAuth} is the standard for \textit{access delegation} used for internet users to grant websites access to their information on other sites. A pretty good example of this is Google's sign in page on other websites. How do you think other websites conduct sign in without knowing your password for your Google account?
+
+\subsection{GET Requests}
+
+Assume we used Python's \texttt{requests} module to query a server with a \texttt{GET} request.\newline
+
+First, we'd get either a \texttt{CSV}, \texttt{JSON}, or \texttt{HTML/XML/XHTML} file back, in response. This is the data that we have to sift through. \textit{Note:} You might also get a domain-specific file, like an \textbf{rvt} file. You're always welcome to make your own filetype for storing data, but make sure it's actually documented somewhere.\newline
+
+\begin{tcolorbox}[title=Aside: Parsing CSVs and JSON,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+Never write your own \texttt{CSV} or \texttt{JSON} parsers. This is another example of reinventing the wheel. We'll use Python Libraries to do this more easily. \textit{E.g. PANDAS}
+\end{tcolorbox}
+
+\subsection{More on Data Storage Formats}
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Serialization} $\rightarrow$ The process of converting objects into strings.\newline
+\textbf{Deserialization} $\rightarrow$ The process of converting strings back into objects.
+\end{tcolorbox}
+
+\textbf{\texttt{JSON}} is a pretty common format for serializing objects. Plus, serializing objects makes it easier for humans to read and perform sanity-checks on. In Python, \texttt{JSON} is built with Strings, Lists, Dictionaries, and sometimes mixes of a few of those together.\newline
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Document Object Model} $\rightarrow$ A tree-based data storage method. For example, HTML is structured this way.
+\end{tcolorbox}
+
+\subsubsection{SAX}
+
+SAX is a lightweight way to process XML. It generates a stream of events as it parses an XML file. IT helps us pay attention to individual parts of an XML file without having to process through the rest of it.
+
+\subsection{Parsing HTML}
+
+Parsing HTML is the hardest to do in this case, as I've seen many times before in hackathon projects. Although HTML's specifications are pure, the real world examples of it are pretty nightmarish, thanks to how it interacts with JavaScript and loads dynamic content. All in all, it's fairly unreliable in terms of parsing it manually.\newline
+
+In this case, we're best off using the Python library \texttt{BeautifulSoup}. We can also make use of Python's Regex, which is similar enough to Ruby regex that we worked with in 330. A website like Rubular-\texttt{https://pythex.org} will be useful in this case.\newline
+
+By combining \texttt{BeautifulSoup}, Regular expressions, and \texttt{GET} requests, we can make the process fairly streamlined. This is usually what we'll be using to scrape websites. In order to scrape more dynamic websites, we'd probably have to make use of Selenium. Check my 320 folder to find an example of a simple webscraper with \texttt{BeautifulSoup}.
+
+\section{Lecture 4}
+
+\textbf{Overview:} \textbf{Numpy, PANDAS, Relational Databases, Apache Spark}\newline
+
+\subsection{Available Technologies}
+
+Python has a bunch of 3rd party packages for scientific and numerical computation. Some examples are..
+
+\begin{itemize}
+	\item \textbf{\texttt{Numpy} and \texttt{Scipy}} $\rightarrow$ Numerical and scientific function libraries.
+	\item \textbf{\texttt{NUMBA}} $\rightarrow$ A Python compiler supporting 'Just in Time' compilation. That is, it supports compilation of code while code is running.
+	\item \textbf{\texttt{ALGLIB}} $\rightarrow$ A cross-platform numerical analysis library
+	\item \textbf{\texttt{PANDAS}} $\rightarrow$ An extensive data analysis tool with some neat built-in data structures
+	\item \textbf{\texttt{PyGSL}} $\rightarrow$ GNU Scientific Library in Python
+	\item \textbf{Scientific Python} $\rightarrow$ A collection of scientific computing modules for Python
+\end{itemize}
+
+These are a bunch of examples of what's available to developers right now, but we won't focus on all of it. Particular emphasis will be placed on \texttt{Numpy} and \texttt{PANDAS}.
+
+\subsection{NumPy Stack}
+
+The \textbf{NumPy} stack is the most commonly used out of all of these packages. It includes the following:
+
+\begin{itemize}
+	\item \texttt{Numpy} - Works sort of like MatLab, just lets us handle a lot of number manipulation and mathematical operations
+	\item \texttt{Matplotlib} - This is a plotting and graphing library
+	\item \texttt{PANDAS} - This gives us a bunch of data structures and data analysis tools to play with/keep track of our data. (Usually, you'll want to import your data into a \texttt{PANDAS} \texttt{dataframe} or something.)
+	\item \texttt{SciPy}
+	\item \texttt{SymPy}
+	\item \texttt{Jupyter} - This will be our medium for \textbf{literate programming}.
+\end{itemize}
+
+To see more about this stuff, search Google for the \textbf{NumPy Stack} and you'll find everything you need.
+
+\subsubsection{Misc About NumPy}
+
+Here are a few more notable things about \texttt{Numpy}:
+
+\begin{itemize}
+	\item It contains the \textbf{n-dimensional array} object
+	\item It contains 'sophisticated' functions that we can use
+	\item It provides us with excellent tools to integrate \texttt{C++}, \texttt{C}, and even \texttt{FORTRAN}
+	\item It has math capabilities that are highly useful to us (e.g. Linear Algebra, Fourier Transform, etc)
+	\item \texttt{Numpy} also comes with a bunch of new DataTypes for us to use.
+\end{itemize}
+
+\begin{tcolorbox}[title=Aside: Numpy Arrays,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+Arrays in \texttt{Numpy} are different from regular lists in Python, so make sure your syntax is correct and you know the difference when you decide to use either one in practice.
+\end{tcolorbox}
+
+\subsubsection{Linear Algebra with NumPy}
+
+One of \texttt{NumPy}'s most common uses lies within its \textbf{Linear Algebra} module. It allows us to do regular LA stuff, like \texttt{.transpose()} and \texttt{.inverse()} to matrices stored as n-dim arrays. Here's an example.
 
 {\centering
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-#include <math.h>
+\begin{lstlisting}[language=python]
+# Note: remember, we have to use NumPy's n-dimensional array object here
 
-int main() {
-   double value;
-
-   printf("Enter a number: ");
-   scanf("%lf", &value);     /* Notice the use of %lf */
-
-   printf("sqrt %f: \n", sqrt(value));
-   printf("power of 2: %f\n", pow(value, 2));
-   printf("sin: %f\n", sin(value));
-
-   return 0;
-}
+array([[1.0, 2.0],
+       [3.0, 4.0]]).transpose()
 \end{lstlisting}
 }
 
-Here's some more information about our code example.
+\subsubsection{SciPy}
+
+\textbf{\texttt{SciPy}} includes various tools and functions for solving common problems in \textbf{scientific computing}.\\
+
+We won't use it much for now, but it's supposed to be good to know. Often you'll be able to find higher-level \texttt{Scipy} functions that will work around the need to call lower-level \texttt{Scipy} functions. It's got a lot of functionality built in, so make sure not to overlook it.
+
+\subsection{The Idea of Reproducibility}
+
+Starting from the same dataset, can we reproduce your analysis and get the same results? \textbf{This is the goal that we're trying to fulfill with our analysis}- we want our stuff to be reproducible! (Otherwise, what exactly does it even mean?)
+
+\subsection{Best Practices}
+
+Honestly, most of this stuff should be common sense.
+
+\begin{itemize}
+	\item Use version control to keep track of code. (e.g. \texttt{git})
+	\item Use unit testing. (e.g. \texttt{unittest} module in python)
+	\item Use libraries when you can. (don't reinvent the wheel!)
+\end{itemize}
+
+\subsection{The Idea of Open Data}
+
+Some data should be widely available for everyone to use as they want, without restrictions from copyright, etc.\\
+
+This is probably where all of our free data comes from, so this idea is super helpful to us as data scientists.
+
+\subsection{General Process}
+
+Here's the general process for data science- just so we have an idea of what's going on.\\
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp9523245055647409] 
+\draw   (34.67,19.33) -- (210.33,19.33) -- (210.33,257.33) -- (34.67,257.33) -- cycle ;
+%Shape: Rectangle [id:dp26296611780141976] 
+\draw   (262,19.33) -- (437.67,19.33) -- (437.67,257.33) -- (262,257.33) -- cycle ;
+%Shape: Rectangle [id:dp4749898829673477] 
+\draw   (491.33,19.33) -- (667,19.33) -- (667,257.33) -- (491.33,257.33) -- cycle ;
+%Straight Lines [id:da3772898435405757] 
+\draw    (65.67,70.33) -- (177.67,69.67) ;
+%Straight Lines [id:da47086799536926727] 
+\draw    (292.33,70.33) -- (404.33,69.67) ;
+%Straight Lines [id:da16258158592667293] 
+\draw    (525.67,69.67) -- (637.67,69) ;
+%Straight Lines [id:da8259565971285442] 
+\draw    (215,138.33) -- (252.33,138.33) ;
+\draw [shift={(254.33,138.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da6335608206253658] 
+\draw    (444.33,138.33) -- (481.67,138.33) ;
+\draw [shift={(483.67,138.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (63.33,35) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{Data Acquisition}};
+% Text Node
+\draw (292.67,27.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{Algorithm / Tool}\\\textbf{Development}};
+% Text Node
+\draw (520.67,37) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{Data Acquisition}};
+% Text Node
+\draw (42,131.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Acquire the data, then\\put it in a usable format.};
+% Text Node
+\draw (270,91.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {If new tools are required\\to analyze your data,\\create them.\\\\If new algorithms may\\be needed to analyze it,\\synthesize them.};
+% Text Node
+\draw (511.33,94.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {Use the tools you've\\built / setup and the \\algorithms you've \\created or \\implemented to \\analyze the data.};
+
+
+\end{tikzpicture}
+
+\hfill \break After we do that, we still technically have some programming left. In this new era of literate programming, there's one more step of processing we have to do with our results in order to make them publicly presentable and meaningful.\\
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp9523245055647409] 
+\draw   (34.67,19.33) -- (667.67,19.33) -- (667.67,198.67) -- (34.67,198.67) -- cycle ;
+%Straight Lines [id:da3772898435405757] 
+\draw    (285.67,69.67) -- (397.67,69.67) ;
+
+% Text Node
+\draw (246,35.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{Communication of Results}};
+% Text Node
+\draw (126,98.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Use the principles of \textbf{literate programming }to provide results, plots,\\and publication regarding your data science experiment. This gives\\you the ability to explain your choices and clearly interpret your\\results.};
+
+
+\end{tikzpicture}
+
+
+\hfill \break It's emphasized a lot here to think like an \textbf{algorithm developer}, as you're going to need efficiency in the data analysis that you perform. However, you also need to think like an experiment-conducting \textbf{data scientist}. We don't usually get enough training as the latter, so hopefully this course should be an introduction to that sort of stuff.
+
+
+
 
 
 
