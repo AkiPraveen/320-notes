@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.15)  5 MAY 2020 12:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.15)  6 MAY 2020 03:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2308,45 +2308,105 @@ Overfull \hbox (27.4251pt too wide) in paragraph at lines 660--661
 [][] 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 667--668
+
+ []
+
 [13]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 672.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 672.
+Underfull \hbox (badness 10000) in paragraph at lines 677--678
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 707--708
+
+ []
+
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 763.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `pcr' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+ [14]
+Underfull \hbox (badness 10000) in paragraph at lines 789--790
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 814--815
+
+ []
+
+
+Overfull \hbox (50.9226pt too wide) in paragraph at lines 891--892
+ [][] 
+ []
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 895--896
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 901--902
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 960--961
+
+ []
+
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 1031--1032
+
+ []
+
+[17]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1039.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1039.
  (./cmsc320.aux
 Package cleveref Info: loaded `english' language definitions on input line 22.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 672.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 672.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 672.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1039.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1039.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1039.
  ) 
 Here is how much of TeX's memory you used:
- 44142 strings out of 492982
- 877001 string characters out of 6134896
- 1068531 words of memory out of 5000000
- 46837 multiletter control sequences out of 15000+600000
- 553639 words of font info for 121 fonts, out of 8000000 for 9000
+ 44217 strings out of 492982
+ 878008 string characters out of 6134896
+ 1068530 words of memory out of 5000000
+ 46889 multiletter control sequences out of 15000+600000
+ 554318 words of font info for 124 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  61i,6n,93p,10466b,1463s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texliv
-e/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}{/usr/share/texmf/fonts/en
-c/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/inconsolata/Inconsolata-zi4b.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/bbold-type1/bbold10.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
-pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texm
-f/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public
-/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1000.p
-fb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf
-/fonts/type1/public/cm-super/sfrm0500.pfb></usr/share/texmf/fonts/type1/public/
-cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pf
-b></usr/share/texmf/fonts/type1/public/cm-super/sfxc2488.pfb>
-Output written on cmsc320.pdf (13 pages, 285705 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/
+fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texlive/texmf-dist/fonts/e
+nc/dvips/inconsolata/i4-t1-0.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-
+super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata/Inc
+onsolata-zi4b.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata
+/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/bbold-t
+ype1/bbold10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texm
+f/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public
+/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.p
+fb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1000.pfb></usr/share/texmf
+/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf/fonts/type1/public/
+cm-super/sfrm0500.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pf
+b></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/
+fonts/type1/public/cm-super/sfxc2488.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/urw/courier/ucrr8a.pfb>
+Output written on cmsc320.pdf (17 pages, 314184 bytes).
 PDF statistics:
- 346 PDF objects out of 1000 (max. 8388607)
- 308 compressed objects within 4 object streams
- 57 named destinations out of 1000 (max. 500000)
- 26930 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 419 PDF objects out of 1000 (max. 8388607)
+ 376 compressed objects within 4 object streams
+ 71 named destinations out of 1000 (max. 500000)
+ 27522 words of extra memory for PDF output out of 29859 (max. 10000000)
 

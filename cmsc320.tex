@@ -662,10 +662,375 @@ Here's the general process for data science- just so we have an idea of what's g
 
 \hfill \break It's emphasized a lot here to think like an \textbf{algorithm developer}, as you're going to need efficiency in the data analysis that you perform. However, you also need to think like an experiment-conducting \textbf{data scientist}. We don't usually get enough training as the latter, so hopefully this course should be an introduction to that sort of stuff.
 
+\subsection{Project Organization}
+
+Make sure to organize your project in folders appropriately. Specifically, even if you have a lot of components, group with with a focus on experimental procedure.\\
+
+You should certainly be isolating things like \textbf{data}, \textbf{tools}, and \textbf{experiments} into their own folders. Data could include your raw input data, along with data that you've done some processing on. Tools could include Python environment you're using, and experiments could include the meat of what your data science work will be- pipeline scripts, results, figures, plots, analysis scripts, etc.
+
+\subsection{A Little on Bias, Ethics, Responsibility}
+
+\begin{tcolorbox}[title=Aside: Fairness Through Blindness,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+The concept of not letting an algorithm look at protected attributes in order to keep it from forming potentially harmful biases.
+\end{tcolorbox}
+
+\hfill \break A great example of fairness through blindness could be software that determines the outcome for a loan application. We want the results to be \textbf{independent} of an applicant's race, but they can be \textbf{dependent} on non-protected attributes, such as credit history and income.\\
+
+\begin{tcolorbox}[title=Aside: FATML,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+\textbf{FATML} stands for Fairness, Accountability, and Transparency in Machine Learning.
+\end{tcolorbox}
+
+\hfill \break Overall, here are some guiding principles for data ethics:
+
+\begin{itemize}
+	\item Start with clear user need, with a focus on public benefit. (Can't go wrong with this!)
+	\item Use data and tools that emphasize \textbf{minimum} intrusion/invasion of privacy. (Sometimes, we have no choice but to handle sensitive data)
+	\item Create robust data science models that minimize bias and focus on objective accuracy.
+	\item Be alert to public perceptions.
+	\item Be open and accountable for your actions.
+	\item Security is key- especially if working with sensitive data.
+\end{itemize}
+
+\section{Lecture 5 \& 6}
+
+\textbf{Big ideas: Pandas + Relational Databases}
+
+\begin{itemize}
+	\item Tables (Specifically, the abstraction + operations)
+	\item \texttt{PANDAS}
+	\item The idea of 'tidy' data
+	\item \texttt{SQL}
+\end{itemize}
+
+\subsection{Tables}
+
+Here's the idea- we can abstract data into our own little data structures just like computer scientists do, and a lot of the time, in data science, tables are the optimal way to do that. (This is why software like PANDAS and Numpy have excellent support for these structures.)\\
+
+{
+\centering
 
 
 
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
 
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp5949882099932227] 
+\draw  [color={rgb, 255:red, 139; green, 87; blue, 42 }  ,draw opacity=1 ] (52.33,67.67) -- (118.67,67.67) -- (118.67,90.67) -- (52.33,90.67) -- cycle ;
+%Shape: Rectangle [id:dp5180660849056042] 
+\draw   (119,67.67) -- (185.33,67.67) -- (185.33,90.67) -- (119,90.67) -- cycle ;
+%Shape: Rectangle [id:dp928756418037382] 
+\draw   (185,67.67) -- (251.33,67.67) -- (251.33,90.67) -- (185,90.67) -- cycle ;
+%Shape: Rectangle [id:dp982011584275448] 
+\draw   (251.67,67.67) -- (318,67.67) -- (318,90.67) -- (251.67,90.67) -- cycle ;
+%Shape: Rectangle [id:dp4812611593055496] 
+\draw  [color={rgb, 255:red, 139; green, 87; blue, 42 }  ,draw opacity=1 ] (52.33,90.33) -- (118.67,90.33) -- (118.67,200.67) -- (52.33,200.67) -- cycle ;
+%Shape: Rectangle [id:dp14867838676065692] 
+\draw   (118.67,90.67) -- (185,90.67) -- (185,200.67) -- (118.67,200.67) -- cycle ;
+%Shape: Rectangle [id:dp7944164207923816] 
+\draw   (185.33,90.67) -- (251.67,90.67) -- (251.67,200.67) -- (185.33,200.67) -- cycle ;
+%Shape: Rectangle [id:dp6914540924812163] 
+\draw   (251.67,90.67) -- (318,90.67) -- (318,200.67) -- (251.67,200.67) -- cycle ;
+%Straight Lines [id:da8659955223770235] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (325.67,26) -- (86.97,67.99) ;
+\draw [shift={(85,68.33)}, rotate = 350.02] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da7649126412714919] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (325.67,26) -- (154.11,67.86) ;
+\draw [shift={(152.17,68.33)}, rotate = 346.28999999999996] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da04591151144441219] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (325.67,26) -- (220.36,67.6) ;
+\draw [shift={(218.5,68.33)}, rotate = 338.44] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da1253621546988095] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (325.67,26) -- (286.22,66.89) ;
+\draw [shift={(284.83,68.33)}, rotate = 313.97] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da7853774637498458] 
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ]   (448.33,121.33) -- (317.65,106.89) ;
+\draw [shift={(315.67,106.67)}, rotate = 366.31] [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da2813931715021274] 
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ]   (448.33,121.33) -- (317,125.27) ;
+\draw [shift={(315,125.33)}, rotate = 358.28] [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da28293623689911906] 
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ]   (448.33,121.33) -- (316.3,146.3) ;
+\draw [shift={(314.33,146.67)}, rotate = 349.28999999999996] [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da8467882522352468] 
+\draw [color={rgb, 255:red, 139; green, 87; blue, 42 }  ,draw opacity=1 ]   (152,248.67) -- (86.75,212.63) ;
+\draw [shift={(85,211.67)}, rotate = 388.90999999999997] [color={rgb, 255:red, 139; green, 87; blue, 42 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (78.67,71.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {id};
+% Text Node
+\draw (79.5,94.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 1}\\{\fontfamily{pcr}\selectfont 2}\\{\fontfamily{pcr}\selectfont 3}\\{\fontfamily{pcr}\selectfont 4}\\{\fontfamily{pcr}\selectfont 5}};
+% Text Node
+\draw (138.67,71.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {age};
+% Text Node
+\draw (196,71.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {weight};
+% Text Node
+\draw (263.33,71.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {height};
+% Text Node
+\draw (136.67,95.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 12}\\{\fontfamily{pcr}\selectfont 11}\\{\fontfamily{pcr}\selectfont 13.5}\\{\fontfamily{pcr}\selectfont 14}\\{\fontfamily{pcr}\selectfont 15}};
+% Text Node
+\draw (201.5,95.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 42.3}\\{\fontfamily{pcr}\selectfont 50.9}\\{\fontfamily{pcr}\selectfont 61.3}\\{\fontfamily{pcr}\selectfont 41.4}\\{\fontfamily{pcr}\selectfont 55}};
+% Text Node
+\draw (264.33,96.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 145.6}\\{\fontfamily{pcr}\selectfont 161.2}\\{\fontfamily{pcr}\selectfont 181.3}\\{\fontfamily{pcr}\selectfont 121.4}\\{\fontfamily{pcr}\selectfont 135.5}};
+% Text Node
+\draw (326.67,17.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{Variables (Attributes/Labels/Columns)}};
+% Text Node
+\draw (453.33,112.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{Observations (rows, tuples)}};
+% Text Node
+\draw (155.17,226.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.55,0.34,0.16}{Known as the Index (ID) column. Usually, there are no duplicates of these}\\\textcolor[rgb]{0.55,0.34,0.16}{allowed, and they're often ordered like this.}};
+
+
+\end{tikzpicture}
+
+}
+
+
+\hfill \break Here's an example table. I've highlighted and color coded the important aspects of it. Remember, don't think of this as the data structure itself- this is just an abstraction to help us keep track of our vast amounts of data. However, most table implementations do a pretty good job of representing the stuff I've color coded.\\
+
+\subsubsection{Selecting / Slicing}
+
+Selecting one or more of the rows or columns in particular to analyze. Examples:
+
+\begin{itemize}
+	\item Select only columns ID + Age
+	\item Select all rows with weight > 41
+	\item We can also apply a combination of the above 2. (\textit{You can combine select rules!})
+\end{itemize}
+
+\subsubsection{Aggregating / Reducing}
+
+Combining values across a column into a single value. (We don't do this across rows, because that obviously wouldn't make any sense. Think about it!). Examples:
+
+\begin{itemize}
+	\item Find the sum of all row's columns
+	\item Find the max of the weight column
+\end{itemize}
+
+\textbf{Note:} It's usually never useful to aggregate/reduce the ID column, so for most cases, we ignore it when we perform such operations.
+
+\subsubsection{Map}
+
+Apply a function to every row, possibly creating fewer or more columns. This one's a little weird to think about without a clear example, so I'm including one below.\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp4887463946097159] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (362.33,88.33) -- (428.67,88.33) -- (428.67,111.33) -- (362.33,111.33) -- cycle ;
+%Shape: Rectangle [id:dp5770783881644757] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (429.21,88.33) -- (537,88.33) -- (537,111.33) -- (429.21,111.33) -- cycle ;
+%Shape: Rectangle [id:dp6134551110117208] 
+\draw   (537,88.33) -- (603.33,88.33) -- (603.33,111.33) -- (537,111.33) -- cycle ;
+%Shape: Rectangle [id:dp5531077995700737] 
+\draw   (603.67,88.33) -- (670,88.33) -- (670,111.33) -- (603.67,111.33) -- cycle ;
+%Shape: Rectangle [id:dp3313757499092773] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (362.33,111) -- (428.67,111) -- (428.67,198.67) -- (362.33,198.67) -- cycle ;
+%Shape: Rectangle [id:dp9339502110856537] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (428.67,111.26) -- (536.46,111.26) -- (536.46,198.67) -- (428.67,198.67) -- cycle ;
+%Shape: Rectangle [id:dp07892533389980638] 
+\draw   (537.33,111.26) -- (603.67,111.26) -- (603.67,198.67) -- (537.33,198.67) -- cycle ;
+%Shape: Rectangle [id:dp979611278461765] 
+\draw   (603.67,111.26) -- (670,111.26) -- (670,198.67) -- (603.67,198.67) -- cycle ;
+%Shape: Rectangle [id:dp717440949324254] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (5.67,87.67) -- (72,87.67) -- (72,110.67) -- (5.67,110.67) -- cycle ;
+%Shape: Rectangle [id:dp5659022269665408] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (72.54,87.67) -- (308.33,87.67) -- (308.33,110.67) -- (72.54,110.67) -- cycle ;
+%Shape: Rectangle [id:dp9470998578275607] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (5.67,110.33) -- (72,110.33) -- (72,198) -- (5.67,198) -- cycle ;
+%Shape: Rectangle [id:dp5421589353414771] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (72,110.6) -- (308.33,110.6) -- (308.33,198) -- (72,198) -- cycle ;
+%Curve Lines [id:da1781160675260307] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (264.33,79.33) .. controls (294.18,20.96) and (362.31,12.75) .. (399.77,78.34) ;
+\draw [shift={(400.33,79.33)}, rotate = 240.75] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da028217104849822316] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (397.67,208.67) .. controls (363.84,267.04) and (314.17,266.01) .. (265.07,206.24) ;
+\draw [shift={(264.33,205.33)}, rotate = 410.88] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (388.67,92.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {id};
+% Text Node
+\draw (390.17,122.06) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 1}\\{\fontfamily{pcr}\selectfont 2}\\{\fontfamily{pcr}\selectfont 3}};
+% Text Node
+\draw (446.67,91) node [anchor=north west][inner sep=0.75pt]   [align=left] {city};
+% Text Node
+\draw (550.67,91) node [anchor=north west][inner sep=0.75pt]   [align=left] {state};
+% Text Node
+\draw (628,91) node [anchor=north west][inner sep=0.75pt]   [align=left] {zip};
+% Text Node
+\draw (433.5,122.06) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont College Park}\\{\fontfamily{pcr}\selectfont D.C.}\\{\fontfamily{pcr}\selectfont Cupertino}};
+% Text Node
+\draw (555.5,122.06) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont MD}\\{\fontfamily{pcr}\selectfont D.C.}\\{\fontfamily{pcr}\selectfont CA}};
+% Text Node
+\draw (616.83,122.06) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 20742}\\{\fontfamily{pcr}\selectfont 2000}\\{\fontfamily{pcr}\selectfont 95014}};
+% Text Node
+\draw (32,91.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {id};
+% Text Node
+\draw (33.5,121.39) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 1}\\{\fontfamily{pcr}\selectfont 2}\\{\fontfamily{pcr}\selectfont 3}};
+% Text Node
+\draw (90,90.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {address};
+% Text Node
+\draw (76.83,121.39) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont College Park,}\\{\fontfamily{pcr}\selectfont D.C., }\\{\fontfamily{pcr}\selectfont Cupertino, }};
+% Text Node
+\draw (186.83,121.39) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont MD}\\{\fontfamily{pcr}\selectfont D.C.}\\{\fontfamily{pcr}\selectfont CA}};
+% Text Node
+\draw (225.5,121.39) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 20742}\\{\fontfamily{pcr}\selectfont 2000}\\{\fontfamily{pcr}\selectfont 95014}};
+% Text Node
+\draw (315.33,5.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{map}};
+% Text Node
+\draw (321.33,256.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{map}};
+
+
+\end{tikzpicture}
+
+}
+
+\hfill \break Notice how applying map to either table is valid in this case- sometimes we want to break down columns into more specific values, and sometimes we want to combine them into singular columns. Each of these operations is totally valid, and has its uses. (This is evident in the projects for this class).\\
+
+Again, this is mostly about what you need. There's no necessary better or worse in this case (more columns does not always equal better data).
+
+\subsubsection{Group By}
+
+Group By is an operation that allows you to group tuples together based on the values in columns/dimensions. Let's say we had the following table of house addresses like earlier. This time, we'll add the number of people in each house as a column as well.\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp816510738764739] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (185,62.33) -- (251.33,62.33) -- (251.33,85.33) -- (185,85.33) -- cycle ;
+%Shape: Rectangle [id:dp39744801489204895] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (251.87,62.33) -- (359.67,62.33) -- (359.67,85.33) -- (251.87,85.33) -- cycle ;
+%Shape: Rectangle [id:dp16790194728351993] 
+\draw   (359.67,62.33) -- (426,62.33) -- (426,85.33) -- (359.67,85.33) -- cycle ;
+%Shape: Rectangle [id:dp5121628997613088] 
+\draw   (426.33,62.33) -- (492.67,62.33) -- (492.67,85.33) -- (426.33,85.33) -- cycle ;
+%Shape: Rectangle [id:dp38170728474734883] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (185,85) -- (251.33,85) -- (251.33,194.67) -- (185,194.67) -- cycle ;
+%Shape: Rectangle [id:dp0783518509199912] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (251.33,85.33) -- (359.12,85.33) -- (359.12,194.67) -- (251.33,194.67) -- cycle ;
+%Shape: Rectangle [id:dp8309347187193188] 
+\draw   (360,85.33) -- (426.33,85.33) -- (426.33,194.67) -- (360,194.67) -- cycle ;
+%Shape: Rectangle [id:dp0878616379496251] 
+\draw   (426.33,85.33) -- (492.67,85.33) -- (492.67,194.67) -- (426.33,194.67) -- cycle ;
+%Shape: Rectangle [id:dp9451653351898317] 
+\draw   (493,62.33) -- (559.33,62.33) -- (559.33,85.33) -- (493,85.33) -- cycle ;
+%Shape: Rectangle [id:dp11005059918565219] 
+\draw   (493,85.33) -- (559.33,85.33) -- (559.33,194.67) -- (493,194.67) -- cycle ;
+
+% Text Node
+\draw (211.33,66.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {id};
+% Text Node
+\draw (212.83,96.06) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 1}\\{\fontfamily{pcr}\selectfont 2}\\{\fontfamily{pcr}\selectfont 3}\\{\fontfamily{pcr}\selectfont 4}\\};
+% Text Node
+\draw (269.33,65) node [anchor=north west][inner sep=0.75pt]   [align=left] {city};
+% Text Node
+\draw (373.33,65) node [anchor=north west][inner sep=0.75pt]   [align=left] {state};
+% Text Node
+\draw (450.67,65) node [anchor=north west][inner sep=0.75pt]   [align=left] {zip};
+% Text Node
+\draw (256.17,96.06) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont College Park}\\{\fontfamily{pcr}\selectfont Washington}\\{\fontfamily{pcr}\selectfont Cupertino}\\{\fontfamily{pcr}\selectfont College Park}};
+% Text Node
+\draw (378.17,96.06) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont MD}\\{\fontfamily{pcr}\selectfont D.C.}\\{\fontfamily{pcr}\selectfont CA}\\{\fontfamily{pcr}\selectfont MD}};
+% Text Node
+\draw (440.17,95.39) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 20742}\\{\fontfamily{pcr}\selectfont 2000}\\{\fontfamily{pcr}\selectfont 95014}\\{\fontfamily{pcr}\selectfont 20742}};
+% Text Node
+\draw (505.33,64.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {people};
+% Text Node
+\draw (520.83,94.06) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 3}\\{\fontfamily{pcr}\selectfont 4}\\{\fontfamily{pcr}\selectfont 3}\\{\fontfamily{pcr}\selectfont 2}};
+
+
+\end{tikzpicture}
+
+}
+
+Let's say we only wanted to see the data from a \textbf{single city}. In this case, let's pick College Park.\newline
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp816510738764739] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (185,62.33) -- (251.33,62.33) -- (251.33,85.33) -- (185,85.33) -- cycle ;
+%Shape: Rectangle [id:dp39744801489204895] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (251.87,62.33) -- (359.67,62.33) -- (359.67,85.33) -- (251.87,85.33) -- cycle ;
+%Shape: Rectangle [id:dp16790194728351993] 
+\draw   (359.67,62.33) -- (426,62.33) -- (426,85.33) -- (359.67,85.33) -- cycle ;
+%Shape: Rectangle [id:dp5121628997613088] 
+\draw   (426.33,62.33) -- (492.67,62.33) -- (492.67,85.33) -- (426.33,85.33) -- cycle ;
+%Shape: Rectangle [id:dp38170728474734883] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (185,85) -- (251.33,85) -- (251.33,194.67) -- (185,194.67) -- cycle ;
+%Shape: Rectangle [id:dp0783518509199912] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (251.33,85.33) -- (359.12,85.33) -- (359.12,194.67) -- (251.33,194.67) -- cycle ;
+%Shape: Rectangle [id:dp8309347187193188] 
+\draw   (360,85.33) -- (426.33,85.33) -- (426.33,194.67) -- (360,194.67) -- cycle ;
+%Shape: Rectangle [id:dp0878616379496251] 
+\draw   (426.33,85.33) -- (492.67,85.33) -- (492.67,194.67) -- (426.33,194.67) -- cycle ;
+%Shape: Rectangle [id:dp9451653351898317] 
+\draw   (493,62.33) -- (559.33,62.33) -- (559.33,85.33) -- (493,85.33) -- cycle ;
+%Shape: Rectangle [id:dp11005059918565219] 
+\draw   (493,85.33) -- (559.33,85.33) -- (559.33,194.67) -- (493,194.67) -- cycle ;
+%Shape: Free Drawing [id:dp983490163154191] 
+\draw  [color={rgb, 255:red, 255; green, 0; blue, 0 }  ,draw opacity=1 ][line width=3] [line join = round][line cap = round] (209,90.5) .. controls (198.12,90.5) and (168.09,89.91) .. (172,107.5) .. controls (173.05,112.21) and (201.95,116.35) .. (205,116.5) .. controls (211.67,116.83) and (218.33,117.44) .. (225,117.5) .. controls (265.32,117.85) and (345.68,117.33) .. (394,116.5) .. controls (416.57,116.11) and (439.52,112.83) .. (462,112.5) .. controls (480.28,112.24) and (514.78,111.08) .. (539,113.5) .. controls (546.8,114.28) and (556.96,114.91) .. (564,113.5) .. controls (566.72,112.96) and (577.71,112.02) .. (578,108.5) .. controls (581.35,68.27) and (524.35,93.19) .. (494,91.5) .. controls (427.64,87.81) and (413.09,87.87) .. (312,88.5) .. controls (284.83,88.67) and (256.23,89.85) .. (229,90.5) .. controls (222.28,90.66) and (216.95,92.5) .. (210,92.5) ;
+%Curve Lines [id:da10861026576502275] 
+\draw [color={rgb, 255:red, 255; green, 0; blue, 0 }  ,draw opacity=1 ][line width=3] [line join = round][line cap = round]   (218,139.5) .. controls (201.04,139.5) and (193.69,138.27) .. (181,142.5) .. controls (176.53,143.99) and (169.8,153.48) .. (171,159.5) .. controls (171.2,160.48) and (185.36,164.26) .. (189,164.5) .. controls (198.32,165.12) and (207.66,165.5) .. (217,165.5) .. controls (221.09,165.5) and (226.66,163.55) .. (231,163.5) .. controls (282.82,162.87) and (384.95,164.21) .. (430,164.5) .. controls (443.35,164.59) and (456.65,166.35) .. (470,166.5) .. controls (497.66,166.82) and (525.34,166.82) .. (553,166.5) .. controls (558.97,166.43) and (577.17,164.8) .. (579,157.5) .. controls (583.4,139.91) and (542.58,139.95) .. (534,137.5) .. controls (486.11,123.82) and (438.47,140.4) .. (391,141.5) .. controls (345.12,142.57) and (299.53,137.8) .. (254,136.5) .. controls (243.67,136.2) and (233.29,136.47) .. (223,137.5) .. controls (222.9,137.51) and (209,136.14) .. (209,139.5) ;
+
+% Text Node
+\draw (211.33,66.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {id};
+% Text Node
+\draw (212.83,96.06) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 1}\\{\fontfamily{pcr}\selectfont 2}\\{\fontfamily{pcr}\selectfont 3}\\{\fontfamily{pcr}\selectfont 4}\\};
+% Text Node
+\draw (269.33,65) node [anchor=north west][inner sep=0.75pt]   [align=left] {city};
+% Text Node
+\draw (373.33,65) node [anchor=north west][inner sep=0.75pt]   [align=left] {state};
+% Text Node
+\draw (450.67,65) node [anchor=north west][inner sep=0.75pt]   [align=left] {zip};
+% Text Node
+\draw (256.17,96.06) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont College Park}\\{\fontfamily{pcr}\selectfont Washington}\\{\fontfamily{pcr}\selectfont Cupertino}\\{\fontfamily{pcr}\selectfont College Park}};
+% Text Node
+\draw (378.17,96.06) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont MD}\\{\fontfamily{pcr}\selectfont D.C.}\\{\fontfamily{pcr}\selectfont CA}\\{\fontfamily{pcr}\selectfont MD}};
+% Text Node
+\draw (440.17,95.39) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 20742}\\{\fontfamily{pcr}\selectfont 2000}\\{\fontfamily{pcr}\selectfont 95014}\\{\fontfamily{pcr}\selectfont 20742}};
+% Text Node
+\draw (505.33,64.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {people};
+% Text Node
+\draw (520.83,94.06) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 3}\\{\fontfamily{pcr}\selectfont 4}\\{\fontfamily{pcr}\selectfont 3}\\{\fontfamily{pcr}\selectfont 2}};
+
+
+\end{tikzpicture}
+
+}
+
+This is what a 'Group By' operation would be perfect for. It'll basically just get us the rows that are from the city that we want.
+
+\subsubsection{Group By + Aggregate}
+
+We can combined Group By and Aggregate in pretty cool ways to get results that we want. For example, let's say we wanted to leverage the above table and get the sum total of all people who live in College Park, D.C., and Cupertino, respectively. By using a combo of Group By and Aggregate, we can totally do that. (\textit{Group By} City, then perform summing \textit{aggregation} operation.)
+
+\subsubsection{Union, Intersection, Difference}
+
+These are your usual set operations from statistics. However, this only works if the tables have identical attributes (columns). If they have identical columns, they are called \textbf{compatible tables}.\\
+
+Examples: (Table A) $\union$ (Table B) results in (Table C) where all three tables have the same attributes. Likewise, (Table A) $\cap$ (Table B) results in (Table D) where all three also have the same attributes.
 
 \section{Footnotes}
 
