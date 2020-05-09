@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.15)  6 MAY 2020 03:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.15)  9 MAY 2020 01:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2058,6 +2058,7 @@ Package cleveref Info: loaded `english' language definitions on input line 1.
 \openout7 = `cmsc320.toc'.
 
  [2]
+[3]
 Underfull \hbox (badness 10000) in paragraph at lines 130--134
 
  []
@@ -2072,7 +2073,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 135--136
 
  []
 
-[3]
+[4]
 Underfull \hbox (badness 10000) in paragraph at lines 215--216
 
  []
@@ -2102,7 +2103,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 230--233
 
  []
 
-[4]
+[5]
 Underfull \hbox (badness 10000) in paragraph at lines 235--236
 
  []
@@ -2129,7 +2130,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 269--270
 
  []
 
-[5]
+[6]
 Underfull \hbox (badness 10000) in paragraph at lines 335--336
 
  []
@@ -2144,7 +2145,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 350--360
 
  []
 
-[6]
+[7]
 Underfull \hbox (badness 10000) in paragraph at lines 366--367
 
  []
@@ -2194,7 +2195,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 385--389
 
  []
 
-[7]
+[8]
 Underfull \hbox (badness 10000) in paragraph at lines 393--394
 
  []
@@ -2209,7 +2210,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 401--402
 
  []
 
-[8]
+[9]
 Underfull \hbox (badness 10000) in paragraph at lines 454--455
 
  []
@@ -2234,7 +2235,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 472--473
 
  []
 
-[9]
+[10]
 Underfull \hbox (badness 10000) in paragraph at lines 474--475
 
  []
@@ -2269,7 +2270,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 507--508
 
  []
 
-[10] [11]
+[11] [12]
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
 (Font)              scaled to size 8.0pt on input line 560.
 Package microtype Info: Character `textendash ' is missing
@@ -2298,7 +2299,7 @@ Overfull \hbox (26.9226pt too wide) in paragraph at lines 638--639
 [][] 
  []
 
-[12]
+[13]
 Underfull \hbox (badness 10000) in paragraph at lines 640--641
 
  []
@@ -2313,7 +2314,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 667--668
 
  []
 
-[13]
+[14]
 Underfull \hbox (badness 10000) in paragraph at lines 677--678
 
  []
@@ -2331,7 +2332,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `pcr' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [14]
+ [15]
 Underfull \hbox (badness 10000) in paragraph at lines 789--790
 
  []
@@ -2346,7 +2347,7 @@ Overfull \hbox (50.9226pt too wide) in paragraph at lines 891--892
  [][] 
  []
 
-[15]
+[16]
 Underfull \hbox (badness 10000) in paragraph at lines 895--896
 
  []
@@ -2361,29 +2362,308 @@ Underfull \hbox (badness 10000) in paragraph at lines 960--961
 
  []
 
-[16]
+[17]
 Underfull \hbox (badness 10000) in paragraph at lines 1031--1032
 
  []
 
-[17]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1039.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1039.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1037--1038
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1043--1044
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1064--1065
+
+ []
+
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 1066--1067
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1140--1141
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1142--1143
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1144--1145
+
+ []
+
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 1208--1209
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1285--1286
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1291--1293
+
+ []
+
+[20]
+Underfull \hbox (badness 10000) in paragraph at lines 1306--1307
+
+ []
+
+<img/table_1.png, id=262, 528.97626pt x 320.19624pt>
+File: img/table_1.png Graphic file (type png)
+<use img/table_1.png>
+Package pdftex.def Info: img/table_1.png  used on input line 1311.
+(pdftex.def)             Requested size: 185.14445pt x 112.07036pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1315--1316
+
+ []
+
+<img/table_2.png, id=264, 886.31125pt x 316.18124pt>
+File: img/table_2.png Graphic file (type png)
+<use img/table_2.png>
+Package pdftex.def Info: img/table_2.png  used on input line 1320.
+(pdftex.def)             Requested size: 310.21358pt x 110.66508pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1325--1326
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1327--1328
+
+ []
+
+[21 <./img/table_1.png> <./img/table_2.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1337--1338
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1344--1345
+
+ []
+
+File: img/table_2.png Graphic file (type png)
+<use img/table_2.png>
+Package pdftex.def Info: img/table_2.png  used on input line 1358.
+(pdftex.def)             Requested size: 372.74857pt x 150.39992pt.
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 1408--1409
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1410--1411
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1412--1413
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1414--1415
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1414--1415
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1486--1487
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1489--1491
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1489--1491
+
+ []
+
+[23]
+Underfull \hbox (badness 10000) in paragraph at lines 1498--1499
+
+ []
+
+<img/table_3.png, id=280, 1190.4475pt x 420.57124pt>
+File: img/table_3.png Graphic file (type png)
+<use img/table_3.png>
+Package pdftex.def Info: img/table_3.png  used on input line 1500.
+(pdftex.def)             Requested size: 416.66287pt x 147.20213pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1500--1501
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1502--1503
+
+ []
+
+<img/table_4.png, id=281, 823.075pt x 211.79124pt>
+File: img/table_4.png Graphic file (type png)
+<use img/table_4.png>
+Package pdftex.def Info: img/table_4.png  used on input line 1504.
+(pdftex.def)             Requested size: 288.08057pt x 74.12804pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1504--1505
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1508--1509
+
+ []
+
+<img/table_5.png, id=282, 886.31125pt x 361.35pt>
+File: img/table_5.png Graphic file (type png)
+<use img/table_5.png>
+Package pdftex.def Info: img/table_5.png  used on input line 1510.
+(pdftex.def)             Requested size: 310.21358pt x 126.4744pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1510--1511
+
+ []
+
+[24 <./img/table_3.png> <./img/table_4.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1514--1515
+
+ []
+
+<img/table_6.png, id=289, 816.04875pt x 411.5375pt>
+File: img/table_6.png Graphic file (type png)
+<use img/table_6.png>
+Package pdftex.def Info: img/table_6.png  used on input line 1516.
+(pdftex.def)             Requested size: 285.62134pt x 144.04028pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1516--1517
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1518--1519
+
+ []
+
+<img/table_7.png, id=290, 855.195pt x 312.16624pt>
+File: img/table_7.png Graphic file (type png)
+<use img/table_7.png>
+Package pdftex.def Info: img/table_7.png  used on input line 1520.
+(pdftex.def)             Requested size: 299.32274pt x 109.25981pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1520--1521
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1524--1525
+
+ []
+
+<img/table_8.png, id=291, 858.20625pt x 461.725pt>
+File: img/table_8.png Graphic file (type png)
+<use img/table_8.png>
+Package pdftex.def Info: img/table_8.png  used on input line 1526.
+(pdftex.def)             Requested size: 300.3767pt x 161.60617pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1526--1527
+
+ []
+
+[25 <./img/table_5.png> <./img/table_6.png> <./img/table_7.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1532--1533
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1534--1535
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1568--1571
+
+ []
+
+[26 <./img/table_8.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1575--1576
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1575--1576
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1637--1638
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1640--1641
+
+ []
+
+[27]
+Underfull \hbox (badness 10000) in paragraph at lines 1713--1714
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1740--1741
+
+ []
+
+[28]
+Underfull \hbox (badness 10000) in paragraph at lines 1795--1796
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1820--1821
+
+ []
+
+[29] [30]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1837.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1837.
  (./cmsc320.aux
 Package cleveref Info: loaded `english' language definitions on input line 22.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1039.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1039.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1039.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1837.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1837.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1837.
  ) 
 Here is how much of TeX's memory you used:
- 44217 strings out of 492982
- 878008 string characters out of 6134896
- 1068530 words of memory out of 5000000
- 46889 multiletter control sequences out of 15000+600000
- 554318 words of font info for 124 fonts, out of 8000000 for 9000
+ 44418 strings out of 492982
+ 880706 string characters out of 6134896
+ 1285349 words of memory out of 5000000
+ 47004 multiletter control sequences out of 15000+600000
+ 554901 words of font info for 133 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 61i,6n,93p,10466b,1463s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 61i,8n,93p,21196b,1463s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/
 fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texlive/texmf-dist/fonts/e
 nc/dvips/inconsolata/i4-t1-0.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-
@@ -2403,10 +2683,10 @@ cm-super/sfrm0500.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pf
 b></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/
 fonts/type1/public/cm-super/sfxc2488.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/urw/courier/ucrr8a.pfb>
-Output written on cmsc320.pdf (17 pages, 314184 bytes).
+Output written on cmsc320.pdf (30 pages, 633592 bytes).
 PDF statistics:
- 419 PDF objects out of 1000 (max. 8388607)
- 376 compressed objects within 4 object streams
- 71 named destinations out of 1000 (max. 500000)
- 27522 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 649 PDF objects out of 1000 (max. 8388607)
+ 575 compressed objects within 6 object streams
+ 129 named destinations out of 1000 (max. 500000)
+ 27762 words of extra memory for PDF output out of 29859 (max. 10000000)
 
