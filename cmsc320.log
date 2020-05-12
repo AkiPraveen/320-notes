@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.15)  9 MAY 2020 01:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.15)  12 MAY 2020 03:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2422,7 +2422,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1306--1307
 
  []
 
-<img/table_1.png, id=262, 528.97626pt x 320.19624pt>
+<img/table_1.png, id=272, 528.97626pt x 320.19624pt>
 File: img/table_1.png Graphic file (type png)
 <use img/table_1.png>
 Package pdftex.def Info: img/table_1.png  used on input line 1311.
@@ -2432,7 +2432,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1315--1316
 
  []
 
-<img/table_2.png, id=264, 886.31125pt x 316.18124pt>
+<img/table_2.png, id=274, 886.31125pt x 316.18124pt>
 File: img/table_2.png Graphic file (type png)
 <use img/table_2.png>
 Package pdftex.def Info: img/table_2.png  used on input line 1320.
@@ -2506,7 +2506,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1498--1499
 
  []
 
-<img/table_3.png, id=280, 1190.4475pt x 420.57124pt>
+<img/table_3.png, id=290, 1190.4475pt x 420.57124pt>
 File: img/table_3.png Graphic file (type png)
 <use img/table_3.png>
 Package pdftex.def Info: img/table_3.png  used on input line 1500.
@@ -2521,7 +2521,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1502--1503
 
  []
 
-<img/table_4.png, id=281, 823.075pt x 211.79124pt>
+<img/table_4.png, id=291, 823.075pt x 211.79124pt>
 File: img/table_4.png Graphic file (type png)
 <use img/table_4.png>
 Package pdftex.def Info: img/table_4.png  used on input line 1504.
@@ -2536,7 +2536,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1508--1509
 
  []
 
-<img/table_5.png, id=282, 886.31125pt x 361.35pt>
+<img/table_5.png, id=292, 886.31125pt x 361.35pt>
 File: img/table_5.png Graphic file (type png)
 <use img/table_5.png>
 Package pdftex.def Info: img/table_5.png  used on input line 1510.
@@ -2551,7 +2551,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1514--1515
 
  []
 
-<img/table_6.png, id=289, 816.04875pt x 411.5375pt>
+<img/table_6.png, id=299, 816.04875pt x 411.5375pt>
 File: img/table_6.png Graphic file (type png)
 <use img/table_6.png>
 Package pdftex.def Info: img/table_6.png  used on input line 1516.
@@ -2566,7 +2566,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1518--1519
 
  []
 
-<img/table_7.png, id=290, 855.195pt x 312.16624pt>
+<img/table_7.png, id=300, 855.195pt x 312.16624pt>
 File: img/table_7.png Graphic file (type png)
 <use img/table_7.png>
 Package pdftex.def Info: img/table_7.png  used on input line 1520.
@@ -2581,7 +2581,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1524--1525
 
  []
 
-<img/table_8.png, id=291, 858.20625pt x 461.725pt>
+<img/table_8.png, id=301, 858.20625pt x 461.725pt>
 File: img/table_8.png Graphic file (type png)
 <use img/table_8.png>
 Package pdftex.def Info: img/table_8.png  used on input line 1526.
@@ -2646,22 +2646,58 @@ Underfull \hbox (badness 10000) in paragraph at lines 1820--1821
 
  []
 
-[29] [30]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1837.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1837.
+[29]
+Underfull \hbox (badness 10000) in paragraph at lines 1838--1839
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1848--1849
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1850--1851
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1853--1854
+
+ []
+
+
+Underfull \hbox (badness 1418) in paragraph at lines 1853--1854
+\T1/cmr/m/n/10 (+20) Since we could pre-dict the "missing-ness" of the stu-dent
+'s score from the stu-dent's
+ []
+
+[30]
+Underfull \hbox (badness 10000) in paragraph at lines 1868--1869
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1874--1875
+
+ []
+
+[31] [32]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1944.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1944.
  (./cmsc320.aux
 Package cleveref Info: loaded `english' language definitions on input line 22.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1837.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1837.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1837.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1944.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1944.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1944.
  ) 
 Here is how much of TeX's memory you used:
- 44418 strings out of 492982
- 880706 string characters out of 6134896
+ 44440 strings out of 492982
+ 880971 string characters out of 6134896
  1285349 words of memory out of 5000000
- 47004 multiletter control sequences out of 15000+600000
- 554901 words of font info for 133 fonts, out of 8000000 for 9000
+ 47017 multiletter control sequences out of 15000+600000
+ 554959 words of font info for 134 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  61i,8n,93p,21196b,1463s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/
@@ -2671,22 +2707,25 @@ super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata/Inc
 onsolata-zi4b.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata
 /Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/bbold-t
 ype1/bbold10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texm
-f/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public
-/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.p
-fb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1000.pfb></usr/share/texmf
-/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf/fonts/type1/public/
-cm-super/sfrm0500.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pf
-b></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/
-fonts/type1/public/cm-super/sfxc2488.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/urw/courier/ucrr8a.pfb>
-Output written on cmsc320.pdf (30 pages, 633592 bytes).
+cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/
+cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pf
+b></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/
+fonts/type1/public/cm-super/sfcc1000.pfb></usr/share/texmf/fonts/type1/public/c
+m-super/sfcc1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0500.pfb
+></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/f
+onts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm
+-super/sfxc2488.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr
+8a.pfb>
+Output written on cmsc320.pdf (32 pages, 664443 bytes).
 PDF statistics:
- 649 PDF objects out of 1000 (max. 8388607)
- 575 compressed objects within 6 object streams
- 129 named destinations out of 1000 (max. 500000)
- 27762 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 697 PDF objects out of 1000 (max. 8388607)
+ 617 compressed objects within 7 object streams
+ 136 named destinations out of 1000 (max. 500000)
+ 27802 words of extra memory for PDF output out of 29859 (max. 10000000)
 

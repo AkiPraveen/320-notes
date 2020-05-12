@@ -69,4 +69,9 @@
 \contentsline {section}{\numberline {8}Lecture 8}{29}{section.8}
 \contentsline {subsection}{Missing Data}{29}{section*.62}
 \contentsline {subsubsection}{Just Deleting It}{30}{section*.63}
-\contentsline {section}{\numberline {9}Footnotes}{30}{section.9}
+\contentsline {subsection}{Types of Missing Data}{30}{section*.64}
+\contentsline {subsubsection}{Missing Completely At Random}{30}{section*.65}
+\contentsline {subsubsection}{Missing At Random}{30}{section*.66}
+\contentsline {subsubsection}{Missing Not At Random}{31}{section*.67}
+\contentsline {subsection}{Line of Best Fit}{31}{section*.68}
+\contentsline {section}{\numberline {9}Footnotes}{32}{section.9}
