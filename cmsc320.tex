@@ -1926,15 +1926,336 @@ In order to aid in this, let's again revisit the idea of a 'line of best fit' fr
 
 $$ \sum_{i=1}^{n} {(E_i)^2} = (E_1)^2 + (E_2)^2 + ... (E_n)^2$$
 
+\subsection{Imputation}
+
+How do we handle missing data? One excellent way to do that is \textbf{imputation}.\\
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Imputation} $\rightarrow$ Replacing the missing data with substituted values.
+\end{tcolorbox}
+
+\hfill \break Imputation is basically just a fancy way of saying that you'll replace whatever's missing with other data that you generate or collect yourself.
+
+\subsubsection{Types Of Imputation}
+
+\begin{itemize}
+	\item \textbf{Mean Imputation} $\rightarrow$ Imputing the average from observed cases for all missing values
+	\item \textbf{Hot-Deck Imputation} $\rightarrow$ Imputing a value from another subject, or \textit{donor}, that is most like the subject.
+	\item \textbf{Cold-Deck Imputation} $\rightarrow$ Bringing in other datasets
+	\item \textbf{Other Methods} $\rightarrow$ Regression imputation, stochastic regression imputation, interpolation and extrapolation.
+\end{itemize}
+
+\subsubsection{Single vs. Multiple Imputation}
+
+\textbf{Single Imputation} is supposedly 'old and busted', while \textbf{Multiple Imputation} is the 'new hotness'. Multiple imputation is basically when you impute on the original data $n$ times, then you perform analysis on each of the resulting $n$ datasets, then pool all those results into one, distilled result.\\\\
+
+{
+\centering
 
 
 
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Can [id:dp2602400961202158] 
+\draw   (184.33,90.28) -- (184.33,188.05) .. controls (184.33,199.62) and (149.71,209) .. (107,209) .. controls (64.29,209) and (29.67,199.62) .. (29.67,188.05) -- (29.67,90.28) .. controls (29.67,78.71) and (64.29,69.33) .. (107,69.33) .. controls (149.71,69.33) and (184.33,78.71) .. (184.33,90.28) .. controls (184.33,101.85) and (149.71,111.23) .. (107,111.23) .. controls (64.29,111.23) and (29.67,101.85) .. (29.67,90.28) ;
+%Flowchart: Punched Tape [id:dp15411156869991438] 
+\draw   (501.33,83.6) .. controls (501.33,91.3) and (517.53,97.53) .. (537.5,97.53) .. controls (557.47,97.53) and (573.67,91.3) .. (573.67,83.6) .. controls (573.67,75.9) and (589.86,69.67) .. (609.83,69.67) .. controls (629.81,69.67) and (646,75.9) .. (646,83.6) -- (646,195.07) .. controls (646,187.37) and (629.81,181.13) .. (609.83,181.13) .. controls (589.86,181.13) and (573.67,187.37) .. (573.67,195.07) .. controls (573.67,202.76) and (557.47,209) .. (537.5,209) .. controls (517.53,209) and (501.33,202.76) .. (501.33,195.07) -- cycle ;
+%Straight Lines [id:da6406675389654978] 
+\draw    (183.67,139.33) -- (225.12,85.19) ;
+\draw [shift={(226.33,83.6)}, rotate = 487.44] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da8270960211517617] 
+\draw    (183.67,139.33) -- (224.8,104.95) ;
+\draw [shift={(226.33,103.67)}, rotate = 500.11] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da20731204626185318] 
+\draw    (183.67,139.33) -- (224.49,122.11) ;
+\draw [shift={(226.33,121.33)}, rotate = 517.13] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da35473989075756784] 
+\draw    (183.67,139.33) -- (224.33,139.33) ;
+\draw [shift={(226.33,139.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da06709427884110541] 
+\draw    (183.67,139.33) -- (224.9,179.73) ;
+\draw [shift={(226.33,181.13)}, rotate = 224.41] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da28455274447168444] 
+\draw    (255.67,83.6) -- (430.33,83.6) ;
+\draw [shift={(432.33,83.6)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da5528993287124772] 
+\draw    (255.67,103.67) -- (431.67,103.67) ;
+\draw [shift={(433.67,103.67)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da8952519050209367] 
+\draw    (255.67,121.33) -- (431,121.33) ;
+\draw [shift={(433,121.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da6969730944234751] 
+\draw    (255.67,139.33) -- (431,139.33) ;
+\draw [shift={(433,139.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da06722917869533818] 
+\draw    (255.67,181.13) -- (431,181.13) ;
+\draw [shift={(433,181.13)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da7733865371627034] 
+\draw    (463,83.6) -- (500.2,137.69) ;
+\draw [shift={(501.33,139.33)}, rotate = 235.48] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da923997647536473] 
+\draw    (463,103.67) -- (499.87,137.97) ;
+\draw [shift={(501.33,139.33)}, rotate = 222.94] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da862155293400015] 
+\draw    (463,121.33) -- (499.52,138.48) ;
+\draw [shift={(501.33,139.33)}, rotate = 205.15] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da4866075836725807] 
+\draw    (463,139.33) -- (499.33,139.33) ;
+\draw [shift={(501.33,139.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da6375086814085584] 
+\draw    (463,181.13) -- (499.98,140.81) ;
+\draw [shift={(501.33,139.33)}, rotate = 492.52] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (229.33,73.6) node [anchor=north west][inner sep=0.75pt]   [align=left] {S$\displaystyle _{1}$};
+% Text Node
+\draw (229.33,93.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {S$\displaystyle _{2}$};
+% Text Node
+\draw (229.33,111.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {S$\displaystyle _{3}$};
+% Text Node
+\draw (229.33,129.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {S$\displaystyle _{4}$};
+% Text Node
+\draw (229.33,171.13) node [anchor=north west][inner sep=0.75pt]   [align=left] {S$\displaystyle _{n}$};
+% Text Node
+\draw (441,73.6) node [anchor=north west][inner sep=0.75pt]   [align=left] {A$\displaystyle _{1}$};
+% Text Node
+\draw (441,93.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {A$\displaystyle _{2}$};
+% Text Node
+\draw (441,111.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {A$\displaystyle _{3}$};
+% Text Node
+\draw (441,129.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {A$\displaystyle _{4}$};
+% Text Node
+\draw (441,171.13) node [anchor=north west][inner sep=0.75pt]   [align=left] {A$\displaystyle _{n}$};
+% Text Node
+\draw (339.33,150.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {...};
+% Text Node
+\draw (69.5,125.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Incomplete\\Dataset};
+% Text Node
+\draw (552,120.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Pooled\\Results};
+
+
+\end{tikzpicture}
+
+
+}
+
+\hfill \break In this case, pooling the data is just taking an average. We can see that this 'multiple imputation' model relies on the results of each imputation being distinct.\\
+
+Now, the question arises: \textbf{How big should $n$ be} when we're talking about multiple imputation? This ultimately depends on the \textbf{size of your dataset} and the \textbf{amount of data missing}.\\
+
+Recent research suggests, however, that a 'good' $n$ value is generally higher. General counsel here is to choose a pretty sizable value for $n$.
+
+\section{Lecture 9}
+
+Now that we have imputed and made some new datasets, how do we make use of them? To clarify from the previous example, we can simply perform analysis on each \textbf{individual dataset}, then pool the results of that analysis (take the average of the analyses on the imputed datasets).\\
+
+\textbf{Bayesian Imputation} is another way to handle imputation, this time using Bayes' theorem. A google search doesn't yield much on this, but I assume it's got something to do with a Bayesian attempt at imputing data.\\
+
+\subsection{Data Wrangling}
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Data Wrangling} $\rightarrow$ Getting data into a structured form suitable for analysis.\\\\ A.k.a. \textbf{data preparation}, \textbf{data mining}, or the \textbf{Extract $\rightarrow$ Transfer $\rightarrow$ Load (ETL) Process}.
+\end{tcolorbox}
+
+\hfill \break Supposedly, 80 to 90\% of your time is spent on data wrangling.
+
+\subsubsection{Key Steps of Data Wrangling}
+
+\begin{itemize}
+	\item \textbf{Scraping} $\rightarrow$ Taking info from sources. The process of getting your data from its unusable format into Python data structures.
+	\item \textbf{Transformation} $\rightarrow$ Tidying it into the right data structure. (e.g. converting \texttt{string}s that represent the date into \texttt{datetime} objects)
+	\item \textbf{Information Extraction} $\rightarrow$ Extracting structured information from unstructured text and/or sources.
+	\item \textbf{Data Integration} $\rightarrow$ (If applicable) combine info from multiple sources so that it all plays nice together.
+	\item \textbf{Cleaning} $\rightarrow$ Removing inconsistencies + errors.
+\end{itemize}
+
+Usually, there are a 'mishmash' of tools that are used for all these processes, but there are generally accepted tools that are used to 'pipeline' all of these operations so that they work smoothly.\\
+
+For example, some popular ETL services are \textbf{Talend} and \textbf{AWS Glue}.\\
+
+\subsection{Data Integration}
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Data Integration} $\rightarrow$ Combining data from different sources into one unified view, and allowing for structured querying and analysis on that data.
+\end{tcolorbox}
+
+\hfill \break Each data has a \textbf{local schema}. We want to bring it all under one, unified, \textbf{global schema}. As it happens, there are actually two main ways that we can accomplish this.
+
+\begin{itemize}
+	\item[1.] Bring all the data into one single data structure or repository. This is known as \textbf{data warehousing}.
+	\item[2.] Keep the data where it is, in separate repositories, and send \textbf{queries} to our separate data when we need to.
+\end{itemize}
+
+Option 1 is pretty self explanatory- you're just mushing all the data together, and with a little effort, you can ensure that the format of your data is all compatible, and combine it. Option 2 is a little tougher to think about at first, so here's a diagram.\\
+
+{
+
+\centering
 
 
 
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Flowchart: Off Page Connector [id:dp9567338023313746] 
+\draw   (292,20) -- (362,20) -- (362,52.5) -- (327,60) -- (292,52.5) -- cycle ;
+%Shape: Rectangle [id:dp7141492352007189] 
+\draw   (221.92,101.33) -- (432.08,101.33) -- (432.08,153.33) -- (221.92,153.33) -- cycle ;
+%Straight Lines [id:da5299238451556456] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (327,60) -- (327,96.67) ;
+\draw [shift={(327,98.67)}, rotate = 270] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Can [id:dp2595198181958037] 
+\draw   (232.33,232.5) -- (232.33,281.5) .. controls (232.33,287.3) and (210.47,292) .. (183.5,292) .. controls (156.53,292) and (134.67,287.3) .. (134.67,281.5) -- (134.67,232.5) .. controls (134.67,226.7) and (156.53,222) .. (183.5,222) .. controls (210.47,222) and (232.33,226.7) .. (232.33,232.5) .. controls (232.33,238.3) and (210.47,243) .. (183.5,243) .. controls (156.53,243) and (134.67,238.3) .. (134.67,232.5) ;
+%Shape: Cube [id:dp8253370569862154] 
+\draw   (278.67,240.67) -- (299.67,219.67) -- (377.67,219.67) -- (377.67,268.67) -- (356.67,289.67) -- (278.67,289.67) -- cycle ; \draw   (377.67,219.67) -- (356.67,240.67) -- (278.67,240.67) ; \draw   (356.67,240.67) -- (356.67,289.67) ;
+%Flowchart: Document [id:dp20461138874225637] 
+\draw   (427.33,226) -- (519,226) -- (519,273.3) .. controls (461.71,273.3) and (473.17,290.36) .. (427.33,279.32) -- cycle ;
+%Straight Lines [id:da9431063515450052] 
+\draw [color={rgb, 255:red, 254; green, 0; blue, 0 }  ,draw opacity=1 ]   (327,154) -- (187.41,232.35) ;
+\draw [shift={(185.67,233.33)}, rotate = 330.69] [color={rgb, 255:red, 254; green, 0; blue, 0 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da4037211793604081] 
+\draw [color={rgb, 255:red, 254; green, 0; blue, 0 }  ,draw opacity=1 ]   (327,154) -- (327,227.33) ;
+\draw [shift={(327,229.33)}, rotate = 270] [color={rgb, 255:red, 254; green, 0; blue, 0 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da35327476463374285] 
+\draw [color={rgb, 255:red, 254; green, 0; blue, 0 }  ,draw opacity=1 ]   (327,154) -- (467.22,225.1) ;
+\draw [shift={(469,226)}, rotate = 206.89] [color={rgb, 255:red, 254; green, 0; blue, 0 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (297.5,28.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {Query \textcolor[rgb]{0.94,0,0}{Q}};
+% Text Node
+\draw (236.5,123.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Mediated (Global) Schema};
+% Text Node
+\draw (152.67,253.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Source A};
+% Text Node
+\draw (287.67,253.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {Source B};
+% Text Node
+\draw (438.67,241) node [anchor=north west][inner sep=0.75pt]   [align=left] {Source C};
 
 
+\end{tikzpicture}
 
+
+}
+
+\hfill \break Though it is \textbf{less efficient}, this setup is preferable when the data is \textbf{dynamic}.\\
+
+For example, if you needed to make a query on the sum total of the data in Sources A, B and C, and data source B was constantly updating, there's no real way you'd be able to warehouse that data.\\
+
+We usually move to keeping our data separate and maintaining only a global schema when data warehousing is unfeasible.\\
+
+Data integration has key challenges associated with it. For example integration, cleaning, setting up a global schema, and limits on how many time you can access a source (e.g. API request limits)\\
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Schema Matching} $\rightarrow$ Constructing a global schema that allows all the data you're accessing to 'mix'. (Different sources label their data differently!)
+\end{tcolorbox}
+
+\hfill \break \textbf{Big Idea:} Data integration is still a pretty ad-hoc and manual process as of right now, but it is a growing area of focus in this relatively new industry.\\
+
+\subsection{Data Cleaning}
+
+Data cleaning is the process in which we deal with data quality issues.\\
+
+\subsubsection{Types of Data Quality Issues}
+
+\begin{itemize}
+	\item \textbf{Single Source Problems} $\rightarrow$ These are problems you run into when you work with a single source. Databases tend to force constraints on their data, so we can trust them sometimes. There is \textbf{no Quality Control} for data scraped from files, spreadsheets, or webpages. As such, we're susceptible to things like \textbf{ill-formatted or missing data}, \textbf{contradicting data}, \textbf{illegal entries}, and the like.
+	\item \textbf{Multi Source Problems} $\rightarrow$ More problems arise when you try to integrate multiple sources. Different sources are maintained by different people, so we can already see a basis for issues.
+	\begin{itemize}
+		\item[1.] Mapping Info
+		\begin{itemize}
+			\item Naming conflicts: The same name is used for different objects.
+			\item Structural conflicts: different representations across sources.
+		\end{itemize}
+		\item[2.] Entity Resolution
+		\begin{itemize}
+			\item Matching entries across sources may prove to be difficult.
+		\end{itemize}
+		\item[3.] Data Quality Issues
+		\begin{itemize}
+			\item Contradicting information, mismatched information, etc.
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Outlier Detection}
+
+\textbf{Univariate outliers} are detected by using the \textbf{MAD}.\\
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Median Absolute Deviation (MAD)} $\rightarrow$ Median distance of all the values from the median value.
+\end{tcolorbox}
+
+\hfill \break If your data is \textbf{normally distributed}, we can assume that any and all data farther than \textbf{\texttt{1.4826}} MAD from the median are considered outliers.\\
+
+\begin{tcolorbox}[title=Aside: Curse of Dimensionality,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+The "Curse of Dimensionality" states that methods to find outliers break down as the dimensionality of the data increases. We always have the option of \textbf{projecting} this data down to lower dimensions and working with that, but that's the best we can do. Usually, it isn't that straightforward.
+\end{tcolorbox}
+
+\subsubsection{Entity Resolution}
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Entity Resolution} $\rightarrow$ Determining when references to data are equivalent. (E.g. Bob Spence, B. Spence, and Robert Spence \textit{could} all be referencing the same person)
+\end{tcolorbox}
+
+\hfill \break When it comes to working with entity resolution in practice, there are three main issues to get over. First, let's informally define a \textbf{mention} as when some object gets referenced.
+
+\begin{itemize}
+	\item \textbf{Deduplication} $\rightarrow$ Cluster records/mentions to the same entity and create a \textbf{cluster representative}.
+	\item \textbf{Record Linkage} $\rightarrow$ Matching records across different databases. (e.g. finding the same person on FB and Google Plus)
+	\item \textbf{Reference Matching} $\rightarrow$ Matching mentions of an entity to the actual entity being mentioned.
+\end{itemize}
+
+Actually finding similarity between two references/mentions can be done in many ways. For example, one can use 'edit distance' (string dissimilarity) functions, set similarity, vector similarity, etc. Generally, this must be optimized for each dataset.\\
+
+For more advanced examples, the keyword to search the web for is \textbf{entity resolution algorithms}. The examples in the slides look to be fairly basic and straightforward.
+
+\section{Lecture 10}
+
+This lecture is a summary of the 'important stuff' from STAT400, and then some. Worth going over, it's been a long time since statistics.
+
+\subsection{Exploratory Data Analysis}
+
+\textbf{Exploratory Data Analysis} is fancy talk for when you're getting a feel for what's going on with the data. We can usually spot certain nuances in the data (skews, trends, interactions of variables) that will help suggest what assumptions to make and what approaches to take when performing actual analysis.
+
+\subsection{Summary Statistics - Overview}
+
+Part of \textbf{descriptive statistics}, summary statistics is basically exactly what you think it is- it's used to summarize data.\\
+
+The big idea here is to convey information with extreme simplicity. This includes the following:
+
+\begin{itemize}
+	\item Measures of Location
+	\item Measures of Dispersion
+	\item Correlations
+\end{itemize}
+
+\subsection{Measures of Location}
+
+There exists a certain distribution of values, and we are interested in the center of said distribution. In other words, we are interested in \textbf{measures of central tendency.}\\
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Measure of Central Tendency} $\rightarrow$ A measure of \textbf{central tendency} is a single value that attempts to describe a set of data by identifying the central position within that set of data.
+\end{tcolorbox}
+
+\hfill \break There are two measurements that we use for this business: \textbf{sample mean} and \textbf{sample median}. They look similar, and they measure the same thing.\\
+
+We also know that these two measures \textbf{differ predictably} when the data \textbf{aren't symmetric}.\\
+
+The idea of \textbf{weighted average} is when you give more power to larger contributions. For example, bombing a midterm will hurt your grade average more than bombing a homework assignment.\\
+
+\hfill \break It's interesting to note that \textbf{extreme observations} will skew the mean, but not the median. For example:\\
+
+\begin{myproof}
+The \textbf{median} of \texttt{[1,2,4,6,8,9,17000]} is $6$\\
+The \textbf{mean} of \texttt{[1,2,4,6,8,9,17000]} is $2432.8$ 
+\end{myproof} 
+
+\hfill \break So how do we measure \textbf{dispersion}? We know we can't use the range to do so, as shown by the below example:\\
 
 
 \section{Footnotes}

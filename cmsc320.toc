@@ -74,4 +74,19 @@
 \contentsline {subsubsection}{Missing At Random}{30}{section*.66}
 \contentsline {subsubsection}{Missing Not At Random}{31}{section*.67}
 \contentsline {subsection}{Line of Best Fit}{31}{section*.68}
-\contentsline {section}{\numberline {9}Footnotes}{32}{section.9}
+\contentsline {subsection}{Imputation}{32}{section*.69}
+\contentsline {subsubsection}{Types Of Imputation}{32}{section*.70}
+\contentsline {subsubsection}{Single vs. Multiple Imputation}{32}{section*.71}
+\contentsline {section}{\numberline {9}Lecture 9}{33}{section.9}
+\contentsline {subsection}{Data Wrangling}{33}{section*.72}
+\contentsline {subsubsection}{Key Steps of Data Wrangling}{33}{section*.73}
+\contentsline {subsection}{Data Integration}{33}{section*.74}
+\contentsline {subsection}{Data Cleaning}{34}{section*.75}
+\contentsline {subsubsection}{Types of Data Quality Issues}{35}{section*.76}
+\contentsline {subsubsection}{Outlier Detection}{35}{section*.77}
+\contentsline {subsubsection}{Entity Resolution}{35}{section*.78}
+\contentsline {section}{\numberline {10}Lecture 10}{36}{section.10}
+\contentsline {subsection}{Exploratory Data Analysis}{36}{section*.79}
+\contentsline {subsection}{Summary Statistics - Overview}{36}{section*.80}
+\contentsline {subsection}{Measures of Location}{36}{section*.81}
+\contentsline {section}{\numberline {11}Footnotes}{37}{section.11}
