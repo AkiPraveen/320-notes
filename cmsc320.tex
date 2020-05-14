@@ -123,7 +123,7 @@
 
 Course notes for CMSC320, under Prof. John Dickerson. Notes collected from previous and current lectures.
 
-\section{Lecture 1}
+\section{Introduction (L1)}
 
 \subsection{What is Data Science?}
 
@@ -200,7 +200,7 @@ Conda is a package and environment manager for python that we can use with the c
 We can create multiple environments for us and install separate packages in each of them.
 This will be highly useful to us, as we sometimes want to consolidate the tools we use into separate environments.
 
-\section{Lecture 2}
+\section{Python, Jupyter, Literate Programming (L2)}
 
 \begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
 \textbf{Data Collection} $\rightarrow$ The process of measuring and gathering information on targeted variables.
@@ -424,7 +424,7 @@ Here are some ways that we think about data in this class:\newline
 	\end{itemize}
 \end{itemize}
 
-\section{Lecture 3}
+\section{Getting Data to Work With (L3)}
 
 \subsection{Acquiring Data}
 
@@ -502,9 +502,7 @@ In this case, we're best off using the Python library \texttt{BeautifulSoup}. We
 
 By combining \texttt{BeautifulSoup}, Regular expressions, and \texttt{GET} requests, we can make the process fairly streamlined. This is usually what we'll be using to scrape websites. In order to scrape more dynamic websites, we'd probably have to make use of Selenium. Check my 320 folder to find an example of a simple webscraper with \texttt{BeautifulSoup}.
 
-\section{Lecture 4}
-
-\textbf{Overview:} \textbf{Numpy, PANDAS, Relational Databases, Apache Spark}\newline
+\section{NumPy, Best Practices, Ethics (L4)}
 
 \subsection{Available Technologies}
 
@@ -691,16 +689,7 @@ The concept of not letting an algorithm look at protected attributes in order to
 	\item Security is key- especially if working with sensitive data.
 \end{itemize}
 
-\section{Lecture 5 \& 6}
-
-\textbf{Big ideas: Pandas + Relational Databases}
-
-\begin{itemize}
-	\item Tables (Specifically, the abstraction + operations)
-	\item \texttt{PANDAS}
-	\item The idea of 'tidy' data
-	\item \texttt{SQL}
-\end{itemize}
+\section{Tables, Relational DB, and Pandas (L5 + L6)}
 
 \subsection{Tables}
 
@@ -1632,7 +1621,7 @@ Here's a neat way to visualize joins using Venn Diagrams.\\\\
 
 }
 
-\section{Lecture 7}
+\section{Version Control Software (L7)}
 
 This lecture focuses mainly on \textbf{version control} and \textbf{\texttt{Git}}. Since I know the basics of this stuff already, this will just be a smaller review of \texttt{Git} plus the stuff I didn't already know very well coming into this course.\\
 
@@ -1796,7 +1785,7 @@ This idea can be complemented by a visual guide, where you can see the three mai
 
 It's sort of like a hybrid of a centralized and distributed VCS. According to a website online, "GitHub and similar services bring all of the benefits of a decentralized VCS to a centralized service."
 
-\section{Lecture 8}
+\section{Missing Data and Imputation (L8)}
 
 \subsection{Missing Data}
 
@@ -2048,7 +2037,7 @@ Now, the question arises: \textbf{How big should $n$ be} when we're talking abou
 
 Recent research suggests, however, that a 'good' $n$ value is generally higher. General counsel here is to choose a pretty sizable value for $n$.
 
-\section{Lecture 9}
+\section{Data Wrangling, Integration, Cleaning (L9)}
 
 Now that we have imputed and made some new datasets, how do we make use of them? To clarify from the previous example, we can simply perform analysis on each \textbf{individual dataset}, then pool the results of that analysis (take the average of the analyses on the imputed datasets).\\
 
@@ -2214,7 +2203,7 @@ Actually finding similarity between two references/mentions can be done in many 
 
 For more advanced examples, the keyword to search the web for is \textbf{entity resolution algorithms}. The examples in the slides look to be fairly basic and straightforward.
 
-\section{Lecture 10}
+\section{Statistics Review (L10)}
 
 This lecture is a summary of the 'important stuff' from STAT400, and then some. Worth going over, it's been a long time since statistics.
 
@@ -2255,7 +2244,445 @@ The \textbf{median} of \texttt{[1,2,4,6,8,9,17000]} is $6$\\
 The \textbf{mean} of \texttt{[1,2,4,6,8,9,17000]} is $2432.8$ 
 \end{myproof} 
 
+\subsection{Measures of Dispersion}
+
 \hfill \break So how do we measure \textbf{dispersion}? We know we can't use the range to do so, as shown by the below example:\\
+
+{
+
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Flowchart: Process [id:dp42985399592270557] 
+\draw   (68.33,54) -- (220.33,54) -- (220.33,207.33) -- (68.33,207.33) -- cycle ;
+%Flowchart: Process [id:dp10230829715920353] 
+\draw   (313,54) -- (465,54) -- (465,207.33) -- (313,207.33) -- cycle ;
+%Shape: Rectangle [id:dp294441304663163] 
+\draw   (68.5,189) -- (80.17,189) -- (80.17,207.33) -- (68.5,207.33) -- cycle ;
+%Shape: Rectangle [id:dp0758070145538664] 
+\draw   (120.5,184.75) -- (132.17,184.75) -- (132.17,207.33) -- (120.5,207.33) -- cycle ;
+%Shape: Rectangle [id:dp2684702369415499] 
+\draw   (132,171.25) -- (143.67,171.25) -- (143.67,207.33) -- (132,207.33) -- cycle ;
+%Shape: Rectangle [id:dp18320331343577423] 
+\draw   (143.5,193.75) -- (155.17,193.75) -- (155.17,207.33) -- (143.5,207.33) -- cycle ;
+%Shape: Rectangle [id:dp5730680892444393] 
+\draw   (208,192.75) -- (219.67,192.75) -- (219.67,207.33) -- (208,207.33) -- cycle ;
+%Shape: Rectangle [id:dp33682018352719645] 
+\draw   (312.5,189) -- (324.17,189) -- (324.17,207.33) -- (312.5,207.33) -- cycle ;
+%Shape: Rectangle [id:dp35260214424395486] 
+\draw   (324,185.25) -- (335.67,185.25) -- (335.67,207.33) -- (324,207.33) -- cycle ;
+%Shape: Rectangle [id:dp33610034244219744] 
+\draw   (336,189) -- (347.67,189) -- (347.67,207.33) -- (336,207.33) -- cycle ;
+%Shape: Rectangle [id:dp3523600042941607] 
+\draw   (347.5,178.75) -- (359.17,178.75) -- (359.17,207.33) -- (347.5,207.33) -- cycle ;
+%Shape: Rectangle [id:dp9944722298043582] 
+\draw   (359.5,194.25) -- (371.17,194.25) -- (371.17,207.33) -- (359.5,207.33) -- cycle ;
+%Shape: Rectangle [id:dp48377497880010323] 
+\draw   (371,166.75) -- (382.67,166.75) -- (382.67,207.33) -- (371,207.33) -- cycle ;
+%Shape: Rectangle [id:dp15813218987235855] 
+\draw   (383,157.75) -- (394.67,157.75) -- (394.67,207.33) -- (383,207.33) -- cycle ;
+%Shape: Rectangle [id:dp4067396806620175] 
+\draw   (394.5,184.25) -- (406.17,184.25) -- (406.17,207.33) -- (394.5,207.33) -- cycle ;
+%Shape: Rectangle [id:dp9548628722511838] 
+\draw   (406,189) -- (417.67,189) -- (417.67,207.33) -- (406,207.33) -- cycle ;
+%Shape: Rectangle [id:dp36628712469833324] 
+\draw   (417.5,191.75) -- (429.17,191.75) -- (429.17,207.33) -- (417.5,207.33) -- cycle ;
+%Shape: Rectangle [id:dp3668461747520537] 
+\draw   (429,184.75) -- (440.67,184.75) -- (440.67,207.33) -- (429,207.33) -- cycle ;
+%Shape: Rectangle [id:dp6070297155185923] 
+\draw   (441,189) -- (452.67,189) -- (452.67,207.33) -- (441,207.33) -- cycle ;
+%Shape: Rectangle [id:dp43867865923165406] 
+\draw   (453,189) -- (464.67,189) -- (464.67,207.33) -- (453,207.33) -- cycle ;
+
+% Text Node
+\draw (13,224.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {Ex) These two datasets have the same range, but highly different dispersions};
+
+
+\end{tikzpicture}
+
+
+}
+
+
+\hfill \break As such, \textbf{Variance} and \textbf{Standard Deviation} are univariate measures of dispersion in a dataset.\\
+
+\textbf{Variance} measures how far a set of numbers is spread out from their average value. It can be calculated using the following formula:\\
+
+$$\frac{1}{n}\sum_{i=1}^{n}{(x_i-\bar{x})^2}$$\\
+
+\hfill \break In this case, $x_i$ represents each data point, while $\bar{x}$ represents the sample mean.\\
+
+However, the units get messed up when we calculate variance. Thus, \textbf{standard deviation} is an \textbf{interpretable} unit of measurement for dispersion.\\
+
+We calculate the standard deviation by simply finding the square root of variance. The formula is as follows:\\
+
+$$\sqrt{\frac{1}{n}\sum_{i=1}^{n}{(x_i-\bar{x})^2}}$$\\
+
+\begin{tcolorbox}[title=Aside: Bessel's Correction,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+\textbf{Bessel's Correction} is the formal name for when we use $(n-1)$ instead of $n$ when calculating sample variance and sample standard deviation, where $n$ is the number of observations in the sample. This method apparently corrects bias in the estimation of the population variance.
+\end{tcolorbox}
+
+\hfill \break \textbf{Standard deviation} can also be used as a unit. For example, $68\%$ of the distribution will be within 1 standard deviation from the mean, $95\%$ will be within 2 standard deviations from the mean, $99.73\%$ in 3 standard deviations, and so on. (Just like STAT400)
+
+\subsection{Correlation}
+
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Correlation} $\rightarrow$ The idea that variables x and y vary together.
+\end{tcolorbox}
+
+\hfill \break \textbf{Causality vs. Correlation:} Can we figure out if movement in $x$ induces some sort of movement in $y$?\\
+
+\begin{myproof}
+\textbf{Example:} If the following scatter plot suggests correlation, \textbf{linear regression} can actually measure that correlation.\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Straight Lines [id:da691600851003093] 
+\draw    (99,249) -- (99,92.67) ;
+\draw [shift={(99,90.67)}, rotate = 450] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da40851272097006375] 
+\draw    (99,249) -- (265,249) ;
+\draw [shift={(267,249)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da28842348848593835] 
+\draw    (407,249) -- (573,249) ;
+\draw [shift={(575,249)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da9336437291069557] 
+\draw    (407,249) -- (407,92.67) ;
+\draw [shift={(407,90.67)}, rotate = 450] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Flowchart: Summing Junction [id:dp9042799879699613] 
+\draw   (128.53,200.87) .. controls (128.53,198.77) and (130.23,197.07) .. (132.33,197.07) .. controls (134.43,197.07) and (136.13,198.77) .. (136.13,200.87) .. controls (136.13,202.97) and (134.43,204.67) .. (132.33,204.67) .. controls (130.23,204.67) and (128.53,202.97) .. (128.53,200.87) -- cycle ; \draw   (129.65,198.18) -- (135.02,203.55) ; \draw   (135.02,198.18) -- (129.65,203.55) ;
+%Flowchart: Summing Junction [id:dp33641373424460996] 
+\draw   (148.53,220.87) .. controls (148.53,218.77) and (150.23,217.07) .. (152.33,217.07) .. controls (154.43,217.07) and (156.13,218.77) .. (156.13,220.87) .. controls (156.13,222.97) and (154.43,224.67) .. (152.33,224.67) .. controls (150.23,224.67) and (148.53,222.97) .. (148.53,220.87) -- cycle ; \draw   (149.65,218.18) -- (155.02,223.55) ; \draw   (155.02,218.18) -- (149.65,223.55) ;
+%Flowchart: Summing Junction [id:dp25077564919441] 
+\draw   (155.87,190.87) .. controls (155.87,188.77) and (157.57,187.07) .. (159.67,187.07) .. controls (161.77,187.07) and (163.47,188.77) .. (163.47,190.87) .. controls (163.47,192.97) and (161.77,194.67) .. (159.67,194.67) .. controls (157.57,194.67) and (155.87,192.97) .. (155.87,190.87) -- cycle ; \draw   (156.98,188.18) -- (162.35,193.55) ; \draw   (162.35,188.18) -- (156.98,193.55) ;
+%Flowchart: Summing Junction [id:dp10280310083157251] 
+\draw   (188.53,184.87) .. controls (188.53,182.77) and (190.23,181.07) .. (192.33,181.07) .. controls (194.43,181.07) and (196.13,182.77) .. (196.13,184.87) .. controls (196.13,186.97) and (194.43,188.67) .. (192.33,188.67) .. controls (190.23,188.67) and (188.53,186.97) .. (188.53,184.87) -- cycle ; \draw   (189.65,182.18) -- (195.02,187.55) ; \draw   (195.02,182.18) -- (189.65,187.55) ;
+%Flowchart: Summing Junction [id:dp9991352500853743] 
+\draw   (194.2,152.2) .. controls (194.2,150.1) and (195.9,148.4) .. (198,148.4) .. controls (200.1,148.4) and (201.8,150.1) .. (201.8,152.2) .. controls (201.8,154.3) and (200.1,156) .. (198,156) .. controls (195.9,156) and (194.2,154.3) .. (194.2,152.2) -- cycle ; \draw   (195.31,149.51) -- (200.69,154.89) ; \draw   (200.69,149.51) -- (195.31,154.89) ;
+%Flowchart: Summing Junction [id:dp6950916379064316] 
+\draw   (234.2,147.53) .. controls (234.2,145.43) and (235.9,143.73) .. (238,143.73) .. controls (240.1,143.73) and (241.8,145.43) .. (241.8,147.53) .. controls (241.8,149.63) and (240.1,151.33) .. (238,151.33) .. controls (235.9,151.33) and (234.2,149.63) .. (234.2,147.53) -- cycle ; \draw   (235.31,144.85) -- (240.69,150.22) ; \draw   (240.69,144.85) -- (235.31,150.22) ;
+%Flowchart: Summing Junction [id:dp9248526822392967] 
+\draw   (214.2,128.2) .. controls (214.2,126.1) and (215.9,124.4) .. (218,124.4) .. controls (220.1,124.4) and (221.8,126.1) .. (221.8,128.2) .. controls (221.8,130.3) and (220.1,132) .. (218,132) .. controls (215.9,132) and (214.2,130.3) .. (214.2,128.2) -- cycle ; \draw   (215.31,125.51) -- (220.69,130.89) ; \draw   (220.69,125.51) -- (215.31,130.89) ;
+%Flowchart: Summing Junction [id:dp5996481964322673] 
+\draw   (115.2,233.2) .. controls (115.2,231.1) and (116.9,229.4) .. (119,229.4) .. controls (121.1,229.4) and (122.8,231.1) .. (122.8,233.2) .. controls (122.8,235.3) and (121.1,237) .. (119,237) .. controls (116.9,237) and (115.2,235.3) .. (115.2,233.2) -- cycle ; \draw   (116.31,230.51) -- (121.69,235.89) ; \draw   (121.69,230.51) -- (116.31,235.89) ;
+%Flowchart: Summing Junction [id:dp5620763540811129] 
+\draw   (155.2,127.53) .. controls (155.2,125.43) and (156.9,123.73) .. (159,123.73) .. controls (161.1,123.73) and (162.8,125.43) .. (162.8,127.53) .. controls (162.8,129.63) and (161.1,131.33) .. (159,131.33) .. controls (156.9,131.33) and (155.2,129.63) .. (155.2,127.53) -- cycle ; \draw   (156.31,124.85) -- (161.69,130.22) ; \draw   (161.69,124.85) -- (156.31,130.22) ;
+%Flowchart: Summing Junction [id:dp5542972204658851] 
+\draw   (227.53,175.87) .. controls (227.53,173.77) and (229.23,172.07) .. (231.33,172.07) .. controls (233.43,172.07) and (235.13,173.77) .. (235.13,175.87) .. controls (235.13,177.97) and (233.43,179.67) .. (231.33,179.67) .. controls (229.23,179.67) and (227.53,177.97) .. (227.53,175.87) -- cycle ; \draw   (228.65,173.18) -- (234.02,178.55) ; \draw   (234.02,173.18) -- (228.65,178.55) ;
+%Flowchart: Summing Junction [id:dp9478706147850046] 
+\draw   (438.53,199.87) .. controls (438.53,197.77) and (440.23,196.07) .. (442.33,196.07) .. controls (444.43,196.07) and (446.13,197.77) .. (446.13,199.87) .. controls (446.13,201.97) and (444.43,203.67) .. (442.33,203.67) .. controls (440.23,203.67) and (438.53,201.97) .. (438.53,199.87) -- cycle ; \draw   (439.65,197.18) -- (445.02,202.55) ; \draw   (445.02,197.18) -- (439.65,202.55) ;
+%Flowchart: Summing Junction [id:dp0966153856744063] 
+\draw   (458.53,219.87) .. controls (458.53,217.77) and (460.23,216.07) .. (462.33,216.07) .. controls (464.43,216.07) and (466.13,217.77) .. (466.13,219.87) .. controls (466.13,221.97) and (464.43,223.67) .. (462.33,223.67) .. controls (460.23,223.67) and (458.53,221.97) .. (458.53,219.87) -- cycle ; \draw   (459.65,217.18) -- (465.02,222.55) ; \draw   (465.02,217.18) -- (459.65,222.55) ;
+%Flowchart: Summing Junction [id:dp198239701522397] 
+\draw   (465.87,189.87) .. controls (465.87,187.77) and (467.57,186.07) .. (469.67,186.07) .. controls (471.77,186.07) and (473.47,187.77) .. (473.47,189.87) .. controls (473.47,191.97) and (471.77,193.67) .. (469.67,193.67) .. controls (467.57,193.67) and (465.87,191.97) .. (465.87,189.87) -- cycle ; \draw   (466.98,187.18) -- (472.35,192.55) ; \draw   (472.35,187.18) -- (466.98,192.55) ;
+%Flowchart: Summing Junction [id:dp6366216446149654] 
+\draw   (498.53,183.87) .. controls (498.53,181.77) and (500.23,180.07) .. (502.33,180.07) .. controls (504.43,180.07) and (506.13,181.77) .. (506.13,183.87) .. controls (506.13,185.97) and (504.43,187.67) .. (502.33,187.67) .. controls (500.23,187.67) and (498.53,185.97) .. (498.53,183.87) -- cycle ; \draw   (499.65,181.18) -- (505.02,186.55) ; \draw   (505.02,181.18) -- (499.65,186.55) ;
+%Flowchart: Summing Junction [id:dp5339937012733282] 
+\draw   (504.2,151.2) .. controls (504.2,149.1) and (505.9,147.4) .. (508,147.4) .. controls (510.1,147.4) and (511.8,149.1) .. (511.8,151.2) .. controls (511.8,153.3) and (510.1,155) .. (508,155) .. controls (505.9,155) and (504.2,153.3) .. (504.2,151.2) -- cycle ; \draw   (505.31,148.51) -- (510.69,153.89) ; \draw   (510.69,148.51) -- (505.31,153.89) ;
+%Flowchart: Summing Junction [id:dp3396798526868743] 
+\draw   (544.2,146.53) .. controls (544.2,144.43) and (545.9,142.73) .. (548,142.73) .. controls (550.1,142.73) and (551.8,144.43) .. (551.8,146.53) .. controls (551.8,148.63) and (550.1,150.33) .. (548,150.33) .. controls (545.9,150.33) and (544.2,148.63) .. (544.2,146.53) -- cycle ; \draw   (545.31,143.85) -- (550.69,149.22) ; \draw   (550.69,143.85) -- (545.31,149.22) ;
+%Flowchart: Summing Junction [id:dp6647281849884135] 
+\draw   (524.2,127.2) .. controls (524.2,125.1) and (525.9,123.4) .. (528,123.4) .. controls (530.1,123.4) and (531.8,125.1) .. (531.8,127.2) .. controls (531.8,129.3) and (530.1,131) .. (528,131) .. controls (525.9,131) and (524.2,129.3) .. (524.2,127.2) -- cycle ; \draw   (525.31,124.51) -- (530.69,129.89) ; \draw   (530.69,124.51) -- (525.31,129.89) ;
+%Flowchart: Summing Junction [id:dp4567465349796471] 
+\draw   (425.2,232.2) .. controls (425.2,230.1) and (426.9,228.4) .. (429,228.4) .. controls (431.1,228.4) and (432.8,230.1) .. (432.8,232.2) .. controls (432.8,234.3) and (431.1,236) .. (429,236) .. controls (426.9,236) and (425.2,234.3) .. (425.2,232.2) -- cycle ; \draw   (426.31,229.51) -- (431.69,234.89) ; \draw   (431.69,229.51) -- (426.31,234.89) ;
+%Flowchart: Summing Junction [id:dp39927990486176523] 
+\draw   (465.2,126.53) .. controls (465.2,124.43) and (466.9,122.73) .. (469,122.73) .. controls (471.1,122.73) and (472.8,124.43) .. (472.8,126.53) .. controls (472.8,128.63) and (471.1,130.33) .. (469,130.33) .. controls (466.9,130.33) and (465.2,128.63) .. (465.2,126.53) -- cycle ; \draw   (466.31,123.85) -- (471.69,129.22) ; \draw   (471.69,123.85) -- (466.31,129.22) ;
+%Flowchart: Summing Junction [id:dp0888699043165192] 
+\draw   (537.53,174.87) .. controls (537.53,172.77) and (539.23,171.07) .. (541.33,171.07) .. controls (543.43,171.07) and (545.13,172.77) .. (545.13,174.87) .. controls (545.13,176.97) and (543.43,178.67) .. (541.33,178.67) .. controls (539.23,178.67) and (537.53,176.97) .. (537.53,174.87) -- cycle ; \draw   (538.65,172.18) -- (544.02,177.55) ; \draw   (544.02,172.18) -- (538.65,177.55) ;
+%Straight Lines [id:da22477620790243336] 
+\draw [color={rgb, 255:red, 255; green, 0; blue, 0 }  ,draw opacity=1 ]   (407,249) -- (568,115.75) ;
+%Right Arrow [id:dp31063873859211444] 
+\draw  [fill={rgb, 255:red, 248; green, 231; blue, 28 }  ,fill opacity=1 ] (305,162) -- (347,162) -- (347,152) -- (375,172) -- (347,192) -- (347,182) -- (305,182) -- cycle ;
+
+% Text Node
+\draw (320.5,163.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {???};
+
+
+\end{tikzpicture}
+
+
+}
+
+\end{myproof}
+
+\hfill \break However, be warned. \textbf{Correlation does not imply causation!} Just because two things vary at similar rates does not imply that one affects the other!\\
+
+\subsection{Standardization}
+
+Say we find out our variables are skewed and have different ranges. We should \textbf{transform} the variables to ease data analysis and allow the use of other statistics and/or machine learning models.\\ 
+
+This can be done with \textbf{Standardization} (3 types).
+
+\begin{itemize}
+	\item \textbf{P-Standardization} (Percentiles)
+	\item \textbf{Z-Standardization} (Z-score)
+	\item \textbf{D-Standardization} (Dichotomization)
+\end{itemize}
+
+You should \textbf{always} standardize. \\
+
+\begin{myproof}
+\textbf{Example:} when averaging multiple variables, like creating a 'socioeconomic status' variable out of a combination of age, income and education.
+\end{myproof}
+
+\hfill \break \textbf{P-Standardization} is sometimes called a 'percentile score'. Every observation is assigned to a number between 0 and 100, indicating the \% of observations 'beneath it'.\\
+
+\textbf{Special examples of this:} median, quartiles, quintiles.\\
+
+This process is known as transforming the variable into an \textbf{ordinal variable}.\\
+
+You can also group data into 'standard deviations from the mean', like we do with exam scores.\\
+
+It's important to note which of your datasets uses \textbf{discrete} or \textbf{continuous} variables, because some models only work on one type of dataset or another, so we should keep that in mind.\\
+
+\begin{tcolorbox}[title=Aside: Logarithmic Transformation,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+The Logarithmic transformation is especially useful when standardizing data that is skewed to the right, i.e. when we have some ridiculously high values to the right of our data. The log transform 'reels them in' to the left and helps us deal with all the data.
+\end{tcolorbox}
+
+\section{Networks and Graphs (L11)}
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Network} $\rightarrow$ a system of interconnected objects, often represented by a graph.
+\end{tcolorbox}
+
+\subsection{Review on Graphs}
+
+A \textbf{graph} is a data structure describing a set of vertices and edges. It can either be \textbf{weighted} or \textbf{unweighted}, \textbf{directed} or \textbf{non-directed}.\\
+
+You can store graphs in a few different ways.\\
+
+\begin{myproof}
+\textbf{Adjacency List}\\
+(For each vertex, store a list of the vertices it connects to)\\
+
+Pros:
+\begin{itemize}
+	\item Easy to add edges
+\end{itemize}
+
+Cons:
+\begin{itemize}
+	\item Deleting is hard
+	\item Checking for edges is \texttt{O(|v|)}
+\end{itemize}
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Circle [id:dp2717325757060276] 
+\draw   (22.5,70.17) .. controls (22.5,58.84) and (31.68,49.67) .. (43,49.67) .. controls (54.32,49.67) and (63.5,58.84) .. (63.5,70.17) .. controls (63.5,81.49) and (54.32,90.67) .. (43,90.67) .. controls (31.68,90.67) and (22.5,81.49) .. (22.5,70.17) -- cycle ;
+%Shape: Circle [id:dp10440427856784407] 
+\draw   (121.83,104.17) .. controls (121.83,92.84) and (131.01,83.67) .. (142.33,83.67) .. controls (153.66,83.67) and (162.83,92.84) .. (162.83,104.17) .. controls (162.83,115.49) and (153.66,124.67) .. (142.33,124.67) .. controls (131.01,124.67) and (121.83,115.49) .. (121.83,104.17) -- cycle ;
+%Shape: Circle [id:dp1041314060360411] 
+\draw   (25.17,192.83) .. controls (25.17,181.51) and (34.34,172.33) .. (45.67,172.33) .. controls (56.99,172.33) and (66.17,181.51) .. (66.17,192.83) .. controls (66.17,204.16) and (56.99,213.33) .. (45.67,213.33) .. controls (34.34,213.33) and (25.17,204.16) .. (25.17,192.83) -- cycle ;
+%Shape: Circle [id:dp7832881426057642] 
+\draw   (131.17,202.83) .. controls (131.17,191.51) and (140.34,182.33) .. (151.67,182.33) .. controls (162.99,182.33) and (172.17,191.51) .. (172.17,202.83) .. controls (172.17,214.16) and (162.99,223.33) .. (151.67,223.33) .. controls (140.34,223.33) and (131.17,214.16) .. (131.17,202.83) -- cycle ;
+%Straight Lines [id:da38761707924361] 
+\draw    (122.33,97.33) -- (65.32,71.01) ;
+\draw [shift={(63.5,70.17)}, rotate = 384.78999999999996] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da24509226005445295] 
+\draw    (53.33,52) .. controls (123.27,-5.13) and (134.02,47.7) .. (136.24,81.79) ;
+\draw [shift={(136.33,83.33)}, rotate = 266.63] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da1214994408370218] 
+\draw    (60.33,178) -- (122.27,114.76) ;
+\draw [shift={(123.67,113.33)}, rotate = 494.4] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da8406248096151248] 
+\draw    (58.67,209.67) .. controls (116.78,271.07) and (129.94,262.93) .. (144.98,225.08) ;
+\draw [shift={(145.67,223.33)}, rotate = 471.3] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da16515278602403738] 
+\draw    (277.33,42) -- (326.33,42) ;
+%Straight Lines [id:da24796609978389095] 
+\draw    (354,42) -- (427,42) ;
+
+% Text Node
+\draw (37.5,60.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont A}};
+% Text Node
+\draw (136.83,94.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont C}};
+% Text Node
+\draw (40.17,183) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont B}};
+% Text Node
+\draw (146.17,193) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont D}};
+% Text Node
+\draw (278.67,21) node [anchor=north west][inner sep=0.75pt]   [align=left] {Vertex};
+% Text Node
+\draw (354.67,21) node [anchor=north west][inner sep=0.75pt]   [align=left] {Neighbors};
+% Text Node
+\draw (295.33,46) node [anchor=north west][inner sep=0.75pt]   [align=left] {A};
+% Text Node
+\draw (380,46) node [anchor=north west][inner sep=0.75pt]   [align=left] {[C]};
+% Text Node
+\draw (294.67,70) node [anchor=north west][inner sep=0.75pt]   [align=left] {B};
+% Text Node
+\draw (372,70.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {[C, D]};
+% Text Node
+\draw (294.67,92.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {C};
+% Text Node
+\draw (382.67,92) node [anchor=north west][inner sep=0.75pt]   [align=left] {[A]};
+% Text Node
+\draw (295.33,114.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {D};
+% Text Node
+\draw (388,112.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {[]};
+
+
+\end{tikzpicture}
+}
+\end{myproof}
+
+\begin{myproof}
+\textbf{Adjacency Dictionary}\\
+(For each vertex, store a dictionary of vertices that it connects to)\\\\
+Pros:
+\begin{itemize}
+	\item O(1) to add, remove and query edges
+\end{itemize}
+Cons:
+\begin{itemize}
+	\item Memory + Caching overhead (heavy use of Python data structure)
+\end{itemize}
+
+Neighbors for B $\rightarrow$ \texttt{\{C:1.0, D:2.0\}}
+\end{myproof}
+
+\hfill \break The previous two are pretty much similar, it's just that the Adjacency Dictionary takes advantage of features provided to us in Python, while the Adjacency List is the more classic way to represent a graph. However, the reason we talk specifically about the adjacency dictionary will be explored below.\\
+
+\begin{myproof}
+\textbf{Adjacency Matrix}\\
+(Store the connectivity of the graph in a matrix- almost always in a sparse matrix)\\\\
+Pros:
+\begin{itemize}
+	\item \texttt{O(1)} time for query, add edge, remove edge
+\end{itemize}
+Cons:
+\begin{itemize}
+	\item \texttt{O($v^2$)} space complexity, regardless of the actual number of edges
+\end{itemize}
+\end{myproof}
+
+\subsection{NetworkX}
+
+\texttt{\textbf{NetworkX}} is how data scientists work with graphs in \textbf{Python}. It makes use of an \textbf{Adjacency Dictionary} representation, which is essentially just a beefed up Adjacency List with better access times and more overhead (see above).
+
+\subsection{Graph Databases}
+
+Graph databases exist and are an alternative to relational databases.\\
+
+\begin{myproof}
+\textbf{Example:} A very simple graph database. Note the similarities to a relational database. Here, the different relations like '\texttt{is\_friend}' and '\texttt{read}' can be represented with, for example, separate adjacency dictionaries.\\\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp051464383627423005] 
+\draw   (64,54.67) -- (184.33,54.67) -- (184.33,94.67) -- (64,94.67) -- cycle ;
+%Shape: Rectangle [id:dp5147384377159534] 
+\draw   (342.67,25.33) -- (463,25.33) -- (463,65.33) -- (342.67,65.33) -- cycle ;
+%Shape: Rectangle [id:dp13294535427367693] 
+\draw   (131,168.67) -- (372.33,168.67) -- (372.33,244) -- (131,244) -- cycle ;
+%Curve Lines [id:da8347841470794473] 
+\draw [color={rgb, 255:red, 245; green, 166; blue, 35 }  ,draw opacity=1 ]   (133,52.67) .. controls (170.29,3.17) and (292.52,22.93) .. (340.89,29.8) ;
+\draw [shift={(342.33,30)}, rotate = 188.02] [color={rgb, 255:red, 245; green, 166; blue, 35 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da09588463321076213] 
+\draw [color={rgb, 255:red, 245; green, 166; blue, 35 }  ,draw opacity=1 ]   (391.67,65.33) .. controls (352.73,148.49) and (238.32,83.98) .. (185.9,81.39) ;
+\draw [shift={(184.33,81.33)}, rotate = 361.48] [color={rgb, 255:red, 245; green, 166; blue, 35 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da2685612909820726] 
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ]   (119.67,95.33) -- (189.61,167.89) ;
+\draw [shift={(191,169.33)}, rotate = 226.05] [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da7536260060068494] 
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ]   (401.67,65.33) -- (320.25,167.1) ;
+\draw [shift={(319,168.67)}, rotate = 308.65999999999997] [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (141.33,187.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {TITLE: Bob's Adventure\\AUTHORS: Tim Lane, Jack Hart};
+% Text Node
+\draw (71.33,65.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {NAME: John P.};
+% Text Node
+\draw (358.67,36) node [anchor=north west][inner sep=0.75pt]   [align=left] {NAME: Lizzy};
+% Text Node
+\draw (170.67,2) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont \textcolor[rgb]{0.96,0.65,0.14}{is\_friend}}};
+% Text Node
+\draw (286,81.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont \textcolor[rgb]{0.96,0.65,0.14}{is\_friend}}};
+% Text Node
+\draw (112.67,124) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont \textcolor[rgb]{0.29,0.56,0.89}{read}}};
+% Text Node
+\draw (362.33,120) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont \textcolor[rgb]{0.29,0.56,0.89}{read}}};
+
+
+\end{tikzpicture}
+
+
+}
+\end{myproof}
+
+\hfill \break To \textbf{query} a graph database, we need to use a language other than SQL.\\
+
+\texttt{\textbf{Neo4J}} and \texttt{\textbf{Titan}} are popular graph DB solutions, and can be accessed and leveraged using \texttt{\textbf{Bulbflow}}, a Python library.\\
+
+\subsection{Centrality Analysis}
+
+Centrality Analysis is the idea of finding out the most important node(s) in one network- not all nodes are created equal. This is important in visualization and classification. There are four distinct types of centrality analyses.
+
+\begin{itemize}
+	\item \textbf{Degree Centrality} $\rightarrow$ The importance of a vertex is determined by the number of vertices adjacent to it. In other words: the larger the \textit{degree}, the more important the vertex. To find normalized degree centrality, just divide \texttt{(degree of node)} by \texttt{(total nodes - 1)}.
+	\item \textbf{Closeness Centrality} $\rightarrow$ The importance of a vertex is measured by how close a vertex is to other vertices. For example, to determine this, we can calculate the average length of all the shortest paths from that one node to every other node in the network. If needed, we can factor in edge weight.
+	\item \textbf{Betweenness Centrality} $\rightarrow$ How "in the way" is this node in terms of shortest paths between nodes?
+	$$\frac{\sigma_{st} v_i}{\sigma_{st}}$$
+	To find this, we just need to divide the shortest paths passing through $v_i$ by the total shortest paths in the graph (as shown above).
+	\item \textbf{Eigenvector Centrality} $\rightarrow$ A vertex's importance should be determined by the importance of the friends of that vertex- i.e. \textit{If one has many important friends, they too, are important.} A variant of eigenvector centrality is Google's PageRank algorithm's scoring system.
+\end{itemize}
+
+All of this and more are implemented in \texttt{NetworkX}.
+
+\subsection{Network Topology}
+
+We want to learn from the topology of a network- which is basically its broad, overarching structure.\\
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Bridge} $\rightarrow$ An edge is a bridge if its removal results in total disconnection of its terminal vertices. Bridges connecting two different communities are weak ties.\\\\
+\textbf{Community} $\rightarrow$ A community is a tightly knit region of a network. We can use bridges to help define how communities are separated.
+\end{tcolorbox}
+
+\hfill \break The \textbf{Girvan-Newman Method} is a way to flesh out tightly-knit communities in networks. You basically remove the edges of a higher betweenness, then keep repeating this process. (This functionality is found in \texttt{NetworkX}).\\
+
+You can also use \textbf{\texttt{GraphViz}} (like in CMSC330 with the regex project) to display your graphs and networks.
+
+
+
+
+
+
+
+
+
+
 
 
 \section{Footnotes}
