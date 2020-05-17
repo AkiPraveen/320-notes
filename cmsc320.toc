@@ -98,4 +98,11 @@
 \contentsline {subsection}{Graph Databases}{41}{section*.87}
 \contentsline {subsection}{Centrality Analysis}{42}{section*.88}
 \contentsline {subsection}{Network Topology}{42}{section*.89}
-\contentsline {section}{\numberline {12}Footnotes}{42}{section.12}
+\contentsline {section}{\numberline {12}Natural Language Processing (L14 + 15)}{43}{section.12}
+\contentsline {subsection}{Background}{43}{section*.90}
+\contentsline {subsection}{Natural Language Processing Terminology}{44}{section*.91}
+\contentsline {subsection}{Spoken Dialogue System (Example)}{45}{section*.92}
+\contentsline {subsection}{General Industry}{45}{section*.93}
+\contentsline {subsection}{Supervised Learning}{46}{section*.94}
+\contentsline {subsection}{NLP In Python}{48}{section*.95}
+\contentsline {section}{\numberline {13}Footnotes}{48}{section.13}

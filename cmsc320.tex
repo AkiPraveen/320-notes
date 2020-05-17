@@ -2672,11 +2672,329 @@ We want to learn from the topology of a network- which is basically its broad, o
 
 \hfill \break The \textbf{Girvan-Newman Method} is a way to flesh out tightly-knit communities in networks. You basically remove the edges of a higher betweenness, then keep repeating this process. (This functionality is found in \texttt{NetworkX}).\\
 
-You can also use \textbf{\texttt{GraphViz}} (like in CMSC330 with the regex project) to display your graphs and networks.
+You can also use \textbf{\texttt{GraphViz}} (like in CMSC330 with the regex project) to display your graphs and networks.\\
+
+\section{Natural Language Processing (L14 + 15)}
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Natural Language Processing} $\rightarrow$ Natural language processing is a subfield of linguistics, computer science, information engineering, and artificial intelligence concerned with the interactions between computers and human languages, in particular how to program computers to process and analyze large amounts of natural language data. \textit{(Wikipedia)}
+\end{tcolorbox}
+
+\hfill \break It appears that this field is the intersection of \textbf{linguistics} and \textbf{computer science}. It's worth picking up further linguistics knowledge if pursuing NLP.
+
+\hfill \break There are many uses for Natural Language Processing (NLP) software, but here are some good examples.
+
+\begin{itemize}
+	\item \textbf{Review analysis} is something that a lot of marketing and product companies have to do- they don't want to manually sift through every review of their product and figure out if the people like it or not, so they assign software to do it!
+	\item \textbf{Language translation} is another excellent example. Language translation isn't as simple as swapping out words for one another, extra processing has to be done. This falls under the realm of NLP.
+	\item \textbf{Question and answer}, like \textit{Jeopardy}, requires a fair amount of natural language processing. When IBM's Watson appeared on \textit{Jeopardy}, programmers mentioned that he had to distinguish between simple 'factoid questions', which could just be answered via a simple fact lookup, and 'thinking questions', which usually required the answer-er to follow some sort of narrative and do some critical thinking.
+\end{itemize}
+
+\subsection{Background}
+
+Before the 1980s, Natural Language Processing was widely based on sets of hand-tuned rules.\\
+
+After the 1980s, however, machine learned seeped into the realm of natural language processing.\\
+
+This started with decision trees then went on to leveraging \textbf{hidden markov models}. Hidden markov models are based on augmenting \textbf{Markov Chain}s.\\
+
+\begin{tcolorbox}[title=Aside: Markov Chains,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+A Markov chain is a mathematical system that experiences transitions from one state to another according to certain probabilistic rules. The defining characteristic of a Markov chain is that no matter how the process arrived at its present state, the possible future states are fixed. It looks kind of like an NFA.\\
+
+Excellent further information and an example found at:\\
+\texttt{https://setosa.io/ev/markov-chains/}
+\end{tcolorbox}
+
+\hfill \break Then, people shifted to using statistical model for language. Now, people have finally come to using mostly unsupervised or semi-supervised learning for models.\\
+
+In data science, lots of data comes in the form of \textbf{unstructured text}. We're basically defining that as text that cannot be predictably processed. The following are examples of chunks of text that could carry unstructured, yet valuable data.
+
+\begin{itemize}
+	\item Facebook posts
+	\item Amazon reviews
+	\item Wikileaks dumps
+\end{itemize}
+
+Understanding the English language is hard, as it's fairly hard to predict which bits of sentences mean what. Specifically, we can say that \textbf{structure can sometimes be ambigious}.\\
+
+\begin{tcolorbox}[title=Aside: Windgrad Schema Challenge,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+Proposed as a complement to the turing test, the Windgrad Schema Challenge involved asking people (or computers) to pick out the antecedent of an ambiguous pronoun.\\
+\begin{myproof}
+\textbf{Example:} The city \textbf{councilmen} refused the \textbf{demonstrators} a permit because they \textbf{[}\textit{feared}\textbf{/}\textit{advocated}\textbf{]} violence. 
+\end{myproof}
+
+\hfill \break Here, we know that \textbf{feared} corresponds to \textbf{councilmen}, while \textbf{advocated} corresponds to the \textbf{demonstrators}. It's fairly easy for a human to deduce this, byt the guy who hosted this challenge argued that understanding this requires 'more than NLP', and that such a task required some type of common sense and \textbf{deep, contextual reasoning}.
+\end{tcolorbox}
+
+NLP is a pretty broad field- we're starting this with sentiment analysis.\\
+
+It can be argued that we don't need to fully understand the text to determine the general sentiment. For example, if you were to scroll through Amazon interviews, you can sort of tell which ones are glowing ones and which ones are very negative.\\
+
+The main idea is to look for \textbf{signals} in the text that tell us the sentimental value of that text.
+
+\subsection{Natural Language Processing Terminology}
+
+Some key terms used in industry.
+
+\begin{itemize}
+	\item \textbf{Documents} $\rightarrow$ Groups of free text- remember that this definition is sort of distinct from the idea of 'word documents' (common confusion)
+	\item \textbf{Corpus} $\rightarrow$ A collection of documents
+	\item \textbf{Terms} $\rightarrow$ Individual words (usually delimited by whitespace or some equivalent)
+	\item \textbf{Syntax} $\rightarrow$ Refers to the grammatical structure of language
+	\item \textbf{Semantics} $\rightarrow$ The study of meaning of language
+	\item \textbf{Tokenization} $\rightarrow$ Splitting sentences into tokens (similar to how compilers 'lex' stuff). There's almost certainly a library for this process.
+	\item \textbf{Stemming} $\rightarrow$ Finding roots of words, e.g. turning \textit{organizer} into \textit{organiz}. Also written as: 'The crude chopping of 'affixes'.
+	\item \textbf{Lemmatization} $\rightarrow$ Reducing inflections on variant forms back to 'base form', e.g. \textit{are}, \textit{am}, and \textit{is} become \textit{be}.
+	\item \textbf{Morphological Segmentation} $\rightarrow$ A process that aims to break words into meaning-bearing morphemes. (Morphemes are the smallest meaningful units in a language.) How words are formed \& relationships of different parts of the words.
+	\item \textbf{Parts of Speech (POS) tagging} $\rightarrow$ Finding parts of speech of a word. This is a key process in producing parse trees for sentences.
+	\item \textbf{Parsing} $\rightarrow$ Making a parse tree for a sentence, based on parts of speech. Again, just like 330s compiler project.
+	\item \textbf{Information Extraction} $\rightarrow$ Turning unstructured text into 'structured sequences', or usable information.
+	\item \textbf{Named Identity Recognition} $\rightarrow$ Is when you identify key entities in text, like locations, times, people, dates, etc.
+	\item \textbf{Sentiment Analysis} $\rightarrow$ Deciding if opinions are good or bad. Lots of ad and marketing companies use software like this. 
+\end{itemize}
+
+\subsection{Spoken Dialogue System (Example)}
+
+Below is an example of a spoken dialogue system.\\
+
+{
+\centering
 
 
 
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
 
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp8373981922874744] 
+\draw   (40,11) -- (159.67,11) -- (159.67,291) -- (40,291) -- cycle ;
+%Shape: Rectangle [id:dp39694369787199746] 
+\draw   (159.33,11) -- (279,11) -- (279,291) -- (159.33,291) -- cycle ;
+%Shape: Rectangle [id:dp32938700493363626] 
+\draw   (279.33,11) -- (399,11) -- (399,291) -- (279.33,291) -- cycle ;
+%Shape: Rectangle [id:dp26423645478485447] 
+\draw   (399.33,11) -- (519,11) -- (519,291) -- (399.33,291) -- cycle ;
+%Shape: Rectangle [id:dp4887672923949493] 
+\draw   (519.33,11) -- (639,11) -- (639,291) -- (519.33,291) -- cycle ;
+%Shape: Rectangle [id:dp8193604616119339] 
+\draw   (57.67,18.33) -- (143,18.33) -- (143,73.33) -- (57.67,73.33) -- cycle ;
+%Shape: Rectangle [id:dp14839864081748477] 
+\draw   (166.33,19.67) -- (272.33,19.67) -- (272.33,90) -- (166.33,90) -- cycle ;
+%Straight Lines [id:da09291938876112937] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (143.67,50.67) -- (163.01,52.48) ;
+\draw [shift={(165,52.67)}, rotate = 185.36] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Rectangle [id:dp510085733603555] 
+\draw   (297.67,18.33) -- (383,18.33) -- (383,67.33) -- (297.67,67.33) -- cycle ;
+%Straight Lines [id:da9017689378229654] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (272.33,54) -- (295.69,50.31) ;
+\draw [shift={(297.67,50)}, rotate = 531.03] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Rectangle [id:dp8303854262526095] 
+\draw   (407,18.33) -- (513,18.33) -- (513,88.67) -- (407,88.67) -- cycle ;
+%Straight Lines [id:da04064952779334319] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (384.33,45.33) -- (405.67,46.55) ;
+\draw [shift={(407.67,46.67)}, rotate = 183.27] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Rectangle [id:dp6563202747605579] 
+\draw   (533,38.67) -- (632.33,38.67) -- (632.33,131.33) -- (533,131.33) -- cycle ;
+%Straight Lines [id:da008366805900147378] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (513.67,49.33) -- (530.84,64.67) ;
+\draw [shift={(532.33,66)}, rotate = 221.76] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Rectangle [id:dp9583321312289558] 
+\draw   (405.67,109.67) -- (511.67,109.67) -- (511.67,180) -- (405.67,180) -- cycle ;
+%Shape: Rectangle [id:dp09633045144651142] 
+\draw   (291.67,114.67) -- (382.33,114.67) -- (382.33,168) -- (291.67,168) -- cycle ;
+%Shape: Rectangle [id:dp6166671040427456] 
+\draw   (165.67,119.33) -- (268.33,119.33) -- (268.33,172.67) -- (165.67,172.67) -- cycle ;
+%Shape: Rectangle [id:dp4918446352170527] 
+\draw   (48.5,120.67) -- (151.17,120.67) -- (151.17,166.67) -- (48.5,166.67) -- cycle ;
+%Straight Lines [id:da5143139305134313] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (532.33,112) -- (513.59,135.11) ;
+\draw [shift={(512.33,136.67)}, rotate = 309.03999999999996] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da388562527552038] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (406.33,140.67) -- (384.33,141.28) ;
+\draw [shift={(382.33,141.33)}, rotate = 358.40999999999997] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da18609348520822822] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (291.67,141.33) -- (269.67,141.94) ;
+\draw [shift={(267.67,142)}, rotate = 358.40999999999997] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da31394847636073786] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (165,146.67) -- (151.66,147.25) ;
+\draw [shift={(149.67,147.33)}, rotate = 357.51] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (70.67,26.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {Speech\\Analysis};
+% Text Node
+\draw (172,25) node [anchor=north west][inner sep=0.75pt]   [align=left] {Morphological\\+ Lexical\\Analysis};
+% Text Node
+\draw (313.33,38) node [anchor=north west][inner sep=0.75pt]   [align=left] {Parsing};
+% Text Node
+\draw (422.67,33.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {Contextual\\Reasoning};
+% Text Node
+\draw (540.67,56) node [anchor=north west][inner sep=0.75pt]   [align=left] {Application\\Reasoning\\+ \ Execution};
+% Text Node
+\draw (417.33,126.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Utterance\\Planning};
+% Text Node
+\draw (300,122) node [anchor=north west][inner sep=0.75pt]   [align=left] {Syntactic\\Realization};
+% Text Node
+\draw (169.33,128.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {Morphological\\Realization};
+% Text Node
+\draw (66,123) node [anchor=north west][inner sep=0.75pt]   [align=left] {Speech\\Synthesis};
+% Text Node
+\draw (60,270) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{Phonology}};
+% Text Node
+\draw (174.67,270) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{Morphology}};
+% Text Node
+\draw (314.67,270) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{Syntax}};
+% Text Node
+\draw (420.67,270) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{Semantics}};
+% Text Node
+\draw (540,270) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{Reasoning}};
+
+
+\end{tikzpicture}
+
+
+}
+
+\hfill \break Notice the \textbf{complexity} and \textbf{number of components} needed for a process like this, even though the system is seemingly simple.\\
+
+The issues involved in translating human language to objective data are immense, and so our systems built to tackle these tasks are fairly involved.\\
+
+\subsection{General Industry}
+
+These days, people in industry are working on a bunch of NLP-related interesting problems.
+
+\begin{itemize}
+	\item Speech recognition
+	\item Caption generation
+	\item Natural Language Generation
+	\item Optical Character Recognition
+	\item Word Sense Disambiguation
+\end{itemize}
+
+\textbf{Text classification} is a common subset of problems in this field, for example. For example, we can take a look at an email spam classifier.\\
+
+{
+
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp5957351502696815] 
+\draw   (241,69.67) -- (376.33,69.67) -- (376.33,173.33) -- (241,173.33) -- cycle ;
+%Straight Lines [id:da13924454285877397] 
+\draw    (176.33,124) -- (239,124) ;
+\draw [shift={(241,124)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Flowchart: Document [id:dp6530782050633164] 
+\draw   (45,84.83) -- (176.67,84.83) -- (176.67,149.46) .. controls (94.38,149.46) and (110.83,172.76) .. (45,157.68) -- cycle ;
+%Shape: Cube [id:dp23320547092917177] 
+\draw   (424,163.67) -- (445,142.67) -- (610.33,142.67) -- (610.33,191.67) -- (589.33,212.67) -- (424,212.67) -- cycle ; \draw   (610.33,142.67) -- (589.33,163.67) -- (424,163.67) ; \draw   (589.33,163.67) -- (589.33,212.67) ;
+%Shape: Cube [id:dp670449158073195] 
+\draw   (441.33,52.33) -- (462.33,31.33) -- (627.67,31.33) -- (627.67,80.33) -- (606.67,101.33) -- (441.33,101.33) -- cycle ; \draw   (627.67,31.33) -- (606.67,52.33) -- (441.33,52.33) ; \draw   (606.67,52.33) -- (606.67,101.33) ;
+%Straight Lines [id:da33294820493668054] 
+\draw    (376.33,124) -- (438.72,78.51) ;
+\draw [shift={(440.33,77.33)}, rotate = 503.9] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da9969041421340407] 
+\draw    (376.33,124) -- (432.52,149.83) ;
+\draw [shift={(434.33,150.67)}, rotate = 204.69] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (55.33,97.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {Input: Document};
+% Text Node
+\draw (104.67,128) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,opacity=1 ] [align=left] {$\displaystyle \omega $};
+% Text Node
+\draw (279.33,77.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {Classifier};
+% Text Node
+\draw (264,128) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle \textcolor[rgb]{0,0,0}{y} =[\textcolor[rgb]{0.49,0.83,0.13}{y_{1}} ,\ \textcolor[rgb]{0.25,0.46,0.02}{y_{2}}]$};
+% Text Node
+\draw (492.67,65) node [anchor=north west][inner sep=0.75pt]   [align=left] {Spam $\displaystyle (\textcolor[rgb]{0.49,0.83,0.13}{y_{1}})$};
+% Text Node
+\draw (458,177) node [anchor=north west][inner sep=0.75pt]   [align=left] {Not Spam $\displaystyle (\textcolor[rgb]{0.25,0.46,0.02}{y_{2}})$};
+
+
+\end{tikzpicture}
+
+
+}
+
+\hfill \break In the diagram above, general ML naming schemes are also used. More on this in ML + NLP classes (and later lectures).\\
+
+\begin{tcolorbox}[title=Aside: Hardcoded Rules,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+
+It was, at a time, the only option to use hard-coded rules to accomplish the tasks that we allocate to modern NLP techniques. We have some pros and cons for this approach.
+\begin{itemize}
+	\item \textbf{Pros} $\rightarrow$ Plenty of domain-expertise and customizability, human readable (we can easily understand the motivation behind decision making)
+	\item \textbf{Cons} $\rightarrow$ Brittle, expensive to maintain, and extremely hard to generalize. (Most customization is very domain-specific)
+\end{itemize}
+
+\end{tcolorbox}
+
+
+\subsection{Supervised Learning}
+
+Supervised learning is one such common method to escape the issues that we find in the hardcoded rules mentioned in the Aside above. Although we can get more generalized solution capability, we trade that for transparency. The algorithm that decides where an object should be classified essentially becomes a black box.
+
+\begin{myproof}
+Let's say we have the following as \textbf{input}:
+
+\begin{itemize}
+	\item A \textbf{document}, $\omega$
+	\item A set of \textbf{classes}, $y=\{y_1,y_2,y_3\}$
+	\item A 'training' set of \textbf{manually classified documents} (hand-labeled),\\ $k=\{(\omega _1, y_1),(\omega _2, y_3),(\omega _3, y_1)\}$
+\end{itemize}
+
+As output, our \textbf{supervised learning} setup would produce a \textbf{learned classifier} that was able to classify documents, $\omega \rightarrow y$ 
+\end{myproof}
+
+\hfill \break In order to figure out how to approach this problem, we need to think like a computer would need to. First and foremost, we need a way to keep track of what the document \textit{is}. We can do this by keeping track of \textbf{features} that we produce based on what we observe about the document.\\
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Feature} \textit{(machine learning)} $\rightarrow$ A feature is an individual measurable property or characteristic of a phenomenon being observed. \textit{(Wikipedia)}
+\end{tcolorbox}
+
+
+\hfill \break Although we may be able to extract a lot of meaning from a clump of words, a computer cannot readily do the same. As such, we will first try and represent this \textbf{document} as \textbf{math}, loosely speaking. How can we do that?\\
+
+
+\begin{myproof}
+\textbf{Idea: Bag of Words}\\
+One idea is to represent each document as a \textbf{vector} of \textbf{word frequencies}. A good visual example of something like this is a word cloud, but could also be as simple as a bar graph with frequencies.\\
+
+In this case, \textit{term frequency} represents the number of times that a term appears in a document.\\
+
+Although this isn't our whole solution, it's a part of it. We can use this as a \textbf{feature} with which we can train our classifier, $\omega \rightarrow y$.
+\end{myproof}
+
+\hfill \break Similarly to how we identified just one feature above, we can deduce many other features from our documents. Then, we can assign \textbf{weights} to these features to tell our algorithms just how important each feature when our classifier renders its final decision.\\
+
+However, not all is as simple as it seems- there's a clear \textbf{issue} with the \textbf{term frequency} we discussed.\\
+
+When we approach this problem realistically, we can see that term frequency gets \textbf{overloaded} with \textbf{common words}, like \textit{a}, \textit{to}, \textit{I}, and \textit{the}. How can we intelligently address something like this?
+
+\begin{myproof}
+\textbf{Solution: Inverse Document Frequency}\\
+
+\textbf{Idea:} In order to address the commonality issue, we weight individual words negatively by how frequently they appear in the corpus.\\
+
+$$IDF_j= log(\frac{d_{total}}{d_j})$$
+
+In the above example, $d_{total}$ represents the total number of documents and $d_j$ represents the number of documents that contain word $j$. Note that $IDF$ is defined across all documents, not a specific word-document pair.
+\end{myproof}
+
+\hfill \break In practice, we end up combining term frequency and inverse document frequency to get a more functional result.
+
+\subsection{NLP In Python}
+
+In order to work with NLP in Python, there are two major libraries we can make use of- \textbf{\texttt{NLTK}} and \textbf{\texttt{SPACY}}.\\
+
+\begin{itemize}
+	\item \textbf{\texttt{NLTK}} $\rightarrow$ Has \textbf{more "stuff" implemented} and is more customizable. Started as a research tool, now has found lots of use in industry as well.
+	\item \textbf{\texttt{SPACY}} $\rightarrow$ Younger and more sparse than \texttt{NLTK}, but can be much \textbf{faster than \texttt{NLTK}}. Much newer, more streamlined implementation.
+\end{itemize}
 
 
 
