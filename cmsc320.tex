@@ -2996,8 +2996,148 @@ In order to work with NLP in Python, there are two major libraries we can make u
 	\item \textbf{\texttt{SPACY}} $\rightarrow$ Younger and more sparse than \texttt{NLTK}, but can be much \textbf{faster than \texttt{NLTK}}. Much newer, more streamlined implementation.
 \end{itemize}
 
+\subsection{Distributional Models of Meaning}
+
+Distributional models of meaning revolve around the idea that you know a word by the company that it keeps. \\
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Distributional models of meaning} $\rightarrow$ quantitative; express the semantic relation between terms but offering no immediately obvious way of modelling the contribution of sentence structure to meaning
+\end{tcolorbox}
+
+The idea is that two words are \textbf{similar} if they have \textbf{similar word contexts}.\\
+
+\subsection{Document Matrices}
+
+A \textbf{document matrix} is a way to quickly compare features of documents.
+
+Here's an example that records 'term frequency'- how often each of these given words appear in the selected texts. We can determine two main things from the following document matrix.\\
+
+{
+\centering
 
 
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp2478510784432143] 
+\draw   (95.33,62.67) -- (543.67,62.67) -- (543.67,222.67) -- (95.33,222.67) -- cycle ;
+%Shape: Rectangle [id:dp04260382568597276] 
+\draw   (95.33,22.67) -- (185,22.67) -- (185,62.67) -- (95.33,62.67) -- cycle ;
+%Shape: Rectangle [id:dp22922453318876046] 
+\draw   (185,22.67) -- (274.67,22.67) -- (274.67,62.67) -- (185,62.67) -- cycle ;
+%Shape: Rectangle [id:dp42730925833582556] 
+\draw   (274.67,22.67) -- (364.33,22.67) -- (364.33,62.67) -- (274.67,62.67) -- cycle ;
+%Shape: Rectangle [id:dp23538913728045674] 
+\draw   (364.33,22.67) -- (454,22.67) -- (454,62.67) -- (364.33,62.67) -- cycle ;
+%Shape: Rectangle [id:dp9654673895790655] 
+\draw   (454,22.67) -- (543.67,22.67) -- (543.67,62.67) -- (454,62.67) -- cycle ;
+%Shape: Rectangle [id:dp7801296194846411] 
+\draw   (95.33,62.67) -- (185,62.67) -- (185,102.67) -- (95.33,102.67) -- cycle ;
+%Shape: Rectangle [id:dp12054212062700542] 
+\draw   (95.33,102.67) -- (185,102.67) -- (185,142.67) -- (95.33,142.67) -- cycle ;
+%Shape: Rectangle [id:dp31221018949565704] 
+\draw   (95.33,142.67) -- (185,142.67) -- (185,182.67) -- (95.33,182.67) -- cycle ;
+%Shape: Rectangle [id:dp8440884365925955] 
+\draw   (95.33,182.67) -- (185,182.67) -- (185,222.67) -- (95.33,222.67) -- cycle ;
+%Straight Lines [id:da49294477728710373] 
+\draw    (274.67,62.67) -- (274.67,223.33) ;
+%Straight Lines [id:da7884746242568562] 
+\draw    (364.33,62.67) -- (364.33,223.33) ;
+%Straight Lines [id:da24798511925788602] 
+\draw    (454,62.67) -- (454,223.33) ;
+%Shape: Ellipse [id:dp7521885992840447] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (463.83,148) .. controls (463.83,97.56) and (479.5,56.67) .. (498.83,56.67) .. controls (518.16,56.67) and (533.83,97.56) .. (533.83,148) .. controls (533.83,198.44) and (518.16,239.33) .. (498.83,239.33) .. controls (479.5,239.33) and (463.83,198.44) .. (463.83,148) -- cycle ;
+%Shape: Ellipse [id:dp18898786339216123] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (373.83,150.67) .. controls (373.83,100.22) and (389.5,59.33) .. (408.83,59.33) .. controls (428.16,59.33) and (443.83,100.22) .. (443.83,150.67) .. controls (443.83,201.11) and (428.16,242) .. (408.83,242) .. controls (389.5,242) and (373.83,201.11) .. (373.83,150.67) -- cycle ;
+%Straight Lines [id:da43167078277561544] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (456.33,261.33) -- (410.69,242.75) ;
+\draw [shift={(408.83,242)}, rotate = 382.15] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da1607094671672762] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (456.33,261.33) -- (497.06,240.25) ;
+\draw [shift={(498.83,239.33)}, rotate = 512.63] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Ellipse [id:dp8182016509988886] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (177.33,206.67) .. controls (177.33,195.99) and (259.34,187.33) .. (360.5,187.33) .. controls (461.66,187.33) and (543.67,195.99) .. (543.67,206.67) .. controls (543.67,217.34) and (461.66,226) .. (360.5,226) .. controls (259.34,226) and (177.33,217.34) .. (177.33,206.67) -- cycle ;
+%Shape: Ellipse [id:dp9230130966168822] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (179.33,162.67) .. controls (179.33,151.99) and (261.34,143.33) .. (362.5,143.33) .. controls (463.66,143.33) and (545.67,151.99) .. (545.67,162.67) .. controls (545.67,173.34) and (463.66,182) .. (362.5,182) .. controls (261.34,182) and (179.33,173.34) .. (179.33,162.67) -- cycle ;
+%Straight Lines [id:da42515748550090093] 
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ]   (206.33,255.33) -- (265.24,223.61) ;
+\draw [shift={(267,222.67)}, rotate = 511.7] [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da06447257921970884] 
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ]   (206.33,255.33) -- (286.82,185.31) ;
+\draw [shift={(288.33,184)}, rotate = 498.98] [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (205.33,24) node [anchor=north west][inner sep=0.75pt]   [align=left] {As You\\Like it};
+% Text Node
+\draw (304,23.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {12th\\Night};
+% Text Node
+\draw (384,23.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Julius\\Caesar};
+% Text Node
+\draw (478.67,23.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Henry\\V};
+% Text Node
+\draw (119.33,74.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Battle};
+% Text Node
+\draw (123.83,154.17) node [anchor=north west][inner sep=0.75pt]   [align=left] {Fool};
+% Text Node
+\draw (117.33,194.17) node [anchor=north west][inner sep=0.75pt]   [align=left] {Clown};
+% Text Node
+\draw (225.33,73.83) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 1}};
+% Text Node
+\draw (225.33,113.17) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 2}};
+% Text Node
+\draw (221.83,153.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 37}};
+% Text Node
+\draw (225.33,193.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 6}};
+% Text Node
+\draw (314,73.83) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 1}};
+% Text Node
+\draw (314,113.17) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 2}};
+% Text Node
+\draw (310.5,153.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 58}};
+% Text Node
+\draw (306.5,193.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 117}};
+% Text Node
+\draw (403.5,73.83) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 8}};
+% Text Node
+\draw (400,113.17) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 12}};
+% Text Node
+\draw (403.5,153.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 1}};
+% Text Node
+\draw (403.5,193.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 0}};
+% Text Node
+\draw (489.83,73.83) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 15}};
+% Text Node
+\draw (489.83,113.17) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 36}};
+% Text Node
+\draw (493.33,153.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 5}};
+% Text Node
+\draw (493.33,193.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 0}};
+% Text Node
+\draw (114.83,113.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {Soldier};
+% Text Node
+\draw (388.17,263.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Two \textcolor[rgb]{0.82,0.01,0.11}{documents} are similar if \\their vectors are similar.};
+% Text Node
+\draw (149.33,256.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {Two \textcolor[rgb]{0.29,0.56,0.89}{words} are similar if their\\vectors are similar.};
+
+
+\end{tikzpicture}
+
+
+}
+
+
+\subsection{Measuring Similarity}
+
+We've seen a visual way to represent document matrices, but how do we actually, \textbf{quantitatively} tell if vectors are similar?
+
+One such method is to use the \textbf{vector dot product}. Given vectors $v$ and $w$, recall that we can calculate dot product by multiplying their components as follows.
+
+$$\sum_{i=1}^{n}{v_i w_i}$$
+
+We can use this to develop a general idea of when 2 vectors have \textbf{large values} in the \textbf{same dimensions}.
 
 
 
