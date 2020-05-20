@@ -3004,7 +3004,7 @@ Distributional models of meaning revolve around the idea that you know a word by
 \textbf{Distributional models of meaning} $\rightarrow$ quantitative; express the semantic relation between terms but offering no immediately obvious way of modelling the contribution of sentence structure to meaning
 \end{tcolorbox}
 
-The idea is that two words are \textbf{similar} if they have \textbf{similar word contexts}.\\
+The idea is that two words are \textbf{similar} if they have \textbf{similar word contexts}.
 
 \subsection{Document Matrices}
 
@@ -3133,18 +3133,229 @@ Here's an example that records 'term frequency'- how often each of these given w
 
 We've seen a visual way to represent document matrices, but how do we actually, \textbf{quantitatively} tell if vectors are similar?
 
+\subsubsection{Using The Dot Product}
+
 One such method is to use the \textbf{vector dot product}. Given vectors $v$ and $w$, recall that we can calculate dot product by multiplying their components as follows.
 
-$$\sum_{i=1}^{n}{v_i w_i}$$
+$$\sum_{i=1}^{n}{v_i \cdot w_i}$$\\
 
-We can use this to develop a general idea of when 2 vectors have \textbf{large values} in the \textbf{same dimensions}.
+We can use this to develop a general idea of when 2 vectors have \textbf{large values} in the \textbf{same dimensions}. The dot product will also be lower for two vectors with different dimensional structures.\\
+
+It will be zero for completely orthogonal vectors (representing wholly different objects), i.e. orthogonal vectors represent objects that cannot be any more different.\\
+
+However, the dot product is affected by term frequency as a whole. Higher word frequencies overall lead to a larger dot product overall. This is \textbf{bad}- we don't want a similarity metric to be sensitive to word frequency in this way. For this reason, we need some way to \textbf{normalize} the dot product.\\
+
+\textbf{Solution}: normalize the dot product by dividing by the lengths of both vectors.
+
+$$\frac{\vec{a} \cdot \vec{b}}{|\vec{a}||\vec{b}|}$$\\
+
+Now, take advantage of a property of the dot product to help us define this process.
+
+$$\frac{\vec{a} \cdot \vec{b}}{|\vec{a}||\vec{b}|} = cos \theta$$\\
+
+Thus, we can say that the \textbf{cosine of the angle between the vectors} provides us with a \textbf{normalized} measure of 'similarity' between both vectors. This process is formalized below.
+
+\subsubsection{Normalizing Dot Product: Cosine Similarity}
+
+Given two documents $X$ and $Y$, represented here as vectors in matrix form, the \textbf{cosine similarity} of the two can be represented by the following equation:\\
+
+$$similarity_{cos}(X,Y)=\frac{X^TY}{|X||Y|}$$\\
+
+Technically, we're measuring the \textbf{cosine of the angle between vectors $X$ and $Y$}. This is how we determine similarity while ignoring term frequency.\\
+
+\begin{itemize}
+	\item \textbf{Similar} documents have \textbf{high} cosine similarity.
+	\item \textbf{Dissimilar} documents have \textbf{low} cosine similarity.
+\end{itemize}
+
+\subsubsection{Example: Calculating Cosine Similarity}
+
+Given the following document matrix, here are a few examples of calculated cosine similarity. Assume the rows represent \textbf{documents} and the columns represent \textbf{words}.\\
+
+\begin{center}
+\begin{tabular}{ |c|c c c| } 
+ \hline
+  & \textbf{large} & \textbf{data} & \textbf{computer} \\
+  \hline 
+ \textbf{apricot} & 2 & 0 & 0 \\ 
+ \textbf{digital} & 0 & 1 & 2 \\ 
+ \textbf{information} & 1 & 6 & 1 \\ 
+ \hline
+\end{tabular}
+\end{center}
+
+Also, note the formula for calculating cosine similarity given vectors $v$ and $w$ amounts to the following:
+
+$$similarity_{cos}(v,w)=\frac{\vec{v} \cdot \vec{w}}{|v||w|}=\frac{\sum_{i=1}^{n}{(v_i \cdot w_i)}}{\sqrt{\sum_{1}^{n}{v_i^2}} \sqrt{\sum_{1}^{n}{w_i^2}}}$$\\
+
+\begin{myproof}
+\textbf{Examples:}
+
+$$similarity_{cos}(\textrm{\textbf{apricot}},\textrm{\textbf{information}})=\frac{2+0+0}{\sqrt{2} \sqrt{38}}=0.23$$
+
+$$similarity_{cos}(\textrm{\textbf{digital}},\textrm{\textbf{information}})=\frac{0+6+2}{\sqrt{38} \sqrt{5}}=0.58$$
+
+$$similarity_{cos}(\textrm{\textbf{apricot}},\textrm{\textbf{digital}})=\frac{0+0+0}{\sqrt{1} \sqrt{5}}=0.00$$
+\end{myproof}
+
+\subsubsection{Minimum Edit Distance}
+
+A metric used to calculate how similar 2 strings are to one another is \textbf{minimum edit distance}.\\
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Minimum Edit Distance} $\rightarrow$ The minimum edit distance between two strings is the number of edit operations to turn one string into another.
+\end{tcolorbox}
+
+\hfill \break This seemingly simple tool is used widely in NLP, namely for \textbf{spelling correction}, \textbf{information extraction}, \textbf{speech recognition}, and plenty of other things.\\
+
+\begin{tcolorbox}[title=Aside: Information Extraction Systems,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+
+Miscellaneous further info on information extraction systems. Here are some general goals for an information extraction system:
+\begin{itemize}
+	\item To extract \textbf{clear}, \textbf{factual} information
+	\item To find and understand texts
+	\item To gather information from \textbf{many} pieces of text
+	\item To provide a structured representation of relevant information (e.g. in \textbf{relations} or \textbf{data structures})
+	\item To organize information to make it useful to humans
+\end{itemize}
+
+\end{tcolorbox}
+
+\subsection{Representing Text with N-Grams}
+
+\textbf{Idea:} We can represent text as contiguous sequences (arrays) of $N$ tokens/words.
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{N-Gram} $\rightarrow$ An n-gram is a contiguous sequence of N tokens/words. In layman's terms, it's just a group of words. Latin prefixes can denote how big they are, i.e. unigram is one word, bigram is two words, trigram is 3 words, etc.
+\end{tcolorbox}
+
+\subsubsection{Probabilities}
+
+We can use probabilities as the basis of solving a lot of problems in a language. Examples:
+
+\begin{itemize}
+	\item \textbf{Machine Translation} $\rightarrow$ P(High winds tonight) > P(Large winds tonight)
+	\item \textbf{Correctness Check/Grammar} $\rightarrow$ P(15 Minutes) > P(15 Minuets)
+	\item \textbf{Speech Recognition} $\rightarrow$ P(I saw a van) > P(Ice of a ban)
+\end{itemize}
+
+In that regard, our goal should be to be able to calculate the probability of a sentence of words. (Generalized version of the above examples)
+
+$$P(w)=P(w_1,w_2,w_3 ... w_n)$$\\
+
+We can use \textbf{n-grams} for this purpose. An \textbf{n-gram model} is a type of probabilistic model for predicting the next item in such a sequence in the form of a (n-1) order Markov chain.\\
+
+\textbf{N-gram models} are popular due to their \textbf{simplicity} and \textbf{scalability}. The given structure allows small experiments to scale up efficiently.
+
+\section{Machine Learning (L16 + 19)}
+
+Supervised machine learning gives us a way to automatically \textbf{infer} a predictive model, given some amount of pre-labeled data.
+
+\subsection{Overview}
+
+This diagram provides a broad overview of the supervised learning process.\\
+
+{
+\centering
 
 
 
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Straight Lines [id:da6934013484644858] 
+\draw    (59,40.33) -- (190.33,40.33) ;
+%Straight Lines [id:da22235545874167506] 
+\draw    (255,40.33) -- (386.33,40.33) ;
+%Straight Lines [id:da7620370986062277] 
+\draw    (447.67,40.33) -- (579,40.33) ;
+%Straight Lines [id:da5092396514647811] 
+\draw    (315.67,153.33) -- (331.83,90.6) ;
+\draw [shift={(332.33,88.67)}, rotate = 464.45] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Rectangle [id:dp7402750968279076] 
+\draw   (48.67,5.33) -- (205,5.33) -- (205,296.67) -- (48.67,296.67) -- cycle ;
+%Shape: Rectangle [id:dp05887269365061776] 
+\draw   (242,5.33) -- (398.33,5.33) -- (398.33,296.67) -- (242,296.67) -- cycle ;
+%Shape: Rectangle [id:dp2515662723024984] 
+\draw   (433.33,6.67) -- (589.67,6.67) -- (589.67,298) -- (433.33,298) -- cycle ;
+%Straight Lines [id:da11949475196221093] 
+\draw    (205,148.33) -- (239.67,148.33) ;
+\draw [shift={(241.67,148.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da6197911001911289] 
+\draw    (397.67,148.33) -- (430.33,148.33) ;
+\draw [shift={(432.33,148.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (82,19.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Training Data};
+% Text Node
+\draw (276.67,19.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {ML Algorithm};
+% Text Node
+\draw (474.67,19.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Predictions};
+% Text Node
+\draw (87.33,49.73) node [anchor=north west][inner sep=0.75pt]    {$\left( x^{1} ,y^{1}\right)$};
+% Text Node
+\draw (68,81.73) node [anchor=north west][inner sep=0.75pt]    {$\left( x^{2} ,y^{2}\right)$};
+% Text Node
+\draw (85.33,137.73) node [anchor=north west][inner sep=0.75pt]    {$\left( x^{4} ,y^{4}\right)$};
+% Text Node
+\draw (112.67,105.73) node [anchor=north west][inner sep=0.75pt]    {$\left( x^{3} ,y^{3}\right)$};
+% Text Node
+\draw (116,169.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {.\\.\\.};
+% Text Node
+\draw (88,239.07) node [anchor=north west][inner sep=0.75pt]    {$\left( x^{n} ,y^{n}\right)$};
+% Text Node
+\draw (278.67,157.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {Hypothesis\\function\\formed\\based on \\the given\\training data};
+% Text Node
+\draw (284,60) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle y^{i}$$\displaystyle =h\left( x^{i}\right)$};
+% Text Node
+\draw (451.33,50.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {Given a new input};
+% Text Node
+\draw (497.33,73.07) node [anchor=north west][inner sep=0.75pt]    {$x_{new}$};
+% Text Node
+\draw (450,107.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {The algorithm will\\predict what it\\ends up as};
+% Text Node
+\draw (462,179.07) node [anchor=north west][inner sep=0.75pt]    {$y_{new} =h( x_{new})$};
+
+$$
+
+
+\end{tikzpicture}
+
+
+}
+
+\hfill \break Labeled data (usually done manually) is provided to the machine learning algorithm, the algorithm runs and selects the best hypothesis function from the given hypothesis space, and then is able to render its own predictions on unlabeled data.
+
+\subsection{Hypothesis}
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Hypothesis} $\rightarrow$ A function that describes \textit{a} relation between the input and the target in supervised learning.
+\end{tcolorbox}
+
+\hfill \break The hypothesis can be affected by \textbf{data}, \textbf{restrictions}, \textbf{bias}, and other factors. These are the nuances of the ML algorithm.\\
+
+The hypothesis itself must be selected from a given \textbf{hypothesis space}. Think of it as a starting point for the algorithm.\\
+
+Providing the algorithm with a hypothesis space and asking it to design a hypothesis is like saying, "Here's the domain of all possible functions you can specify your hypothesis of choice from, now decide which one is the most optimal".\\
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Hypothesis Space} $\rightarrow$ Set of all possible legal hypotheses. The set from which the ML algorithm will decide the best.
+\end{tcolorbox}
+
+\hfill \break Overall, the \textbf{hypothesis space} is simply the set of \textbf{all possible hypotheses}, and a \textbf{hypothesis} is a single potential solution. (The algorithm then chooses the \textbf{best} hypothesis.)
 
 
 \section{Footnotes}
 
-Taken by Akilesh Praveen.
+Taken and compiled by Akilesh Praveen.\\
+
+References:
+\begin{itemize}
+	\item CMSC320 - John Dickerson, UMD
+	\item Geeksforgeeks.com
+	\item Wikipedia.org
+\end{itemize}
 
 \end{document}
