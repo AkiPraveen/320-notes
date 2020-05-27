@@ -32,6 +32,8 @@
 % \listfiles
 
 \usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
  
 \usepackage{listings}
 \lstloadlanguages{Python}
@@ -3340,11 +3342,194 @@ The hypothesis itself must be selected from a given \textbf{hypothesis space}. T
 
 Providing the algorithm with a hypothesis space and asking it to design a hypothesis is like saying, "Here's the domain of all possible functions you can specify your hypothesis of choice from, now decide which one is the most optimal".\\
 
+\subsubsection{Hypothesis Function}
+
+At the end of the day, our algorithm is just trying to figure out the best hypothesis function. The end goal is the following: a function that can (supposedly) successfully classify all given inputs.
+
+$$ h_{\theta}:R^n \rightarrow y $$
+\begin{center}
+\textit{(Takes all possible inputs and classifies them)}
+\end{center} 
+
+Our hypothesis function depends on domain knowledge. For example, a hypothesis function could be a line on a Naviance college acceptances graph that determines where acceptances and rejections will lie given an x coordinate of SAT scores and a y coordinate of GPA.
+
+\subsubsection{Hypothesis Space}
+
 \begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
 \textbf{Hypothesis Space} $\rightarrow$ Set of all possible legal hypotheses. The set from which the ML algorithm will decide the best.
 \end{tcolorbox}
 
 \hfill \break Overall, the \textbf{hypothesis space} is simply the set of \textbf{all possible hypotheses}, and a \textbf{hypothesis} is a single potential solution. (The algorithm then chooses the \textbf{best} hypothesis.)
+
+\subsection{The Loss Function}
+
+The loss function (defined below) is a component of a machine learning algorithm that measures the difference between a prediction and the true output (what it's supposed to be).
+
+$$ l:y \times y \rightarrow R_+$$
+
+There are \textbf{two types} of \textbf{loss functions}.
+\begin{itemize}
+	\item \textbf{Classification Loss} $\rightarrow$ Classification functions predict a \textbf{label}. Examples of this type of loss function would be logarithmic loss, focal loss, KL divergence, relative entropy, exponential loss, hinge loss.
+	\item \textbf{Regression Loss} $\rightarrow$ Regression functions predict a quantity. Examples of this type of loss function would be Mean square error (quadratic loss), Mean absolute error, Huber loss, Smooth mean absolute error, log cosh loss, quantile loss.
+\end{itemize}
+
+There is no single loss function that works on all sets of data. Your choice of loss function depends on factors like the following:
+\begin{itemize}
+	\item Outliers
+	\item Choice of ML Algorithm
+	\item Time Efficiency of Gradient Descent
+	\item Confidence of Predictions
+\end{itemize}
+
+It looks like, at the end of the day, you should just pick the right loss function for your situation.
+
+\subsection{The Canonical Machine Learning Problem}
+
+At the end of the day, we want to \textbf{learn} a hypothesis function that \textbf{accurately} predicts outputs given inputs.\\
+
+As such, we can say that our \textbf{goal} is to \textbf{minimize loss} by choosing the parameterization that minimizes loss over all possible parameters.\\
+
+Here's where the hypothesis function and the loss function fit into the big picture:
+
+$$ \underbrace{\sum_{i=1}^{m}{l((h_{\theta}(x^i)), y^i)}}_{\mathrm{minimize}}$$
+
+We want to \textbf{find a hypothesis} function that \textbf{minimizes the loss} across all the training data inputs that we have. In this case, $m$ is our training data.\\
+
+Minimizing this is not as easy as it seems- it's a high order differential equation, and we need an efficient way to optimize it. Different optimization methods work differently for different machine learning algorithms.
+
+\subsection{Overarching Idea}
+
+Big Idea: \textbf{Take in a hypothesis space, loss function and an optimizer, then decide a hypothesis function given a hypothesis space.}\\
+
+Our \textbf{hypothesis function} will be domain-specific. It could be anything from drawing a line on a graph to separate pass from failure, or designing a function to classify different types of fruits.\\
+
+Our \textbf{loss function} can be chosen based on our problem type, as we explored above. Again, this is case-specific.\\
+
+Our \textbf{optimization method} is usually gradient descent or stochastic gradient descent- this is basically how you easily find minima of a high order differential equation.
+
+\subsection{Examples of ML Algorithms}
+
+\begin{center}
+\begin{tabular}{ |c|c|c|c| } 
+ \hline
+ \textbf{Name} & \textbf{Hypothesis Function} & \textbf{Loss Function} & \textbf{Optimization Approach} \\ 
+ \hline
+ Least Squares & Linear & Squared & Algo / Gradient Descent \\
+ \hline 
+ Linear Regression & Linear & Squared & Algo / Gradient Descent \\
+ \hline
+ Support Vector Machine & Linear/Kernel & Hinge & Algo / Gradient Descent \\
+ \hline
+ Perceptron & Linear & Perceptron Criterion & Perceptron Algorithm \\
+ \hline
+ Neural Networks & Compound Nonlinear & Squared, Hinge & Stochastic Gradient Descent \\
+ \hline
+ Decision Trees & Hierarchical Half-planes & Many & Greedy \\
+ \hline
+ Naive Bayes & Linear & Joint Probability & \#SAT \\
+ \hline
+\end{tabular}
+\end{center}
+
+We can see that ML Algorithms are just the sum of their components. Its not so much our job to discover these methods, but instead to decide where to apply which method, using scientific insight.
+
+\subsection{Example: Linear Regression As Machine Learning}
+
+Consider linear regression that minimizes the sum of squared error, i.e. makes use of least squares. (First row in example table above).\\
+
+In technical terms:\\
+
+\begin{myproof}
+\begin{itemize}
+	\item \textbf{Hypothesis Function} $\rightarrow$ Linear ($h_{\theta}(x)=\theta^T x$)
+	\item \textbf{Loss Function} $\rightarrow$ Squared error loss ($l(\hat{y},y)=\frac{1}{2}(\hat{y}-y)^2$)
+	\item \textbf{Optimization} $\rightarrow$ Minimize $\sum_{i=1}^{m}(\theta^T x^i-y^i)^2$
+\end{itemize}
+\end{myproof}
+
+Now, our task is to minimize the function we wish to optimize. Rewrite inputs in technical form:\\
+
+$$X=\begin{pmatrix}
+  (x_1)^T\\ 
+  (x_2)^T\\
+  .\\
+  .\\
+  .\\
+  (x_m)^T\\
+\end{pmatrix} \in R^{m \times n}$$
+
+\begin{center}
+\textit{Feature Vectors a.k.a. Training Data Inputs}
+\end{center}
+
+$$y=\begin{pmatrix}
+  y_1\\ 
+  y_2\\
+  .\\
+  .\\
+  .\\
+  y\\
+\end{pmatrix} \in R^{m}$$
+
+\begin{center}
+\textit{Labels a.k.a. Training Data Outputs}\\
+\end{center}
+
+\hfill \break Now we'll review the gradient, then get into how we're applying gradient descent. Recall the following from multivariate calculus:
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Gradient} $\rightarrow$ The multivariate generalization of the derivative\\
+
+For a function $f:\mathbb{R}^n \rightarrow \mathbb{R}$, the gradient is a vector of all $n$ partial derivatives of that function:
+
+$$ \nabla_{\theta} f(\theta) = \begin{pmatrix}
+\frac{\partial f(\theta)}{\partial f(\theta)_1}\\
+.\\
+.\\
+.\\
+\frac{\partial f(\theta)}{\partial f(\theta)_n}\\
+\end{pmatrix} \in \mathbb{R}^n$$
+
+\end{tcolorbox}
+
+As such, minimizing a multivariate function involves finding a point where the gradient is zero.
+
+$$ \nabla_{\theta} f(\theta)=\begin{pmatrix}
+0\\
+0\\
+.\\
+.\\
+.\\
+0
+\end{pmatrix}$$\\
+
+That is, we find when the gradient is a zero vector of order $n$. However, note that points where the gradient is zero are mainly local minima. Only in convex functions can we be sure that this point is the global minimum.\\
+
+Given our optimization problem can written as the following, we can look to find the gradient from there.                                                     
+
+$$\mathrm{minimize}_{\theta} \frac{1}{2}||X \theta - y||_2^2$$\\
+
+
+By applying a few rules, we can arrive at the following gradient.\\
+
+$$X^T(X \theta -y)$$\\
+
+Now, solve for the model parameters $\theta$, because we already have defined $X$ and $y$ above.
+
+$$X^T(X \theta -y)=0$$
+$$X^TX \theta - X^T y =0$$
+$$X^TX \theta =X^T y$$
+$$ \underbrace{ (X^T X)^{-1} \cdot X^TX}_{cancels}  \theta = (X^T X)^{-1} \cdot X^T y$$
+$$\theta = (X^T X)^{-1} \cdot X^T y$$\\
+
+Thus, we have found a systematic way to find the optimal model parameters for linear regression, given the training data.
+
+\subsection{Machine Learning in Python}
+
+
+
+
+
+
 
 
 \section{Footnotes}

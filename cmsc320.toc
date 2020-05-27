@@ -1,120 +1,128 @@
 \babel@toc {english}{}
-\contentsline {section}{\numberline {1}Notes \& Preface}{4}{section.1}
-\contentsline {section}{\numberline {2}Introduction (L1)}{4}{section.2}
-\contentsline {subsection}{What is Data Science?}{4}{section*.2}
-\contentsline {subsection}{Topics}{4}{section*.3}
-\contentsline {subsection}{Tools}{4}{section*.4}
-\contentsline {subsection}{Conda}{5}{section*.5}
-\contentsline {section}{\numberline {3}Python, Jupyter, Literate Programming (L2)}{5}{section.3}
-\contentsline {subsection}{Literate Programming}{5}{section*.6}
-\contentsline {subsection}{Jupyter Notebook + Alternatives}{5}{section*.7}
-\contentsline {subsection}{List Comprehensions in Python}{5}{section*.8}
-\contentsline {subsection}{Using Python3}{6}{section*.9}
-\contentsline {subsection}{Python vs. R for Data Scientists}{6}{section*.10}
-\contentsline {subsection}{The Classic Statistical View of Data}{7}{section*.11}
-\contentsline {subsubsection}{Nominal Data}{7}{section*.12}
-\contentsline {subsubsection}{Ordinal Data}{7}{section*.13}
-\contentsline {subsubsection}{Interval and Ratio Data}{8}{section*.14}
-\contentsline {subsection}{Data Science at a Glance}{9}{section*.15}
-\contentsline {section}{\numberline {4}Getting Data to Work With (L3)}{10}{section.4}
-\contentsline {subsection}{Acquiring Data}{10}{section*.16}
-\contentsline {subsection}{RESTful APIs}{10}{section*.17}
-\contentsline {subsection}{Oauth}{10}{section*.18}
-\contentsline {subsection}{GET Requests}{11}{section*.19}
-\contentsline {subsection}{More on Data Storage Formats}{11}{section*.20}
-\contentsline {subsubsection}{SAX}{11}{section*.21}
-\contentsline {subsection}{Parsing HTML}{11}{section*.22}
-\contentsline {section}{\numberline {5}NumPy, Best Practices, Ethics (L4)}{12}{section.5}
-\contentsline {subsection}{Available Technologies}{12}{section*.23}
-\contentsline {subsection}{NumPy Stack}{12}{section*.24}
-\contentsline {subsubsection}{Misc About NumPy}{12}{section*.25}
-\contentsline {subsubsection}{Linear Algebra with NumPy}{13}{section*.26}
-\contentsline {subsubsection}{SciPy}{13}{section*.27}
-\contentsline {subsection}{The Idea of Reproducibility}{13}{section*.28}
-\contentsline {subsection}{Best Practices}{13}{section*.29}
-\contentsline {subsection}{The Idea of Open Data}{13}{section*.30}
-\contentsline {subsection}{General Process}{13}{section*.31}
-\contentsline {subsection}{Project Organization}{14}{section*.32}
-\contentsline {subsection}{A Little on Bias, Ethics, Responsibility}{15}{section*.33}
-\contentsline {section}{\numberline {6}Tables, Relational DB, and Pandas (L5 + L6)}{15}{section.6}
-\contentsline {subsection}{Tables}{15}{section*.34}
-\contentsline {subsubsection}{Selecting / Slicing}{16}{section*.35}
-\contentsline {subsubsection}{Aggregating / Reducing}{16}{section*.36}
-\contentsline {subsubsection}{Map}{16}{section*.37}
-\contentsline {subsubsection}{Group By}{17}{section*.38}
-\contentsline {subsubsection}{Group By + Aggregate}{17}{section*.39}
-\contentsline {subsubsection}{Union, Intersection, Difference}{17}{section*.40}
-\contentsline {subsubsection}{Merge or Join}{17}{section*.41}
-\contentsline {subsubsection}{Summary}{18}{section*.42}
-\contentsline {subsection}{Pandas}{18}{section*.43}
-\contentsline {subsubsection}{Dataframes}{18}{section*.44}
-\contentsline {subsubsection}{Series}{19}{section*.45}
-\contentsline {subsubsection}{Creating a Dataframe}{19}{section*.46}
-\contentsline {subsection}{Tidy Data}{19}{section*.47}
-\contentsline {subsection}{SQL and Relational Databases}{20}{section*.48}
-\contentsline {subsubsection}{Indexing}{20}{section*.49}
-\contentsline {subsection}{Relationships}{21}{section*.50}
-\contentsline {subsection}{SQL and SQLite}{22}{section*.51}
-\contentsline {subsection}{Joining Data}{23}{section*.52}
-\contentsline {subsubsection}{Types of Joins}{23}{section*.53}
-\contentsline {subsubsection}{Syntax in PANDAS}{25}{section*.54}
-\contentsline {subsubsection}{Visual Example}{26}{section*.55}
-\contentsline {section}{\numberline {7}Version Control Software (L7)}{27}{section.7}
-\contentsline {subsection}{Centralized VCS}{27}{section*.56}
-\contentsline {subsection}{Distributed VCS}{28}{section*.57}
-\contentsline {subsection}{Branching}{28}{section*.58}
-\contentsline {subsubsection}{When Should I Branch?}{28}{section*.59}
-\contentsline {subsection}{Git Basics}{28}{section*.60}
-\contentsline {subsection}{Online Hosting}{29}{section*.61}
-\contentsline {section}{\numberline {8}Missing Data and Imputation (L8)}{29}{section.8}
-\contentsline {subsection}{Missing Data}{29}{section*.62}
-\contentsline {subsubsection}{Just Deleting It}{30}{section*.63}
-\contentsline {subsection}{Types of Missing Data}{30}{section*.64}
-\contentsline {subsubsection}{Missing Completely At Random}{30}{section*.65}
-\contentsline {subsubsection}{Missing At Random}{30}{section*.66}
-\contentsline {subsubsection}{Missing Not At Random}{31}{section*.67}
-\contentsline {subsection}{Line of Best Fit}{31}{section*.68}
-\contentsline {subsection}{Imputation}{32}{section*.69}
-\contentsline {subsubsection}{Types Of Imputation}{32}{section*.70}
-\contentsline {subsubsection}{Single vs. Multiple Imputation}{32}{section*.71}
-\contentsline {section}{\numberline {9}Data Wrangling, Integration, Cleaning (L9)}{33}{section.9}
-\contentsline {subsection}{Data Wrangling}{33}{section*.72}
-\contentsline {subsubsection}{Key Steps of Data Wrangling}{33}{section*.73}
-\contentsline {subsection}{Data Integration}{33}{section*.74}
-\contentsline {subsection}{Data Cleaning}{34}{section*.75}
-\contentsline {subsubsection}{Types of Data Quality Issues}{35}{section*.76}
-\contentsline {subsubsection}{Outlier Detection}{35}{section*.77}
-\contentsline {subsubsection}{Entity Resolution}{35}{section*.78}
-\contentsline {section}{\numberline {10}Statistics Review (L10)}{36}{section.10}
-\contentsline {subsection}{Exploratory Data Analysis}{36}{section*.79}
-\contentsline {subsection}{Summary Statistics - Overview}{36}{section*.80}
-\contentsline {subsection}{Measures of Location}{36}{section*.81}
-\contentsline {subsection}{Measures of Dispersion}{37}{section*.82}
-\contentsline {subsection}{Correlation}{38}{section*.83}
-\contentsline {subsection}{Standardization}{38}{section*.84}
-\contentsline {section}{\numberline {11}Networks and Graphs (L11)}{39}{section.11}
-\contentsline {subsection}{Review on Graphs}{39}{section*.85}
-\contentsline {subsection}{NetworkX}{41}{section*.86}
-\contentsline {subsection}{Graph Databases}{41}{section*.87}
-\contentsline {subsection}{Centrality Analysis}{42}{section*.88}
-\contentsline {subsection}{Network Topology}{42}{section*.89}
-\contentsline {section}{\numberline {12}Natural Language Processing (L14 + 15)}{43}{section.12}
-\contentsline {subsection}{Background}{43}{section*.90}
-\contentsline {subsection}{Natural Language Processing Terminology}{44}{section*.91}
-\contentsline {subsection}{Spoken Dialogue System (Example)}{45}{section*.92}
-\contentsline {subsection}{General Industry}{45}{section*.93}
-\contentsline {subsection}{Supervised Learning}{46}{section*.94}
-\contentsline {subsection}{NLP In Python}{48}{section*.95}
-\contentsline {subsection}{Distributional Models of Meaning}{48}{section*.96}
-\contentsline {subsection}{Document Matrices}{48}{section*.97}
-\contentsline {subsection}{Measuring Similarity}{49}{section*.98}
-\contentsline {subsubsection}{Using The Dot Product}{49}{section*.99}
-\contentsline {subsubsection}{Normalizing Dot Product: Cosine Similarity}{50}{section*.100}
-\contentsline {subsubsection}{Example: Calculating Cosine Similarity}{50}{section*.101}
-\contentsline {subsubsection}{Minimum Edit Distance}{51}{section*.102}
-\contentsline {subsection}{Representing Text with N-Grams}{51}{section*.103}
-\contentsline {subsubsection}{Probabilities}{51}{section*.104}
-\contentsline {section}{\numberline {13}Machine Learning (L16 + 19)}{52}{section.13}
-\contentsline {subsection}{Overview}{52}{section*.105}
-\contentsline {subsection}{Hypothesis}{52}{section*.106}
-\contentsline {section}{\numberline {14}Footnotes}{53}{section.14}
+\contentsline {section}{\numberline {1}Notes \& Preface}{5}{section.1}
+\contentsline {section}{\numberline {2}Introduction (L1)}{5}{section.2}
+\contentsline {subsection}{What is Data Science?}{5}{section*.2}
+\contentsline {subsection}{Topics}{5}{section*.3}
+\contentsline {subsection}{Tools}{5}{section*.4}
+\contentsline {subsection}{Conda}{6}{section*.5}
+\contentsline {section}{\numberline {3}Python, Jupyter, Literate Programming (L2)}{6}{section.3}
+\contentsline {subsection}{Literate Programming}{6}{section*.6}
+\contentsline {subsection}{Jupyter Notebook + Alternatives}{6}{section*.7}
+\contentsline {subsection}{List Comprehensions in Python}{6}{section*.8}
+\contentsline {subsection}{Using Python3}{7}{section*.9}
+\contentsline {subsection}{Python vs. R for Data Scientists}{7}{section*.10}
+\contentsline {subsection}{The Classic Statistical View of Data}{8}{section*.11}
+\contentsline {subsubsection}{Nominal Data}{8}{section*.12}
+\contentsline {subsubsection}{Ordinal Data}{8}{section*.13}
+\contentsline {subsubsection}{Interval and Ratio Data}{9}{section*.14}
+\contentsline {subsection}{Data Science at a Glance}{10}{section*.15}
+\contentsline {section}{\numberline {4}Getting Data to Work With (L3)}{11}{section.4}
+\contentsline {subsection}{Acquiring Data}{11}{section*.16}
+\contentsline {subsection}{RESTful APIs}{11}{section*.17}
+\contentsline {subsection}{Oauth}{11}{section*.18}
+\contentsline {subsection}{GET Requests}{12}{section*.19}
+\contentsline {subsection}{More on Data Storage Formats}{12}{section*.20}
+\contentsline {subsubsection}{SAX}{12}{section*.21}
+\contentsline {subsection}{Parsing HTML}{12}{section*.22}
+\contentsline {section}{\numberline {5}NumPy, Best Practices, Ethics (L4)}{13}{section.5}
+\contentsline {subsection}{Available Technologies}{13}{section*.23}
+\contentsline {subsection}{NumPy Stack}{13}{section*.24}
+\contentsline {subsubsection}{Misc About NumPy}{13}{section*.25}
+\contentsline {subsubsection}{Linear Algebra with NumPy}{14}{section*.26}
+\contentsline {subsubsection}{SciPy}{14}{section*.27}
+\contentsline {subsection}{The Idea of Reproducibility}{14}{section*.28}
+\contentsline {subsection}{Best Practices}{14}{section*.29}
+\contentsline {subsection}{The Idea of Open Data}{14}{section*.30}
+\contentsline {subsection}{General Process}{14}{section*.31}
+\contentsline {subsection}{Project Organization}{15}{section*.32}
+\contentsline {subsection}{A Little on Bias, Ethics, Responsibility}{16}{section*.33}
+\contentsline {section}{\numberline {6}Tables, Relational DB, and Pandas (L5 + L6)}{16}{section.6}
+\contentsline {subsection}{Tables}{16}{section*.34}
+\contentsline {subsubsection}{Selecting / Slicing}{17}{section*.35}
+\contentsline {subsubsection}{Aggregating / Reducing}{17}{section*.36}
+\contentsline {subsubsection}{Map}{17}{section*.37}
+\contentsline {subsubsection}{Group By}{18}{section*.38}
+\contentsline {subsubsection}{Group By + Aggregate}{18}{section*.39}
+\contentsline {subsubsection}{Union, Intersection, Difference}{18}{section*.40}
+\contentsline {subsubsection}{Merge or Join}{18}{section*.41}
+\contentsline {subsubsection}{Summary}{19}{section*.42}
+\contentsline {subsection}{Pandas}{19}{section*.43}
+\contentsline {subsubsection}{Dataframes}{19}{section*.44}
+\contentsline {subsubsection}{Series}{20}{section*.45}
+\contentsline {subsubsection}{Creating a Dataframe}{20}{section*.46}
+\contentsline {subsection}{Tidy Data}{20}{section*.47}
+\contentsline {subsection}{SQL and Relational Databases}{21}{section*.48}
+\contentsline {subsubsection}{Indexing}{21}{section*.49}
+\contentsline {subsection}{Relationships}{22}{section*.50}
+\contentsline {subsection}{SQL and SQLite}{23}{section*.51}
+\contentsline {subsection}{Joining Data}{24}{section*.52}
+\contentsline {subsubsection}{Types of Joins}{24}{section*.53}
+\contentsline {subsubsection}{Syntax in PANDAS}{26}{section*.54}
+\contentsline {subsubsection}{Visual Example}{27}{section*.55}
+\contentsline {section}{\numberline {7}Version Control Software (L7)}{28}{section.7}
+\contentsline {subsection}{Centralized VCS}{28}{section*.56}
+\contentsline {subsection}{Distributed VCS}{29}{section*.57}
+\contentsline {subsection}{Branching}{29}{section*.58}
+\contentsline {subsubsection}{When Should I Branch?}{29}{section*.59}
+\contentsline {subsection}{Git Basics}{29}{section*.60}
+\contentsline {subsection}{Online Hosting}{30}{section*.61}
+\contentsline {section}{\numberline {8}Missing Data and Imputation (L8)}{30}{section.8}
+\contentsline {subsection}{Missing Data}{30}{section*.62}
+\contentsline {subsubsection}{Just Deleting It}{31}{section*.63}
+\contentsline {subsection}{Types of Missing Data}{31}{section*.64}
+\contentsline {subsubsection}{Missing Completely At Random}{31}{section*.65}
+\contentsline {subsubsection}{Missing At Random}{31}{section*.66}
+\contentsline {subsubsection}{Missing Not At Random}{32}{section*.67}
+\contentsline {subsection}{Line of Best Fit}{32}{section*.68}
+\contentsline {subsection}{Imputation}{33}{section*.69}
+\contentsline {subsubsection}{Types Of Imputation}{33}{section*.70}
+\contentsline {subsubsection}{Single vs. Multiple Imputation}{33}{section*.71}
+\contentsline {section}{\numberline {9}Data Wrangling, Integration, Cleaning (L9)}{34}{section.9}
+\contentsline {subsection}{Data Wrangling}{34}{section*.72}
+\contentsline {subsubsection}{Key Steps of Data Wrangling}{34}{section*.73}
+\contentsline {subsection}{Data Integration}{34}{section*.74}
+\contentsline {subsection}{Data Cleaning}{35}{section*.75}
+\contentsline {subsubsection}{Types of Data Quality Issues}{36}{section*.76}
+\contentsline {subsubsection}{Outlier Detection}{36}{section*.77}
+\contentsline {subsubsection}{Entity Resolution}{36}{section*.78}
+\contentsline {section}{\numberline {10}Statistics Review (L10)}{37}{section.10}
+\contentsline {subsection}{Exploratory Data Analysis}{37}{section*.79}
+\contentsline {subsection}{Summary Statistics - Overview}{37}{section*.80}
+\contentsline {subsection}{Measures of Location}{37}{section*.81}
+\contentsline {subsection}{Measures of Dispersion}{38}{section*.82}
+\contentsline {subsection}{Correlation}{39}{section*.83}
+\contentsline {subsection}{Standardization}{39}{section*.84}
+\contentsline {section}{\numberline {11}Networks and Graphs (L11)}{40}{section.11}
+\contentsline {subsection}{Review on Graphs}{40}{section*.85}
+\contentsline {subsection}{NetworkX}{42}{section*.86}
+\contentsline {subsection}{Graph Databases}{42}{section*.87}
+\contentsline {subsection}{Centrality Analysis}{43}{section*.88}
+\contentsline {subsection}{Network Topology}{43}{section*.89}
+\contentsline {section}{\numberline {12}Natural Language Processing (L14 + 15)}{44}{section.12}
+\contentsline {subsection}{Background}{44}{section*.90}
+\contentsline {subsection}{Natural Language Processing Terminology}{45}{section*.91}
+\contentsline {subsection}{Spoken Dialogue System (Example)}{46}{section*.92}
+\contentsline {subsection}{General Industry}{46}{section*.93}
+\contentsline {subsection}{Supervised Learning}{47}{section*.94}
+\contentsline {subsection}{NLP In Python}{49}{section*.95}
+\contentsline {subsection}{Distributional Models of Meaning}{49}{section*.96}
+\contentsline {subsection}{Document Matrices}{49}{section*.97}
+\contentsline {subsection}{Measuring Similarity}{50}{section*.98}
+\contentsline {subsubsection}{Using The Dot Product}{50}{section*.99}
+\contentsline {subsubsection}{Normalizing Dot Product: Cosine Similarity}{51}{section*.100}
+\contentsline {subsubsection}{Example: Calculating Cosine Similarity}{51}{section*.101}
+\contentsline {subsubsection}{Minimum Edit Distance}{52}{section*.102}
+\contentsline {subsection}{Representing Text with N-Grams}{52}{section*.103}
+\contentsline {subsubsection}{Probabilities}{52}{section*.104}
+\contentsline {section}{\numberline {13}Machine Learning (L16 + 19)}{53}{section.13}
+\contentsline {subsection}{Overview}{53}{section*.105}
+\contentsline {subsection}{Hypothesis}{53}{section*.106}
+\contentsline {subsubsection}{Hypothesis Function}{54}{section*.107}
+\contentsline {subsubsection}{Hypothesis Space}{54}{section*.108}
+\contentsline {subsection}{The Loss Function}{54}{section*.109}
+\contentsline {subsection}{The Canonical Machine Learning Problem}{55}{section*.110}
+\contentsline {subsection}{Overarching Idea}{55}{section*.111}
+\contentsline {subsection}{Examples of ML Algorithms}{55}{section*.112}
+\contentsline {subsection}{Example: Linear Regression As Machine Learning}{56}{section*.113}
+\contentsline {subsection}{Machine Learning in Python}{57}{section*.114}
+\contentsline {section}{\numberline {14}Footnotes}{57}{section.14}
