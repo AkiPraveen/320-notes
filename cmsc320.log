@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.15)  27 MAY 2020 01:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.15)  28 MAY 2020 17:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2417,7 +2417,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1297--1298
 
  []
 
-<img/table_1.png, id=375, 528.97626pt x 320.19624pt>
+<img/table_1.png, id=421, 528.97626pt x 320.19624pt>
 File: img/table_1.png Graphic file (type png)
 <use img/table_1.png>
 Package pdftex.def Info: img/table_1.png  used on input line 1302.
@@ -2428,7 +2428,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1306--1307
  []
 
 [21 <./img/table_1.png>]
-<img/table_2.png, id=382, 886.31125pt x 316.18124pt>
+<img/table_2.png, id=428, 886.31125pt x 316.18124pt>
 File: img/table_2.png Graphic file (type png)
 <use img/table_2.png>
 Package pdftex.def Info: img/table_2.png  used on input line 1311.
@@ -2502,7 +2502,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1489--1490
 
  []
 
-<img/table_3.png, id=392, 1190.4475pt x 420.57124pt>
+<img/table_3.png, id=438, 1190.4475pt x 420.57124pt>
 File: img/table_3.png Graphic file (type png)
 <use img/table_3.png>
 Package pdftex.def Info: img/table_3.png  used on input line 1491.
@@ -2517,7 +2517,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1493--1494
 
  []
 
-<img/table_4.png, id=397, 823.075pt x 211.79124pt>
+<img/table_4.png, id=443, 823.075pt x 211.79124pt>
 File: img/table_4.png Graphic file (type png)
 <use img/table_4.png>
 Package pdftex.def Info: img/table_4.png  used on input line 1495.
@@ -2532,7 +2532,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1499--1500
 
  []
 
-<img/table_5.png, id=398, 886.31125pt x 361.35pt>
+<img/table_5.png, id=444, 886.31125pt x 361.35pt>
 File: img/table_5.png Graphic file (type png)
 <use img/table_5.png>
 Package pdftex.def Info: img/table_5.png  used on input line 1501.
@@ -2547,7 +2547,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1505--1506
 
  []
 
-<img/table_6.png, id=399, 816.04875pt x 411.5375pt>
+<img/table_6.png, id=445, 816.04875pt x 411.5375pt>
 File: img/table_6.png Graphic file (type png)
 <use img/table_6.png>
 Package pdftex.def Info: img/table_6.png  used on input line 1507.
@@ -2562,7 +2562,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1509--1510
 
  []
 
-<img/table_7.png, id=408, 855.195pt x 312.16624pt>
+<img/table_7.png, id=454, 855.195pt x 312.16624pt>
 File: img/table_7.png Graphic file (type png)
 <use img/table_7.png>
 Package pdftex.def Info: img/table_7.png  used on input line 1511.
@@ -2577,7 +2577,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1515--1516
 
  []
 
-<img/table_8.png, id=409, 858.20625pt x 461.725pt>
+<img/table_8.png, id=455, 858.20625pt x 461.725pt>
 File: img/table_8.png Graphic file (type png)
 <use img/table_8.png>
 Package pdftex.def Info: img/table_8.png  used on input line 1517.
@@ -3289,34 +3289,369 @@ Underfull \hbox (badness 10000) in paragraph at lines 3522--3523
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3537--3538
+Underfull \hbox (badness 10000) in paragraph at lines 3528--3529
 
  []
 
-[57] [58]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3546.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3546.
+[57]
+Underfull \hbox (badness 10000) in paragraph at lines 3545--3546
+
+ []
+
+<img/gradient.png, id=620, 608.2725pt x 515.9275pt>
+File: img/gradient.png Graphic file (type png)
+<use img/gradient.png>
+Package pdftex.def Info: img/gradient.png  used on input line 3550.
+(pdftex.def)             Requested size: 212.89856pt x 180.57733pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 3553--3554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3555--3556
+
+ []
+
+[58 <./img/gradient.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 3597--3598
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3599--3600
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3601--3602
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3613--3614
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3623--3624
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3623--3624
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3625--3626
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3625--3626
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3627--3628
+
+ []
+
+[59]
+Underfull \hbox (badness 10000) in paragraph at lines 3636--3637
+
+ []
+
+<img/dtree.png, id=630, 871.255pt x 967.615pt>
+File: img/dtree.png Graphic file (type png)
+<use img/dtree.png>
+Package pdftex.def Info: img/dtree.png  used on input line 3639.
+(pdftex.def)             Requested size: 348.49583pt x 387.03915pt.
+[60]
+Underfull \hbox (badness 10000) in paragraph at lines 3643--3645
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3643--3645
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3653--3654
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3655--3656
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3657--3658
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3659--3660
+
+ []
+
+[61 <./img/dtree.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 3661--3662
+
+ []
+
+<img/table.png, id=641, 495.8525pt x 399.4925pt>
+File: img/table.png Graphic file (type png)
+<use img/table.png>
+Package pdftex.def Info: img/table.png  used on input line 3668.
+(pdftex.def)             Requested size: 396.68254pt x 319.59442pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 3671--3672
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3673--3674
+
+ []
+
+[62 <./img/table.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 3772--3773
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3791--3792
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3793--3794
+
+ []
+
+[63]
+Underfull \hbox (badness 10000) in paragraph at lines 3799--3800
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3815--3816
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3818--3819
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3820--3821
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3825--3826
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3827--3828
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3829--3832
+
+ []
+
+[64]
+Underfull \hbox (badness 10000) in paragraph at lines 3846--3847
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3848--3849
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3848--3849
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4014--4015
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4016--4017
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4018--4019
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4022--4023
+
+ []
+
+[65]
+Underfull \hbox (badness 10000) in paragraph at lines 4039--4040
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4072--4073
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4074--4075
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4076--4077
+
+ []
+
+[66]
+Underfull \hbox (badness 10000) in paragraph at lines 4082--4083
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4084--4085
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4092--4093
+
+ []
+
+<img/overfitting.png, id=665, 865.2325pt x 561.09625pt>
+File: img/overfitting.png Graphic file (type png)
+<use img/overfitting.png>
+Package pdftex.def Info: img/overfitting.png  used on input line 4094.
+(pdftex.def)             Requested size: 432.61519pt x 280.54744pt.
+[67 <./img/overfitting.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 4109--4110
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4112--4115
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4116--4117
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4128--4130
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4136--4137
+
+ []
+
+[68]
+Underfull \hbox (badness 10000) in paragraph at lines 4157--4158
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4171--4172
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4173--4174
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4176--4177
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4176--4177
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4183--4184
+
+ []
+
+<img/bagging.png, id=676, 936.49875pt x 690.58pt>
+File: img/bagging.png Graphic file (type png)
+<use img/bagging.png>
+Package pdftex.def Info: img/bagging.png  used on input line 4187.
+(pdftex.def)             Requested size: 468.24823pt x 345.28915pt.
+
+Overfull \hbox (20.17332pt too wide) in paragraph at lines 4187--4189
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4187--4189
+
+ []
+
+[69]
+Underfull \hbox (badness 10000) in paragraph at lines 4190--4191
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4192--4193
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4215--4216
+
+ []
+
+[70 <./img/bagging.png>] [71]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4225.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 4225.
  (./cmsc320.aux
 Package cleveref Info: loaded `english' language definitions on input line 22.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3546.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 3546.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4225.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 4225.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3546.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4225.
  ) 
 Here is how much of TeX's memory you used:
- 44692 strings out of 492982
- 884185 string characters out of 6134896
- 1292227 words of memory out of 5000000
- 47171 multiletter control sequences out of 15000+600000
- 558093 words of font info for 146 fonts, out of 8000000 for 9000
+ 44848 strings out of 492982
+ 886170 string characters out of 6134896
+ 1292228 words of memory out of 5000000
+ 47265 multiletter control sequences out of 15000+600000
+ 558491 words of font info for 151 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 61i,10n,93p,21196b,1463s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/
-fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texlive/texmf-dist/fonts/e
+ 61i,12n,93p,21196b,1999s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texliv
+e/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist/fonts/e
 nc/dvips/inconsolata/i4-t1-0.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-
 super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata/Inc
 onsolata-zi4b.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata
@@ -3336,13 +3671,14 @@ sfonts/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb>
 nts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-
 super/sfcc1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1440.pfb><
 /usr/share/texmf/fonts/type1/public/cm-super/sfrm0500.pfb></usr/share/texmf/fon
-ts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-s
-uper/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfxc2488.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on cmsc320.pdf (58 pages, 808586 bytes).
+ts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-s
+uper/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></
+usr/share/texmf/fonts/type1/public/cm-super/sfxc2488.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on cmsc320.pdf (71 pages, 1777947 bytes).
 PDF statistics:
- 1092 PDF objects out of 1200 (max. 8388607)
- 980 compressed objects within 10 object streams
- 213 named destinations out of 1000 (max. 500000)
- 29746 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 1304 PDF objects out of 1440 (max. 8388607)
+ 1166 compressed objects within 12 object streams
+ 261 named destinations out of 1000 (max. 500000)
+ 29963 words of extra memory for PDF output out of 35830 (max. 10000000)
 

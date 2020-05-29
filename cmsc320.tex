@@ -3525,6 +3525,684 @@ Thus, we have found a systematic way to find the optimal model parameters for li
 
 \subsection{Machine Learning in Python}
 
+Python provides us with lots of options in terms of machine learning libraries.\\
+
+\textbf{\texttt{Scikit-learn}} (\texttt{sklearn}) is the most well-known library. It provides us with a lot of functionality, namely:
+
+\begin{itemize}
+	\item Classification (SVN, K-NN, Random Forest)
+	\item Regression (SVR, Ridge, Lasso)
+	\item Clustering (K-means, spectral, mean-shift)
+	\item Dimensionality Reduction (PCA, matrix factorization)
+	\item Model selection (Grid search)
+	\item Preprocessing (Cleaning, EDA)
+\end{itemize}
+
+\texttt{sklearn} also works well with \texttt{numpy} and \texttt{matplotlib}.
+
+\subsection{(Stochastic) Gradient Descent}
+
+Recall that the \textbf{gradient} always points in the \textit{local} direction of steepest ascent.\\
+
+As such, we need to get to the 'lowest' point on our multivariate $n$-dimensional plane by taking minute steps \textit{against} the gradient.
+
+\begin{center}
+	\includegraphics[scale=0.35]{img/gradient.png} 
+\end{center}
+
+For example, in the above graph, the gradient points us towards higher points on the 3-dimensional plane. Our objective is to step against the gradient and find the minimum point.\\
+
+\textit{Notice that you won't always end up at the global minimum (the blue)- it depends on where you start. If you start to the left of the red portion, you're fine, but if you start to the right of the red portion, you're in trouble. This is the nuance of gradient descent.}\\
+
+\subsubsection{Procedure}
+
+\textbf{Given} the following initial elements:
+
+\begin{myproof}
+
+\begin{itemize}
+	\item a hypothesis function: $h_{\theta}:R^n \rightarrow y$
+	\item a loss function: $l:y \times y \rightarrow R_+$
+	\item a step size: $\gamma$
+	\item an initial parameter vector, $\theta$ of all zeroes
+\end{itemize}
+\end{myproof}
+
+We have all we need to perform gradient descent. From there, repeat the following:
+
+\begin{myproof}
+\begin{itemize}
+	\item Compute gradient: $$ g \leftarrow \sum_{i=1}^{m}{\nabla_{\theta} l(h_{\theta}(x^i), y^i)}$$
+	(We want to see how our multidimensional optimization function is behaving- let's change up our parameters and make sure we're stepping in the right direction)
+	\item Update parameters: $$ \theta \leftarrow \theta - \gamma \cdot g$$
+\end{itemize}
+\end{myproof}
+
+Step size is also an important parameter to consider. If it's too big, you can end up oscillating around the minimum. If it's too small, you can take a really long time to converge on the minimum.
+
+\subsubsection{Batch vs. Stochastic Gradient Descent}
+
+\begin{itemize}
+	\item \textbf{Batch Gradient Descent} calculates gradient descent using the whole dataset. It's good for convex or relatively smooth error manifolds. That is, cases where you're pretty clearly moving towards an optimal solution or goal.
+	\item \textbf{Stochastic Gradient Descent} computes using one sample. It works well for examples with lots of local minima and maxima. This seems to be a more realistic case.
+\end{itemize}
+
+
+\section{Decision Trees (L20)}
+
+Let's look at the big picture of learning first, then move on to decision trees specifically.
+
+\subsection{Big Picture of Learning}
+
+Learning can be seen as \textbf{fitting a function} to the data. We can consider \textbf{different target functions} (which basically means that we can consider different hypothesis spaces).\\
+
+A learning problem is \textbf{realizable} if its hypothesis space contains the \textbf{true function}. (The most accurate function)\\
+
+There is always a \textbf{tradeoff} between the \textbf{expressiveness of a hypothesis space} and the \textbf{complexity of finding simple, consistent hypotheses} within the space.\\
+
+Examples of different target functions:
+\begin{itemize}
+	\item Propositional if-then rules
+	\item Decision Trees
+	\item Linear functions
+	\item Neural networks
+\end{itemize}
+
+\subsection{Decision Trees Intro}
+
+We'll be analyzing \textbf{Decision Trees}. Specifically, decision trees for boolean classification, where each example is classified as positive or negative.\\
+
+First, what is a decision tree?
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Decision Tree} $\rightarrow$ A function that makes consecutive, sequential decisions based on the nature of that input, and produces a final result.
+\begin{itemize}
+	\item \textbf{Input:} An object or situation described by a set of attributes (features)
+	\item \textbf{Output:} A "decision" that predicts the corresponding output value.
+\end{itemize} 
+Structured sort of like a flowchart or a how-to guide, the decision tree is very human-readable.\\\\
+
+It is composed of two types of components: \textbf{Decision Nodes} and \textbf{Leaf Nodes}.\\\\
+
+\textbf{Decision Node} $\rightarrow$ Specifies a choice or test of some attribute with 2 or more alternatives. Every decision node is a part of a path to a leaf node.\\
+
+\textbf{Leaf Node} $\rightarrow$ Indicates classification of an example- function terminates.
+\end{tcolorbox}
+
+\hfill \break A decision tree is a tree-like graph with nodes representing the place where we pick an attribute and ask a question; edges represent the answers the to the question; and the leaves represent the actual output or class label. They are used in non-linear decision making with simple linear decision surface. (\textit{hackerearth})
+
+\subsubsection{Example: Election Decision Tree}
+
+The following is an example of a decision tree. Note that the order of the decisions taken matters, and the results are all based in likelihood, not certainty.\\
+
+\begin{center}
+	\includegraphics[scale=0.4]{img/dtree.png}\\
+\end{center}
+
+\begin{myproof}
+\textbf{Given}:\\
+A collection of examples $(x, f(x))$\\\\
+
+\textbf{Return}:\\
+A function $h$ (\textit{hypothesis}) that approximates $f$, where $h$ is a \textbf{decision tree}.
+\end{myproof}
+
+
+\subsection{Decision Tree Learning Algorithm (ID3)}
+
+Decision trees can express \textbf{any Boolean function}.\\
+
+Our goal is to find a decision tree that '\textbf{agrees}' with our training data set. If it agrees with the training data, it should theoretically produce correct output for the actual inputs.\\
+
+One idea is to \textbf{construct a specific path for each example}; this would guarantee us accuracy with the training data. Unfortunately, this just won't work. This approach would just memorize the example, and \textbf{doesn't generalize} at all.\\
+
+Therefore, we want the smallest tree, to minimize chances of this sort of 'memorization' from happening. One would think there's some systematic way to minimize this, but that problem ends up being \textbf{NP-hard}.\\
+
+Therefore, our \textbf{overall goal} should be to get the best classification with the smallest number of tests- minimize decision nodes while maximizing accuracy.\\
+
+\subsubsection{Badminton Example: Hackerearth}
+
+Let's assume we had the following data as a table:
+
+\begin{center}
+	\includegraphics[scale=0.8]{img/table.png} 
+\end{center}
+
+\hfill \break It indicates our human observations as to whether or not we'd decide to play badminton on a given day based on environmental factors, for the last 10 days.\\
+
+We may use this table to help us decide whether we want to play or not in the future, but let's say that on day $n$, we find that the environmental factors are different than any of the previously recorded days.\\
+
+We can try and form a \textbf{decision tree} based on this data that will help us make our decision. Below is an example decision tree for this data.
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp7287379245887146] 
+\draw   (310,31) -- (380,31) -- (380,71) -- (310,71) -- cycle ;
+%Shape: Rectangle [id:dp8626558304342224] 
+\draw   (206.67,119) -- (276.67,119) -- (276.67,159) -- (206.67,159) -- cycle ;
+%Shape: Rectangle [id:dp23388971934608005] 
+\draw   (415,119) -- (485,119) -- (485,159) -- (415,159) -- cycle ;
+%Straight Lines [id:da19359411263540038] 
+\draw    (302.33,51) -- (243.14,105.31) ;
+\draw [shift={(241.67,106.67)}, rotate = 317.46000000000004] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da8341409973532903] 
+\draw    (389,51) -- (448.55,107.29) ;
+\draw [shift={(450,108.67)}, rotate = 223.39] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Rounded Diagonal Corner Rect [id:dp7974115492268236] 
+\draw   (320.33,130.8) .. controls (320.33,127.78) and (322.78,125.33) .. (325.8,125.33) -- (376,125.33) .. controls (376,125.33) and (376,125.33) .. (376,125.33) -- (376,147.2) .. controls (376,150.22) and (373.55,152.67) .. (370.53,152.67) -- (320.33,152.67) .. controls (320.33,152.67) and (320.33,152.67) .. (320.33,152.67) -- cycle ;
+%Straight Lines [id:da4367305738199382] 
+\draw    (347.67,96.67) -- (347.67,113.33) ;
+\draw [shift={(347.67,115.33)}, rotate = 270] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da46243154172426126] 
+\draw    (241.67,161.33) -- (201.11,222.33) ;
+\draw [shift={(200,224)}, rotate = 303.62] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da1481738222577752] 
+\draw    (241.67,161.33) -- (285.79,219.08) ;
+\draw [shift={(287,220.67)}, rotate = 232.62] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da6081981084391918] 
+\draw    (449.67,161.33) -- (409.11,222.33) ;
+\draw [shift={(408,224)}, rotate = 303.62] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da8710681703922716] 
+\draw    (449.67,161.33) -- (493.79,219.08) ;
+\draw [shift={(495,220.67)}, rotate = 232.62] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Rounded Diagonal Corner Rect [id:dp1289608674372874] 
+\draw   (169.67,232.8) .. controls (169.67,229.78) and (172.11,227.33) .. (175.13,227.33) -- (225.33,227.33) .. controls (225.33,227.33) and (225.33,227.33) .. (225.33,227.33) -- (225.33,249.2) .. controls (225.33,252.22) and (222.89,254.67) .. (219.87,254.67) -- (169.67,254.67) .. controls (169.67,254.67) and (169.67,254.67) .. (169.67,254.67) -- cycle ;
+%Rounded Diagonal Corner Rect [id:dp0009906265808617976] 
+\draw   (259.67,232.8) .. controls (259.67,229.78) and (262.11,227.33) .. (265.13,227.33) -- (315.33,227.33) .. controls (315.33,227.33) and (315.33,227.33) .. (315.33,227.33) -- (315.33,249.2) .. controls (315.33,252.22) and (312.89,254.67) .. (309.87,254.67) -- (259.67,254.67) .. controls (259.67,254.67) and (259.67,254.67) .. (259.67,254.67) -- cycle ;
+%Rounded Diagonal Corner Rect [id:dp13747987290793218] 
+\draw   (467.67,231.47) .. controls (467.67,228.45) and (470.11,226) .. (473.13,226) -- (523.33,226) .. controls (523.33,226) and (523.33,226) .. (523.33,226) -- (523.33,247.87) .. controls (523.33,250.89) and (520.89,253.33) .. (517.87,253.33) -- (467.67,253.33) .. controls (467.67,253.33) and (467.67,253.33) .. (467.67,253.33) -- cycle ;
+%Rounded Diagonal Corner Rect [id:dp07596070403498112] 
+\draw   (379.67,233.47) .. controls (379.67,230.45) and (382.11,228) .. (385.13,228) -- (435.33,228) .. controls (435.33,228) and (435.33,228) .. (435.33,228) -- (435.33,249.87) .. controls (435.33,252.89) and (432.89,255.33) .. (429.87,255.33) -- (379.67,255.33) .. controls (379.67,255.33) and (379.67,255.33) .. (379.67,255.33) -- cycle ;
+%Shape: Rectangle [id:dp379136576621135] 
+\draw   (12.67,41) -- (37.67,41) -- (37.67,61) -- (12.67,61) -- cycle ;
+%Rounded Diagonal Corner Rect [id:dp5937279433237983] 
+\draw   (7,74.68) .. controls (7,72.79) and (8.54,71.25) .. (10.43,71.25) -- (44.67,71.25) .. controls (44.67,71.25) and (44.67,71.25) .. (44.67,71.25) -- (44.67,84.98) .. controls (44.67,86.88) and (43.13,88.42) .. (41.23,88.42) -- (7,88.42) .. controls (7,88.42) and (7,88.42) .. (7,88.42) -- cycle ;
+
+% Text Node
+\draw (228,55) node [anchor=north west][inner sep=0.75pt]   [align=left] {Sunny};
+% Text Node
+\draw (416.67,55) node [anchor=north west][inner sep=0.75pt]   [align=left] {Rainy};
+% Text Node
+\draw (316,42.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {Weather};
+% Text Node
+\draw (211.67,130.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {Humidity};
+% Text Node
+\draw (432,130.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {Wind};
+% Text Node
+\draw (334,130.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {Yes};
+% Text Node
+\draw (321.33,81) node [anchor=north west][inner sep=0.75pt]   [align=left] {Cloudy};
+% Text Node
+\draw (177.33,173) node [anchor=north west][inner sep=0.75pt]   [align=left] {>75\%};
+% Text Node
+\draw (275.33,173) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\leq$ 75\%};
+% Text Node
+\draw (385.33,173) node [anchor=north west][inner sep=0.75pt]   [align=left] {>20};
+% Text Node
+\draw (483.33,173) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\leq$ 20};
+% Text Node
+\draw (186.67,231.83) node [anchor=north west][inner sep=0.75pt]   [align=left] {No};
+% Text Node
+\draw (273.33,232.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {Yes};
+% Text Node
+\draw (481.33,231.17) node [anchor=north west][inner sep=0.75pt]   [align=left] {Yes};
+% Text Node
+\draw (396.67,232.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {No};
+% Text Node
+\draw (38,42.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {\mbox{-} Decision Node};
+% Text Node
+\draw (48.67,71.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\mbox{-} Leaf Node};
+
+
+\end{tikzpicture}
+
+
+}
+
+\subsubsection{ID3 Algorithm}
+
+The following is a basic algorithm used to construct decision trees. It's known as the \textit{Iterative Dichotomiser 3}, or \textit{ID3} for short. It builds decision trees using a \textbf{top-down}, \textbf{greedy} approach.\\
+
+\begin{myproof}
+\begin{itemize}
+	\item[1.] Select the \textbf{best} attribute/feature, $\gamma$, from the pool of given features. The "best" attribute is the attribute which best splits or separates the data.
+	\item[2.] Assign $\gamma$ as the decision attribute for a new node, $\beta$.
+	\item[3.] For each value of $\gamma$, create a new descendant of $\beta$.
+	\item[4.] If the training data is now perfectly classified, stop. Otherwise, recursively start from step 1 on each of the descendants of $\beta$.
+\end{itemize}
+\end{myproof}
+
+\hfill \break This approach is fairly straightforward; let's investigate further into how we can end up choosing the 'best' attribute from the pool of given attributes. For this, we need to establish the concept of \textbf{information gain}.
+
+\subsubsection{Information Gain + Entropy}
+
+\hfill \begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Information Gain} $\rightarrow$ A measure that expresses how well an attribute splits our data into groups based on classification.
+\end{tcolorbox}
+
+\hfill \break Information gain is a statistical property that measures how well a given attribute separates the training examples according to target classification. If the presence of a certain attribute lead to way more of one outcome than another, we consider that attribute to have a \textbf{high information gain}.\\
+
+However, we still need a way to define this property precisely. To aid in this definition, we will define the idea of entropy.\\
+
+\hfill \begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Entropy} $\rightarrow$ A property that measures the level of \textit{impurity} in a group of examples. 
+\end{tcolorbox}
+
+\hfill \break In the case of our \textit{ID3} algorithm, which only provides results in the form of \textbf{positive} or \textbf{negative}, we can define entropy with the following formula:\\
+
+\begin{myproof}
+
+$$ Entropy(S)=-p_+ log_2p_+ -p_-log_2p_- $$
+
+Where:
+
+\begin{itemize}
+	\item $S$ is a sample from our training data.
+	\item $p_+$ is the proportion of positive examples in $S$.
+	\item $p_-$ is the proportion of negative examples in $S$.
+\end{itemize}
+
+\end{myproof}
+
+\hfill \break This formula essentially tells us how 'split' the data is on a scale from 0 to 1.0- for example:\\
+
+\begin{myproof}
+Example: $S$ is a sample containing 14 boolean examples, with 9 positive and 5 negative examples. The Entropy of $S$ relative to this classification is:\\
+
+$$ Entropy ([9+, 5-]) = -\frac{9}{14}\cdot log_2\frac{9}{14} - \frac{5}{14}\cdot log_2 \frac{5}{14} = 0.940$$\\
+
+Note that entropy is $0$, or optimal, if all members of $S$ belong to the same class, and entropy is $1.0$ if exactly half the members belong to one class, and the other half belong to the other.
+\end{myproof}
+
+\hfill \break At this point, our intuition tells us that we need to \textbf{pick the attribute that reduces the entropy the most.}\\
+
+Using this definition of entropy, we can now properly define information gain as a measure of the effectiveness of an attribute in classifying the training data.\\
+
+Information Gain, $Gain(S,\gamma)$, of an attribute $\gamma$ relative to a sample of examples $S$ is defined as the following: \\
+\begin{myproof}
+$$Gain(S,\gamma)=\underbrace{Entropy(S)}_{\text{Entropy of original sample S}}-\underbrace{\sum_{v\in Values(\gamma)}{\frac{|S_v|}{|S|}Entropy(S_v)}}_{\text{Expected value of entropy after S is partitioned using } \gamma}$$
+\end{myproof}
+
+\hfill \break Where:
+\begin{itemize}
+	\item $Values(\gamma)$ is the set of all possible values for attribute $\gamma$
+	\item $S_v$ is the subset of $S$ for which attribute $\gamma$ has value $v$
+\end{itemize}
+
+Overall, we can see that $Gain(S,\gamma)$ is therefore the expected reduction in entropy caused by knowing the value of attribute $\gamma$. We're basically trying to say this:
+
+$$ \text{Information Gain} = Entropy(\text{Parent Node}) - AvgEntropy(\text{Children Nodes})$$
+
+\subsubsection{Example: Information Gain + Entropy}
+
+Suppose a sample $S$ has 30 instances, 14 positive and 16 negative.\\
+
+Also suppose that an attribute $\gamma$ divides the samples into two subsamples of 17 instances (4 negative and 13 positive) and 13 instances (1 positive and 12 negative).\\\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp4519386664719742] 
+\draw   (81.33,12) -- (403,12) -- (403,112) -- (81.33,112) -- cycle ;
+%Straight Lines [id:da005391573051303222] 
+\draw [color={rgb, 255:red, 245; green, 166; blue, 35 }  ,draw opacity=1 ]   (241,112) -- (142.07,168.34) ;
+\draw [shift={(140.33,169.33)}, rotate = 330.34000000000003] [color={rgb, 255:red, 245; green, 166; blue, 35 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da46164442306473463] 
+\draw [color={rgb, 255:red, 245; green, 166; blue, 35 }  ,draw opacity=1 ]   (241,112) -- (331.3,168.28) ;
+\draw [shift={(333,169.33)}, rotate = 211.93] [color={rgb, 255:red, 245; green, 166; blue, 35 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Rectangle [id:dp3853088098543145] 
+\draw   (73.33,169.67) -- (209,169.67) -- (209,236) -- (73.33,236) -- cycle ;
+%Shape: Rectangle [id:dp27389516072713194] 
+\draw   (269.33,170.33) -- (405,170.33) -- (405,236.67) -- (269.33,236.67) -- cycle ;
+
+% Text Node
+\draw (494.67,38) node [anchor=north west][inner sep=0.75pt]   [align=left] {30 instances\\};
+% Text Node
+\draw (94.67,21.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (114.67,41.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (194,22.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (146.67,37.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (205.33,58.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (147.33,70.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (304.67,36) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (302,63.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (344.67,76) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (366.67,30) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (251.33,65.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (248,27.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (274.67,54.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (271.33,85.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (230.67,82.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (226.67,32) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (168,48) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (116.67,72.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (180,72) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (275.33,24.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (336,39.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (318,82) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (145.33,14.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (159.33,90.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (372,54.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (314.67,15.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (372.67,76.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (234.67,48.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (193.33,40.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (96,58.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (454.67,60) node [anchor=north west][inner sep=0.75pt]   [align=left] {(\textcolor[rgb]{0.49,0.83,0.13}{14 positive}, \textcolor[rgb]{0.82,0.01,0.11}{16 negative})};
+% Text Node
+\draw (82,179.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (102,199.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (122,219.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (157.33,182.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (130.67,180) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (176,204.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (144.67,193.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (108.67,174.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (84,213.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (127.33,202) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (152,214) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (102,216.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (184,177.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (337.33,190) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.49,0.83,0.13}{+}};
+% Text Node
+\draw (168.67,189.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (188.67,209.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (116,190.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (137.33,214) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (277.33,175.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (297.33,195.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (317.33,215.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (309.33,179.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (329.33,199.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (370.67,178) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (390.67,198) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (359.33,204) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (281.33,211.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (335,172.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (341.33,215.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (275.33,191.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{1,0,0}{-}};
+% Text Node
+\draw (91.33,244) node [anchor=north west][inner sep=0.75pt]   [align=left] {17 instances\\};
+% Text Node
+\draw (51.33,266) node [anchor=north west][inner sep=0.75pt]   [align=left] {(\textcolor[rgb]{0.49,0.83,0.13}{13 positive}, \textcolor[rgb]{0.82,0.01,0.11}{4 negative})};
+% Text Node
+\draw (296.67,243.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {13 instances\\};
+% Text Node
+\draw (256.67,265.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {(\textcolor[rgb]{0.49,0.83,0.13}{1 positive}, \textcolor[rgb]{0.82,0.01,0.11}{12 negative})};
+% Text Node
+\draw (362.67,130.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.96,0.65,0.14}{Divide on $\displaystyle \gamma $}};
+
+
+\end{tikzpicture}
+
+
+}
+
+\hfill \break Given these conditions, we can calculate the \textbf{information gain} of attribute $\gamma$.\\
+
+We know that the following formula calculates information gain of attribute $\gamma$ from a sample S:\\
+
+$$Gain(S,\gamma)=\underbrace{Entropy(S)}_{\text{Entropy of original sample S}}-\underbrace{\sum_{v\in Values(\gamma)}{\frac{|S_v|}{|S|}Entropy(S_v)}}_{\text{Expected value of entropy after S is partitioned using } \gamma}$$\\
+
+We also know that the entropy of sample $S$ can be calculated using:
+
+$$Entropy(S) = -p_+log_2p_+ - p_-log_2p_-$$\\
+
+Using this formula, we can deduce the following:
+\begin{itemize}
+	\item Entropy of parent (30 instances): $\frac{14}{30}\cdot log_2 \frac{14}{30}-\frac{16}{30}\cdot log_2 \frac{16}{30}=0.996$
+	\item Entropy of child (17 instances): $\frac{13}{17}\cdot log_2 \frac{13}{17} - \frac{4}{17} \cdot log_2 \frac{4}{17}=0.787$
+	\item Entropy of child (13 instances): $\frac{1}{13}\cdot log_2 \frac{1}{13}-\frac{12}{13}\cdot log_2 \frac{12}{13}=0.391$
+\end{itemize}
+
+Now, we take the weighted average of the entropy of the children (expected value of entropy after $S$ is partitioned using $\gamma$).
+
+$$\frac{17}{30}\cdot 0.787+\frac{13}{30}\cdot 0.391=0.615$$
+
+\hfill \break Using all this information, we can calculate the information gain for attribute $\gamma$:
+
+$$G(S,\gamma)=0.996-0.615=0.38$$
+
+Keeping this in mind, we are free to calculate information gain for \textbf{each attribute} and, based on this number, decide which attribute that we should split the data on for our ID3 algorithm.\\
+
+\subsection{Noisy Data}
+
+Lots of 'noise' could potentially occur in your training data- \textbf{training data is not necessarily perfect}. Examples:
+
+\begin{itemize}
+	\item Two examples have the same attribute/value pairs, but different classifications
+	\item Some values of attributes are incorrect because of errors in the data acquisition or preprocessing phase.
+	\item The classification itself is wrong due to some error
+\end{itemize}
+
+Noisy data is just one of the reasons you don't want to \textbf{overfit} your data.
+
+\subsection{Overfitting}
+
+\hfill \begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Overfitting} $\rightarrow$ Fitting the training set "too well" such that performance on the test set degrades.
+\end{tcolorbox}
+
+At the end of the day, the training data is just that- training data. You don't want your algorithm to learn so much from your training data such that it adheres to it so perfectly that it fails to properly classify new training data that it hasn't yet seen. In other words, you want your algorithm to learn, but not totally and entirely meticulously.
+
+\subsubsection{Example: Overfitting}
+
+\begin{myproof}
+You are trying to predict the roll of a die. The experiment data includes:
+\begin{itemize}
+	\item Day of the week
+	\item Month of the week
+	\item Color of the die
+\end{itemize}
+\end{myproof}
+
+Decision Tree Learning may find a hypothesis that fits the data, but with irrelevant attributes.\\
+
+Some attributes are irrelevant to the decision making process, such as the color of the die, but the algorithm may use them to differentiate examples all the same.\\
+
+If the hypothesis space has \textbf{many dimensions} because of a \textbf{large number of attributes}, we may find a \textbf{meaningless regularity} in the data that is irrelevant to the true, important distinguishing features of the dataset.\\
+
+Overfitting is a key problem in learning there are formal results on the number of examples needed to properly train a hypothesis of a certain complexity- the more parameters, the more data is needed.
+
+\subsubsection{Defining Overfitting}
+
+Consider $D$, the entire distribution of data, and $T$, the training set. We can say that hypothesis $h \in H$ overfits $D$ if $\exists h' \neq h \in H$ such that $error_T(h) < error_T(h')$ but $error_D(h) > error_D(h')$.\\
+
+That's basically saying that hypothesis $h$ overfits the data if there exists another hypothesis that's less accurate for the training data but more accurate on the validation data.\\
+
+\begin{tcolorbox}[title=Aside: Fitting Training Data vs. Validation Data,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+
+It's hard to think of a better to the training data as a 'worse' result. It's often difficult to fit training data well, so it seems that a better fit to the training data means a good result. This is an easy way to fall victim to overfitting.
+
+\end{tcolorbox}
+
+\hfill \break Here's an example of overfitting as decision tree size increases.\\
+
+\includegraphics[scale=0.5]{img/overfitting.png} 
+
+\subsection{Evaluation Methodology}
+
+How do we evaluate the quality of the hypotheses produced by learning algorithms? We generally do this by seeing how good they are at classifying unseen examples.
+
+\subsubsection{Standard Methodology: Holdout Cross-Validation}
+
+\begin{itemize}
+	\item[1.] Collect a large set of examples.
+	\item[2.] Randomly divide the collection into two disjoint sets, training set and validation set
+	\item[3.] Apply a learning algorithm to the training set and generate hypothesis $h$
+	\item[4.] Measure performance of $h$ with regards to the test set
+\end{itemize}
+
+It's important to keep the testing sets and training sets disjoint as well- that is, make sure there is no \textbf{peeking}.\\
+
+\begin{myproof}
+\textbf{Peeking Example}:\\
+Suppose generate four different hypotheses- for example by using different criteria to pick the next attribute to branch on.
+We test the performance of the four different hypotheses on the test set and then select the best hypothesis.\\
+
+This is considered \textbf{peeking}, as the hypothesis was selected \textbf{based on} its performance on the \textbf{test set}, so information about the test set leaked into the learning algorithm.\\
+
+In this case, a new, separate test set would be required- one that our algorithm has not yet seen.
+\end{myproof}
+
+\subsection{Learning Curve Graph}
+
+The learning curve graph is the average prediction quality as a function of the size of the training set. Usually, as the training set increases, so does the quality of the prediction.
+
+\subsection{Precision vs. Recall}
+
+\hfill \begin{tcolorbox}[title=Definitions:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Precision} $\rightarrow$ $\frac{\text{number of true positives}}{\text{number of true positives}+\text{number of false positives}}$\\\\
+\textbf{Recall} $\rightarrow$ $\frac{\text{number of true positives}}{\text{number of true positives}+\text{number of false negatives}}$
+\end{tcolorbox}
+
+\hfill \break A precise classifier is selective, while a classifier with high recall is inclusive. There are situations where we'd err to either one side due to caution, precision or recall. It's a case-by-case thing.
+
+\subsection{Decision Trees in Scikit}
+
+As expected, it's very easy to load up a decision tree in \texttt{sklearn}. Here's a python snippet to train a decision tree using default parameters.\\
+
+{\centering
+\begin{lstlisting}[language=python]
+from sklearn.datasets import load_iris
+from sklearn import tree
+
+# Load a common dataset, fit a decision tree to it
+iris = load_iris()
+clf = tree.DEcisionTreeClassifier()
+clf = clf.fit(iris.data, iris.target)
+
+# Predict the most likely class
+clf.predit([[2., 2.]])
+\end{lstlisting}
+}
+
+You can also use \texttt{graphviz} and \texttt{pydotplus} to visualize a decision tree using Python.
+
+\subsection{Random Forests}
+
+Decision trees are very interpret-able, but may be brittle to changes in the training data, as well as noise.\\
+
+\textbf{Random forests} are an ensemble method that:
+
+\begin{itemize}
+	\item Resamples the training data
+	\item Builds many decision trees
+	\item Averages predictions of trees in order to classify
+\end{itemize}
+
+This is done via bagging and random feature selection.
+
+\subsubsection{Bagging}
+
+\textbf{Bagging} is short for \textbf{B}ootstrap \textbf{Ag}gregation.\\
+
+Essentially what you're doing when you're bagging is resampling a training set of size $n$ via the bootstrap, a sample of $n$ elements taken \textit{with replacement} from the original dataset. For example:\\
+
+\begin{myproof}
+\textbf{Original dataset:} \texttt{1,2,3,4,5,6,7,8,9,10}\\\\
+
+\textbf{Resampled training set 1:} \texttt{2,3,3,5,6,1,8,10,9,1}\\
+\textbf{Resampled training set 2:} \texttt{1,1,5,6,3,8,9,10,2,7}\\
+\textbf{Resampled training set 3:} \texttt{1,5,8,9,2,10,9,7,5,4}
+\end{myproof}
+
+\hfill \break Below is a visual example of bagging:\\
+
+{
+\centering
+\includegraphics[scale=0.5]{img/bagging.png} 
+}
+
+\hfill \break Since bagging resamples the original training data \textit{with replacement}, some instances (or even entire resampled datasets) may be present multiple times, while others are left out.\\
+
+Once we perform analysis on all the separate datasets, we can have those analyses 'vote' and decide what the final classification should be.\\
+
+Random forest classification is available in \texttt{sklearn}, simply import \texttt{RandomForestClassifier} from \texttt{sklearn.ensemble}.
+
+\section{K-Nearest Neighbors (L21)}
+
+\textbf{Basic idea:} If it walks like a duck, quacks like a duck, then it's probably a duck.
+
+
+
+
+
+
+
 
 
 
@@ -3541,6 +4219,7 @@ References:
 	\item CMSC320 - John Dickerson, UMD
 	\item Geeksforgeeks.com
 	\item Wikipedia.org
+	\item Hackerearth.com
 \end{itemize}
 
 \end{document}
