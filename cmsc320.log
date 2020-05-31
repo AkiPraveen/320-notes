@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.15)  30 MAY 2020 18:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.15)  30 MAY 2020 19:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2417,7 +2417,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1297--1298
 
  []
 
-<img/table_1.png, id=441, 528.97626pt x 320.19624pt>
+<img/table_1.png, id=449, 528.97626pt x 320.19624pt>
 File: img/table_1.png Graphic file (type png)
 <use img/table_1.png>
 Package pdftex.def Info: img/table_1.png  used on input line 1302.
@@ -2428,7 +2428,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1306--1307
  []
 
 [21 <./img/table_1.png>]
-<img/table_2.png, id=448, 886.31125pt x 316.18124pt>
+<img/table_2.png, id=456, 886.31125pt x 316.18124pt>
 File: img/table_2.png Graphic file (type png)
 <use img/table_2.png>
 Package pdftex.def Info: img/table_2.png  used on input line 1311.
@@ -2502,7 +2502,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1489--1490
 
  []
 
-<img/table_3.png, id=458, 1190.4475pt x 420.57124pt>
+<img/table_3.png, id=466, 1190.4475pt x 420.57124pt>
 File: img/table_3.png Graphic file (type png)
 <use img/table_3.png>
 Package pdftex.def Info: img/table_3.png  used on input line 1491.
@@ -2517,7 +2517,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1493--1494
 
  []
 
-<img/table_4.png, id=463, 823.075pt x 211.79124pt>
+<img/table_4.png, id=472, 823.075pt x 211.79124pt>
 File: img/table_4.png Graphic file (type png)
 <use img/table_4.png>
 Package pdftex.def Info: img/table_4.png  used on input line 1495.
@@ -2532,7 +2532,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1499--1500
 
  []
 
-<img/table_5.png, id=464, 886.31125pt x 361.35pt>
+<img/table_5.png, id=473, 886.31125pt x 361.35pt>
 File: img/table_5.png Graphic file (type png)
 <use img/table_5.png>
 Package pdftex.def Info: img/table_5.png  used on input line 1501.
@@ -2547,7 +2547,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1505--1506
 
  []
 
-<img/table_6.png, id=465, 816.04875pt x 411.5375pt>
+<img/table_6.png, id=474, 816.04875pt x 411.5375pt>
 File: img/table_6.png Graphic file (type png)
 <use img/table_6.png>
 Package pdftex.def Info: img/table_6.png  used on input line 1507.
@@ -2562,7 +2562,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1509--1510
 
  []
 
-<img/table_7.png, id=475, 855.195pt x 312.16624pt>
+<img/table_7.png, id=483, 855.195pt x 312.16624pt>
 File: img/table_7.png Graphic file (type png)
 <use img/table_7.png>
 Package pdftex.def Info: img/table_7.png  used on input line 1511.
@@ -2577,7 +2577,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1515--1516
 
  []
 
-<img/table_8.png, id=476, 858.20625pt x 461.725pt>
+<img/table_8.png, id=484, 858.20625pt x 461.725pt>
 File: img/table_8.png Graphic file (type png)
 <use img/table_8.png>
 Package pdftex.def Info: img/table_8.png  used on input line 1517.
@@ -3298,7 +3298,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 3545--3546
 
  []
 
-<img/gradient.png, id=640, 608.2725pt x 515.9275pt>
+<img/gradient.png, id=648, 608.2725pt x 515.9275pt>
 File: img/gradient.png Graphic file (type png)
 <use img/gradient.png>
 Package pdftex.def Info: img/gradient.png  used on input line 3550.
@@ -3363,7 +3363,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 3636--3637
 
  []
 
-<img/dtree.png, id=650, 871.255pt x 967.615pt>
+<img/dtree.png, id=659, 871.255pt x 967.615pt>
 File: img/dtree.png Graphic file (type png)
 <use img/dtree.png>
 Package pdftex.def Info: img/dtree.png  used on input line 3639.
@@ -3403,7 +3403,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 3661--3662
 
  []
 
-<img/table.png, id=662, 495.8525pt x 399.4925pt>
+<img/table.png, id=670, 495.8525pt x 399.4925pt>
 File: img/table.png Graphic file (type png)
 <use img/table.png>
 Package pdftex.def Info: img/table.png  used on input line 3668.
@@ -3538,7 +3538,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 4092--4093
 
  []
 
-<img/overfitting.png, id=685, 865.2325pt x 561.09625pt>
+<img/overfitting.png, id=693, 865.2325pt x 561.09625pt>
 File: img/overfitting.png Graphic file (type png)
 <use img/overfitting.png>
 Package pdftex.def Info: img/overfitting.png  used on input line 4094.
@@ -3598,7 +3598,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 4183--4184
 
  []
 
-<img/bagging.png, id=696, 936.49875pt x 690.58pt>
+<img/bagging.png, id=704, 936.49875pt x 690.58pt>
 File: img/bagging.png Graphic file (type png)
 <use img/bagging.png>
 Package pdftex.def Info: img/bagging.png  used on input line 4187.
@@ -3648,7 +3648,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 4319--4320
 
  []
 
-<img/voronoi.png, id=717, 1133.23375pt x 660.4675pt>
+<img/voronoi.png, id=725, 1133.23375pt x 660.4675pt>
 File: img/voronoi.png Graphic file (type png)
 <use img/voronoi.png>
 Package pdftex.def Info: img/voronoi.png  used on input line 4321.
@@ -3677,7 +3677,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 4351--4352
 
  []
 
-<img/cursedim.png, id=728, 823.075pt x 185.69376pt>
+<img/cursedim.png, id=736, 823.075pt x 185.69376pt>
 File: img/cursedim.png Graphic file (type png)
 <use img/cursedim.png>
 Package pdftex.def Info: img/cursedim.png  used on input line 4355.
@@ -3747,7 +3747,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 4441--4442
 
  []
 
-<img/rtree.png, id=739, 1027.84pt x 880.28876pt>
+<img/rtree.png, id=747, 1027.84pt x 880.28876pt>
 File: img/rtree.png Graphic file (type png)
 <use img/rtree.png>
 Package pdftex.def Info: img/rtree.png  used on input line 4443.
@@ -3757,7 +3757,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 4452--4453
 
  []
 
-<img/rstartree.png, id=740, 1027.84pt x 1027.84pt>
+<img/rstartree.png, id=748, 1027.84pt x 1027.84pt>
 File: img/rstartree.png Graphic file (type png)
 <use img/rstartree.png>
 Package pdftex.def Info: img/rstartree.png  used on input line 4454.
@@ -3793,30 +3793,70 @@ Underfull \hbox (badness 10000) in paragraph at lines 4501--4502
  []
 
 [78]
-Underfull \hbox (badness 10000) in paragraph at lines 4535--4536
+Underfull \hbox (badness 10000) in paragraph at lines 4522--4523
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4537--4538
+Underfull \hbox (badness 10000) in paragraph at lines 4528--4529
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 4559--4560
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4561--4562
+
+ []
+
+<img/connect.png, id=767, 662.475pt x 518.93875pt>
+File: img/connect.png Graphic file (type png)
+<use img/connect.png>
+Package pdftex.def Info: img/connect.png  used on input line 4566.
+(pdftex.def)             Requested size: 132.49265pt x 103.7859pt.
 [79]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4549.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 4549.
+Underfull \hbox (badness 10000) in paragraph at lines 4570--4571
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4572--4573
+
+ []
+
+<img/knnregression.png, id=784, 496.85625pt x 748.7975pt>
+File: img/knnregression.png Graphic file (type png)
+<use img/knnregression.png>
+Package pdftex.def Info: img/knnregression.png  used on input line 4577.
+(pdftex.def)             Requested size: 149.05801pt x 224.64098pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4591--4592
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4593--4594
+
+ []
+
+[80 <./img/connect.png> <./img/knnregression.png>] [81]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4605.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 4605.
  (./cmsc320.aux
 Package cleveref Info: loaded `english' language definitions on input line 22.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4549.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 4549.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4549.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4605.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 4605.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4605.
  ) 
 Here is how much of TeX's memory you used:
- 44942 strings out of 492982
- 887482 string characters out of 6134896
+ 44980 strings out of 492982
+ 888028 string characters out of 6134896
  1292228 words of memory out of 5000000
- 47327 multiletter control sequences out of 15000+600000
+ 47348 multiletter control sequences out of 15000+600000
  560939 words of font info for 163 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  61i,12n,93p,21196b,1999s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -3846,10 +3886,10 @@ e1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/s
 frm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/sh
 are/texmf/fonts/type1/public/cm-super/sfxc2488.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on cmsc320.pdf (79 pages, 1987441 bytes).
+Output written on cmsc320.pdf (81 pages, 2069810 bytes).
 PDF statistics:
- 1405 PDF objects out of 1440 (max. 8388607)
- 1249 compressed objects within 13 object streams
- 279 named destinations out of 1000 (max. 500000)
- 32623 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 1446 PDF objects out of 1728 (max. 8388607)
+ 1284 compressed objects within 13 object streams
+ 294 named destinations out of 1000 (max. 500000)
+ 32657 words of extra memory for PDF output out of 35830 (max. 10000000)
 

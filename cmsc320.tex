@@ -4193,7 +4193,7 @@ Once we perform analysis on all the separate datasets, we can have those analyse
 
 Random forest classification is available in \texttt{sklearn}, simply import \texttt{RandomForestClassifier} from \texttt{sklearn.ensemble}.
 
-\section{K-Nearest Neighbors (L21)}
+\section{K-Nearest Neighbors \& Support Vector Machines (L21)}
 
 \subsection{Overview}
 
@@ -4519,8 +4519,64 @@ Other methods include:
 	\item Extremely \textbf{flexible} classification scheme
 \end{itemize}
 
+K-NN is well-suited for multimodal classes and records with multiple class labels.\\
+
+Additionally, it's been shown that it sometimes is the best method.
+
+\subsection{Disadvantages of K-NN}
+
+\textbf{Classifying unknown records are relatively expensive}, as you have to perform the distance computation of k-nearest neighbors. This is computationally intensive, especially as the size of the training set grows.\\
+
+The accuracy of the classification can also be severely degraded by the presence of:
+\begin{itemize}
+	\item Noisy or irrelevant features
+	\item High-dimensional space (curse of dimensionality)
+	\item Choosing the wrong distance metric
+	\item Picking a bad value for $k$
+\end{itemize}
+
+\subsection{K-NN Classification in Scikit-Learn}
+
+As expected, \texttt{sklearn} supports K-NN classification.
+
+{\centering
+\begin{lstlisting}[language=python]
+from sklearn import neighbors, datasets
+
+# Load a common dataset, fit a 15-NN classifier to it
+iris = datasets.load_iris()
+X = iris.data[:, :2] # take the first two features
+y = iris.target
+
+clf = neighbors.KNeighborsClassifier(15, weights='uniform')
+clf.fit(X,y)
+\end{lstlisting}
+}
 
 
+\subsection{K-NN Regression}
+
+Here's the idea- to predict a target value y for a data point $x$, we simply apply interpolation and regression to the neighborhood of $x$.\\
+
+The most naive approach to this would be to simply connect the dots in your graph, yielding the following regression:\\
+
+{
+\centering
+
+\includegraphics[scale=0.2]{img/connect.png}
+
+}
+
+\hfill \break We can also, however, apply K-NN methodology to this problem. For example, we can fit a line using linear regression (when $k$ is some number, or we could predict the average target value of the $k$ points.\\
+
+Here is what those two graphs look like.\\
+
+{
+\centering
+
+\includegraphics[scale=0.3]{img/knnregression.png}
+
+}
 
 
 

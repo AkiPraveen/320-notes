@@ -148,7 +148,7 @@
 \contentsline {subsection}{Decision Trees in Scikit}{68}{section*.134}
 \contentsline {subsection}{Random Forests}{69}{section*.135}
 \contentsline {subsubsection}{Bagging}{69}{section*.136}
-\contentsline {section}{\numberline {15}K-Nearest Neighbors (L21)}{70}{section.15}
+\contentsline {section}{\numberline {15}K-Nearest Neighbors \& Support Vector Machines (L21)}{70}{section.15}
 \contentsline {subsection}{Overview}{70}{section*.137}
 \contentsline {subsection}{Using Nearest Neighbors}{72}{section*.138}
 \contentsline {subsection}{Choosing a Value for $k$}{72}{section*.139}
@@ -159,4 +159,7 @@
 \contentsline {subsubsection}{Exact Methods}{75}{section*.144}
 \contentsline {subsubsection}{Approximation Methods}{78}{section*.145}
 \contentsline {subsection}{Advantages of K-NN}{79}{section*.146}
-\contentsline {section}{\numberline {16}Footnotes}{79}{section.16}
+\contentsline {subsection}{Disadvantages of K-NN}{79}{section*.147}
+\contentsline {subsection}{K-NN Classification in Scikit-Learn}{79}{section*.148}
+\contentsline {subsection}{K-NN Regression}{79}{section*.149}
+\contentsline {section}{\numberline {16}Footnotes}{80}{section.16}
