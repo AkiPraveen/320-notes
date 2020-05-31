@@ -4195,9 +4195,329 @@ Random forest classification is available in \texttt{sklearn}, simply import \te
 
 \section{K-Nearest Neighbors (L21)}
 
-\textbf{Basic idea:} If it walks like a duck, quacks like a duck, then it's probably a duck.
+\subsection{Overview}
+
+\textbf{Basic idea:} If it walks like a duck, quacks like a duck, then it's probably a duck.\\
+
+It's a classifier that decides the value of a data point by analyzing that data point's $k$ nearest neighbors.\\
+
+The \textbf{K-NN Classifier} requires three things:
+\begin{itemize}
+	\item The set of stored records
+	\item A distance metric, to compute distance between records
+	\item The value of $k$, the number of nearest neighbors to retrieve
+\end{itemize}
+
+In order to classify an unknown record given the above three things:
+
+\begin{itemize}
+	\item You compute the distance from your unknown record to other training records
+	\item You identify the list of $k$ nearest neighbors
+	\item Use the class labels of those $k$ nearest neighbors to determine the class label of this record (e.g. by taking a majority vote)
+\end{itemize}
+
+{
+\centering
 
 
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp728048521664103] 
+\draw   (38.67,21.33) -- (350.33,21.33) -- (350.33,256.67) -- (38.67,256.67) -- cycle ;
+%Shape: Circle [id:dp4770571693065703] 
+\draw  [color={rgb, 255:red, 80; green, 227; blue, 194 }  ,draw opacity=1 ][dash pattern={on 0.84pt off 2.51pt}] (219.33,65.5) .. controls (219.33,47.18) and (234.18,32.33) .. (252.5,32.33) .. controls (270.82,32.33) and (285.67,47.18) .. (285.67,65.5) .. controls (285.67,83.82) and (270.82,98.67) .. (252.5,98.67) .. controls (234.18,98.67) and (219.33,83.82) .. (219.33,65.5) -- cycle ;
+%Straight Lines [id:da28623831301148495] 
+\draw    (509.33,91.67) -- (267.66,66.21) ;
+\draw [shift={(265.67,66)}, rotate = 366.01] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (87.33,89) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (107.33,109) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (156.67,113) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (209.33,121) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (136,97) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (203.33,44.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (285.33,79.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (279.33,104.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (216,148.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (112,197.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (154.67,218.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (216.67,219) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (115.33,42.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (136.67,62.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (170,41) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (176,83.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (56,228.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (291.33,166.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (68.67,145.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (293.33,210.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (329.33,86.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (320,35) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (40,17) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (60,37) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{-}};
+% Text Node
+\draw (124.67,128) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{+}};
+% Text Node
+\draw (182.67,187.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{+}};
+% Text Node
+\draw (123.33,159.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{+}};
+% Text Node
+\draw (168,134.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{+}};
+% Text Node
+\draw (158,171.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{+}};
+% Text Node
+\draw (226,71.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{+}};
+% Text Node
+\draw (236.67,37.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{+}};
+% Text Node
+\draw (269.33,42.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{+}};
+% Text Node
+\draw (248,56) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.31,0.89,0.76}{x}};
+% Text Node
+\draw (513.33,59.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {The K-NN classifier\\will mark this\\unknown point \textcolor[rgb]{0.31,0.89,0.76}{x}\\as a \textcolor[rgb]{0.29,0.56,0.89}{+}, due to its\\neighbors};
+
+
+\end{tikzpicture}
+
+
+}
+
+
+\hfill \break You can have 1-nearest neighbor, 2-nearest neighbors, 3-nearest neighbor, etc. The bottom line is that K-nearest neighbors of a record $x$ are data points that have the $k$ smallest distances to $x$.\\
+
+\begin{tcolorbox}[title=Aside: Voronoi Diagram,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+
+In mathematics, a Voronoi diagram is a partition of a plane into regions close to each of a given set of objects. In the simplest case, these objects are just finitely many points in the plane. For each seed there is a corresponding region consisting of all points of the plane closer to that seed than to any other.\\
+
+This type of diagram helps us visualize the 1-nearest neighbor algorithm, like below:\\
+
+\includegraphics[scale=0.375]{img/voronoi.png} 
+
+\end{tcolorbox}
+
+\subsection{Using Nearest Neighbors}
+
+We can compute the distance between our unknown point $x$ and all the other points to develop a nearest neighbor list. We can then take the majority vote of class labels among the k-nearest neighbors. We can also weight the vote according to distance.
+
+\subsection{Choosing a Value for $k$}
+\begin{itemize}
+	\item If $k$ is too small, it's sensitive to noise points (i.e. one or two 'mistake' points may throw it off)
+	\item If $k$ is too large, the neighborhood may include points from other classes; it may end up being useless.
+\end{itemize}
+
+\subsection{Scaling}
+
+Additionally, attributes have to scaled to prevent distance measured from being dominated by one of the attributes. For example. if we are comparing people:\\
+
+\begin{myproof}
+\begin{itemize}
+	\item height of a person may vary from 1.5m to 1.8m
+	\item weight of a person may vary from 90lb to 300lb
+	\item income of a person may vary from \$10k to \$1M
+\end{itemize}
+\end{myproof}
+
+\hfill \break We can see that some of these variables vary greatly, while others vary minimally. As such, we have to \textbf{standardize} the variables in order to prevent this problem.
+
+\subsection{Curse of Dimensionality}
+
+There is another problem with using a euclidean measure, if we have data of a high dimension, we know from the \textit{Curse of Dimensionality} that data becomes sparse relative to the total volume of the space, so the distance metrics that we're using effectively lose meaning. This can produce counter-intuitive results- for example:\\
+
+{
+\centering
+\includegraphics[scale=0.55]{img/cursedim.png} 
+}
+
+These two data points have the same \textit{distance}, which is the only measure that the K-NN classifier uses, but we can see with the human eye that they are extremely different comparisons.\\
+
+Think of each 1 or 0 as a value for a variable, these are just multivariable vectors.\\
+
+We can combat this by \textbf{normalizing vectors to unit length}.
+
+\subsubsection{K-NN is Lazy}
+
+K-NN classifiers are known as lazy learners. It doesn't build a model explicitly, such as eager learners like the decision-tree algorithm.
+
+\begin{tcolorbox}[title=Aside: Lazy vs. Eager Learners,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+
+Learning algorithms can either be called lazy or eager learners. Here are the differences.\\
+
+\textbf{Lazy Learners:}
+\begin{itemize}
+	\item Store the dataset without initially \textbf{learning} from it.
+	\item Start classifying data when it receives test/validation data.
+	\item Takes less time to 'learn' and more time to 'classify'.
+\end{itemize}
+
+\hfill \break \textbf{Eager Learners:}
+\begin{itemize}
+	\item When it receives data, it immediately starts classifying them.
+	\item Does not wait for test data to proceed with learning.
+	\item Takes a long time to learn, but less time to classify data.
+\end{itemize}
+
+\hfill \break Examples of both in supervised learning:
+\begin{itemize}
+	\item \textbf{Lazy:}
+	\begin{itemize}
+		\item K-NN
+		\item Case-based reasoning
+	\end{itemize}
+	\item \textbf{Eager:}
+	\begin{itemize}
+		\item Decision Tree
+		\item Naive Bayes
+		\item Artifical Neural Networks
+	\end{itemize}
+\end{itemize}
+
+\end{tcolorbox}
+
+As such, \textbf{classifying unknown records is relatively expensive}.\\
+
+The Naive algorithm is done in linear time, \texttt{O(n)}. We are in need of data structure that help us retrieve nearest neighbors quickly. Spatial data structures that can help us with this will be covered more in CMSC420.
+
+\subsection{Nearest Neighbor Search}
+
+The nearest neighbor search problem is an \textbf{optimization problem} of finding the point in a given set that is closest or most similar to a given point.\\
+
+Formally, the problem is defined as follows:\\
+
+\begin{myproof}
+Given a set $S$ of points in a space $M$ and a query point $q \in M$, find the closest point in $S$ to $q$.
+\end{myproof}
+
+\textbf{Knuth} called it the 'post-office' problem, referring to an application of assigning to a residence the nearest post-office.\\
+
+Most commonly, $M$ is a metric space, and dissimilarity is expressed as a distance metric (e.g. Euclidean Distance or Manhattan Distance).
+
+\subsubsection{Exact Methods}
+
+\hfill
+
+\begin{tcolorbox}[title=Aside: Branch and Bound Paradigm,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+
+Branch and bound is an algorithm design paradigm which is generally used for solving combinatorial \textbf{optimization problems}. These problems are typically exponential in terms of time complexity and may require exploring all possible permutations in worst case. The Branch and Bound Algorithm technique solves these problems relatively quickly.\\
+
+More is covered in Algorithms.
+
+\end{tcolorbox}
+
+\hfill
+
+\begin{tcolorbox}[title=Aside: R-tree,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries,breakable]
+
+R-trees are tree data structures used for spatial access methods, i.e., for indexing multi-dimensional information such as geographical coordinates, rectangles or polygons. In other words, the best way to think about an R-tree is like for a \textbf{2-d map space}.\\
+
+A common real-world usage for an R-tree might be to store spatial objects such as restaurant locations or the polygons that typical maps are made of: streets, buildings, outlines of lakes, coastlines, etc. and then find answers quickly to queries such as "Find all museums within 2 km of my current location", "retrieve all road segments within 2 km of my location" (to display them in a navigation system) or "find the nearest gas station" (although not taking roads into account).\\
+ 
+R-trees are similar to B+ Trees in that {\textbf{no data is actually stored in the internal nodes, only in the leaf nodes}}.\\
+
+\includegraphics[scale=0.4]{img/rtree.png} 
+
+\hfill \break An R-tree consists of:
+\begin{itemize}
+	\item Root node - holds a pointer reference to largest region - \textbf{(grey  wide dashed line)}
+	\item Internal nodes - hierarchically store pointers to child nodes, which either store more internal nodes, or leaf nodes. In any case, this will be \textbf{data bounded by this internal node} - \textbf{(smaller dashed lines)}
+	\item Leaf nodes - store actual data within respective Minimum Bounding Regions (sub-regions within the entire space that group data in as few regions as possible) - \textbf{(solid lines)}
+\end{itemize}
+
+The R-tree can also be generalized to higher dimensions than just the two we see here, (which is where we can make use for it with k-NN classifiers).\\
+
+\includegraphics[scale=0.4]{img/rstartree.png}
+
+\hfill \break Above is a 3 dimensional generalization of the an R-tree. 
+
+\end{tcolorbox}
+
+
+
+\begin{itemize}
+	\item \textbf{Linear Search}
+	\begin{itemize}
+		\item The simplest solution to NNS is to compute the distance from the query point to every other point in the database, while keeping track of the current minimum. (Naive approach)
+	\end{itemize}
+	\item \textbf{Space Partitioning}
+	\begin{itemize}
+		\item The 'branch and bound' methodology has been applied to this problem since the 1970s. The simplest of these approaches is the \textbf{kd-tree}, which bisects the search spaces into two regions containing half the points of the parent region, over and over again.
+		\begin{itemize}
+			\item E.g. a \textbf{2d kd-tree} is a data structure for answering nearest neighbor queries in $R^2$.
+			\begin{myproof}
+				\begin{itemize}
+					\item Select the $x$ or $y$ dimension (alternating between the two
+					\item Partition the space into two with a line passing from the median point
+					\item Repeat recursively in the two partitions as long as there are enough points to do so
+					\item Now that you've built the tree, you can \textbf{quickly query it} for nearest neighbors by finding an incumbent best, and pruning large chunks of the tree away as you go
+				\end{itemize}
+				
+				\hfill \break It's worth nothing that this algorithm can be generalized to higher dimensions, for the sake of our advanced problems.
+			\end{myproof} 
+		\end{itemize}
+		\item The \textbf{r-tree} was also developed to support nearest neighbor search in a dynamic context.
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Approximation Methods}
+
+An approximate nearest neighbor search algorithm is allowed to return points, whose distance from the query is at most $c$ times the distance from the query to its nearest points. The appeal of this approach is that, in many cases, an approximate nearest neighbor is almost as good as the exact one.\\
+
+\textbf{Proximity Graph Methods, such as HNSW, are considered the current state-of-the-art for the approximate nearest neighbors search}.\\
+
+\begin{tcolorbox}[title=Aside: HNSW,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries,breakable]
+
+The industry standard for the approximate K-nearest neighbor search is known as the method leveraging \textbf{Hierarchical Navigable Small World} graphs.\\
+
+The solution is graph-based, and doesn't depend on any other additional search structures.\\
+
+Hierarchical NSW incrementally builds a multi-layer structure consisting from hierarchical set of proximity graphs (layers) for nested subsets of the stored elements. The maximum layer in which an element is present is selected randomly with an exponentially decaying probability distribution. This allows producing graphs similar to the previously studied Navigable Small World (NSW) structures while additionally having the links separated by their characteristic distance scales.\\
+
+Starting search from the upper layer together with utilizing the scale separation boosts the performance compared to NSW and allows a logarithmic complexity scaling. Additional employment of a heuristic for selecting proximity graph neighbors significantly increases performance at high recall and in case of highly clustered data.\\
+\end{tcolorbox}
+
+Other methods include:
+
+\begin{itemize}
+	\item Locality sensitive hashing
+	\item NNS in spaces with small intrinsic dimension using cover trees
+	\item Projected radial search
+	\item Vector approximation files
+	\item Compression/clustering based search
+\end{itemize}
+
+\subsection{Advantages of K-NN}
+
+\begin{itemize}
+	\item \textbf{Simple} technique that is easily implemented
+	\item Building a model is \textbf{cheap}
+	\item Extremely \textbf{flexible} classification scheme
+\end{itemize}
 
 
 
@@ -4214,12 +4534,16 @@ Random forest classification is available in \texttt{sklearn}, simply import \te
 
 Taken and compiled by Akilesh Praveen.\\
 
+I don't claim ownership to any of the material in this notesheet. It is merely a compilation of resources I used to understand materials presented in this course. If a resource needed simplifying in my mind, I tried to do so to the best of my abilities. If not, I left it as it was.\\
+
 References:
 \begin{itemize}
 	\item CMSC320 - John Dickerson, UMD
 	\item Geeksforgeeks.com
 	\item Wikipedia.org
 	\item Hackerearth.com
+	\item Softwaretestinghelp.com
+	\item CSE 591 - Stonybrook University
 \end{itemize}
 
 \end{document}

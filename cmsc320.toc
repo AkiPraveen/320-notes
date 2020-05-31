@@ -149,4 +149,14 @@
 \contentsline {subsection}{Random Forests}{69}{section*.135}
 \contentsline {subsubsection}{Bagging}{69}{section*.136}
 \contentsline {section}{\numberline {15}K-Nearest Neighbors (L21)}{70}{section.15}
-\contentsline {section}{\numberline {16}Footnotes}{70}{section.16}
+\contentsline {subsection}{Overview}{70}{section*.137}
+\contentsline {subsection}{Using Nearest Neighbors}{72}{section*.138}
+\contentsline {subsection}{Choosing a Value for $k$}{72}{section*.139}
+\contentsline {subsection}{Scaling}{72}{section*.140}
+\contentsline {subsection}{Curse of Dimensionality}{73}{section*.141}
+\contentsline {subsubsection}{K-NN is Lazy}{73}{section*.142}
+\contentsline {subsection}{Nearest Neighbor Search}{74}{section*.143}
+\contentsline {subsubsection}{Exact Methods}{75}{section*.144}
+\contentsline {subsubsection}{Approximation Methods}{78}{section*.145}
+\contentsline {subsection}{Advantages of K-NN}{79}{section*.146}
+\contentsline {section}{\numberline {16}Footnotes}{79}{section.16}
