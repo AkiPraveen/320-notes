@@ -174,4 +174,7 @@
 \contentsline {subsection}{K-Means Clustering}{87}{section.16}
 \contentsline {subsubsection}{How K-Means fits Into the Unsupervised Framework Paradigm}{87}{section.16}
 \contentsline {subsubsection}{K-Means Clustering Algorithm}{88}{section.16}
-\contentsline {section}{\numberline {17}Footnotes}{88}{section.17}
+\contentsline {subsubsection}{How Do We Select $k$?}{88}{section.16}
+\contentsline {subsubsection}{Example of K-Means Clustering}{88}{section.16}
+\contentsline {subsection}{Principal Component Analysis}{89}{section.16}
+\contentsline {section}{\numberline {17}Footnotes}{89}{section.17}

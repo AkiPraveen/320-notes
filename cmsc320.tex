@@ -5200,7 +5200,7 @@ $$
 
 Define a hypothesis function, define a loss function, and define how to optimize the loss function. The question is: \textbf{What do the hypothesis function and loss function signify in unsupervised learning?}\\
 
-The goal of unsupervised learning is to pick some restricted class of hypothesis functions that extract soe kind of \textbf{structure} from the data that isn't explicitly given to us. Examples of this type of algorithm are K-means and Principal Component Analysis.\\
+The goal of unsupervised learning is to pick some restricted class of hypothesis functions that extract some kind of \textbf{structure} from the data that isn't explicitly given to us. Examples of this type of algorithm are K-means and Principal Component Analysis.\\
 
 \subsection{K-Means Clustering}
 
@@ -5296,6 +5296,40 @@ The K-Means Algorithm is easy to visualize. If we are given some collection of d
 To process learning data, the K-Means algorithm starts with a group of randomly selected centroids, which are used as the beginning points for every cluster, then performs iterative, repetetive calculations to optimize the positions of the centroids.\\
 
 It \textbf{halts} when either the \textbf{centroids have 'stabilized'}, meaning that there is (basically) no change in their values because the clustering has been successful, or \textbf{when the defined number of iterations has been completed}.
+
+\subsubsection{How Do We Select $k$?}
+
+There is no \textit{right} way to select $k$. Note that \textbf{a larger $k$ virtually always will have lower loss than smaller $k$}, even on a hold out/validation set.\\
+
+Insetad, it's common to look at the loss function as a function of increasing $k$, and then you just stop when things look "good".\\
+
+There are other heuristic ways to do this, but they actually don't convincingly outperform this simple method.
+
+\subsubsection{Example of K-Means Clustering}
+
+K-Means Clustering is just an example of Unsupervised learning at the end of the day, so this is also a great example for unsupervised learning as well.\\
+
+The following example is K-Means Clustering performed on the MNIST digit classification dataset. Here are some examples from the actual dataset:\\
+
+{
+\centering
+
+\includegraphics[scale=0.35]{img/mnistdata.png}
+
+}
+
+\hfill \break K-Means can be run with $k=50$ on this given dataset, and here's the results it produces.\\
+
+{
+\centering
+
+\includegraphics[scale=0.25]{img/mnistk50.png}
+
+}
+
+\hfill \break It is evident that this data was just categorized, and not 'classified' under any label. Such is the nuance of unsupervised learning.\\
+
+\subsection{Principal Component Analysis}
 
 \section{Footnotes}
 
