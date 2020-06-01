@@ -34,6 +34,8 @@
 \usepackage[utf8]{inputenc}
 
 \usepackage{amsmath}
+\usepackage{titlesec}% http://ctan.org/pkg/titlesec
+
  
 \usepackage{listings}
 \lstloadlanguages{Python}
@@ -4578,13 +4580,722 @@ Here is what those two graphs look like.\\
 
 }
 
+\subsection{Support Vector Machines}
+
+The objective of a Support Vector Machine algorithm is to find a hyperplane in an $n$-dimensional space (where $n$ is the number of features) that directly classifies the data points.\\
+
+Below are examples of such planes in a simple 2D space.\\
+
+{
+\centering
 
 
 
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Straight Lines [id:da18386530311215066] 
+\draw    (171,217.33) -- (171,3.75) ;
+\draw [shift={(171,1.75)}, rotate = 450] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da8609346891296188] 
+\draw    (171,217.33) -- (430,217.33) ;
+\draw [shift={(432,217.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Square [id:dp6848519964006714] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (187,179.5) -- (197,179.5) -- (197,189.5) -- (187,189.5) -- cycle ;
+%Shape: Square [id:dp3340403515381454] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (207,199.5) -- (217,199.5) -- (217,209.5) -- (207,209.5) -- cycle ;
+%Shape: Square [id:dp41498390501770255] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (207.5,184) -- (217.5,184) -- (217.5,194) -- (207.5,194) -- cycle ;
+%Shape: Square [id:dp44403283392803305] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (205,137) -- (215,137) -- (215,147) -- (205,147) -- cycle ;
+%Shape: Square [id:dp9556758602028731] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (271,171.5) -- (281,171.5) -- (281,181.5) -- (271,181.5) -- cycle ;
+%Shape: Square [id:dp7219029696699881] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (236.5,202) -- (246.5,202) -- (246.5,212) -- (236.5,212) -- cycle ;
+%Shape: Circle [id:dp6949900053679295] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (282,56.38) .. controls (282,52.72) and (284.97,49.75) .. (288.63,49.75) .. controls (292.28,49.75) and (295.25,52.72) .. (295.25,56.38) .. controls (295.25,60.03) and (292.28,63) .. (288.63,63) .. controls (284.97,63) and (282,60.03) .. (282,56.38) -- cycle ;
+%Shape: Circle [id:dp28759288083550705] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (333.5,81.38) .. controls (333.5,77.72) and (336.47,74.75) .. (340.13,74.75) .. controls (343.78,74.75) and (346.75,77.72) .. (346.75,81.38) .. controls (346.75,85.03) and (343.78,88) .. (340.13,88) .. controls (336.47,88) and (333.5,85.03) .. (333.5,81.38) -- cycle ;
+%Shape: Circle [id:dp41281492253679297] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (310,41.38) .. controls (310,37.72) and (312.97,34.75) .. (316.63,34.75) .. controls (320.28,34.75) and (323.25,37.72) .. (323.25,41.38) .. controls (323.25,45.03) and (320.28,48) .. (316.63,48) .. controls (312.97,48) and (310,45.03) .. (310,41.38) -- cycle ;
+%Shape: Circle [id:dp43905037715166473] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (338.5,42.38) .. controls (338.5,38.72) and (341.47,35.75) .. (345.13,35.75) .. controls (348.78,35.75) and (351.75,38.72) .. (351.75,42.38) .. controls (351.75,46.03) and (348.78,49) .. (345.13,49) .. controls (341.47,49) and (338.5,46.03) .. (338.5,42.38) -- cycle ;
+%Shape: Circle [id:dp7915990666164764] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (366,96.88) .. controls (366,93.22) and (368.97,90.25) .. (372.63,90.25) .. controls (376.28,90.25) and (379.25,93.22) .. (379.25,96.88) .. controls (379.25,100.53) and (376.28,103.5) .. (372.63,103.5) .. controls (368.97,103.5) and (366,100.53) .. (366,96.88) -- cycle ;
+%Straight Lines [id:da24793340972831157] 
+\draw [color={rgb, 255:red, 65; green, 117; blue, 5 }  ,draw opacity=1 ]   (156.5,73.75) -- (357.5,229.25) ;
+%Straight Lines [id:da0504208940868186] 
+\draw [color={rgb, 255:red, 65; green, 117; blue, 5 }  ,draw opacity=1 ]   (191.5,18.25) -- (427.5,132.75) ;
+%Straight Lines [id:da7528490058779704] 
+\draw [color={rgb, 255:red, 65; green, 117; blue, 5 }  ,draw opacity=1 ]   (250.5,15.75) -- (324.5,235.75) ;
+%Straight Lines [id:da9573027238278069] 
+\draw [color={rgb, 255:red, 65; green, 117; blue, 5 }  ,draw opacity=1 ]   (158,102.75) -- (424.5,124.75) ;
+
+% Text Node
+\draw (183,249.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.25,0.46,0.02}{These are all valid 'hyperplanes' that}\\\textcolor[rgb]{0.25,0.46,0.02}{appropriately separate the data}};
+
+
+\end{tikzpicture}
+
+
+}
+
+\hfill \break Not only this, but the hyperplane is supposed to be \textbf{optimal}. This means that we maximize the margin between the hyperplane and the given data.\\
+
+{
+\centering
 
 
 
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
 
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Straight Lines [id:da8848515352287722] 
+\draw    (191,220.83) -- (191,7.25) ;
+\draw [shift={(191,5.25)}, rotate = 450] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da9427799777360648] 
+\draw    (191,220.83) -- (450,220.83) ;
+\draw [shift={(452,220.83)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Square [id:dp7738712618449884] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (207,183) -- (217,183) -- (217,193) -- (207,193) -- cycle ;
+%Shape: Square [id:dp6367968791355435] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (227,203) -- (237,203) -- (237,213) -- (227,213) -- cycle ;
+%Shape: Square [id:dp7049923323858955] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (227.5,187.5) -- (237.5,187.5) -- (237.5,197.5) -- (227.5,197.5) -- cycle ;
+%Shape: Square [id:dp525026405321415] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (225,140.5) -- (235,140.5) -- (235,150.5) -- (225,150.5) -- cycle ;
+%Shape: Square [id:dp5091410331124013] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (291,175) -- (301,175) -- (301,185) -- (291,185) -- cycle ;
+%Shape: Square [id:dp3104066682039195] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (256.5,205.5) -- (266.5,205.5) -- (266.5,215.5) -- (256.5,215.5) -- cycle ;
+%Shape: Circle [id:dp6193179365473596] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (302,59.88) .. controls (302,56.22) and (304.97,53.25) .. (308.63,53.25) .. controls (312.28,53.25) and (315.25,56.22) .. (315.25,59.88) .. controls (315.25,63.53) and (312.28,66.5) .. (308.63,66.5) .. controls (304.97,66.5) and (302,63.53) .. (302,59.88) -- cycle ;
+%Shape: Circle [id:dp19335520051482402] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (353.5,84.88) .. controls (353.5,81.22) and (356.47,78.25) .. (360.13,78.25) .. controls (363.78,78.25) and (366.75,81.22) .. (366.75,84.88) .. controls (366.75,88.53) and (363.78,91.5) .. (360.13,91.5) .. controls (356.47,91.5) and (353.5,88.53) .. (353.5,84.88) -- cycle ;
+%Shape: Circle [id:dp22051017880086232] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (330,44.88) .. controls (330,41.22) and (332.97,38.25) .. (336.63,38.25) .. controls (340.28,38.25) and (343.25,41.22) .. (343.25,44.88) .. controls (343.25,48.53) and (340.28,51.5) .. (336.63,51.5) .. controls (332.97,51.5) and (330,48.53) .. (330,44.88) -- cycle ;
+%Shape: Circle [id:dp9874335837449665] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (358.5,45.88) .. controls (358.5,42.22) and (361.47,39.25) .. (365.13,39.25) .. controls (368.78,39.25) and (371.75,42.22) .. (371.75,45.88) .. controls (371.75,49.53) and (368.78,52.5) .. (365.13,52.5) .. controls (361.47,52.5) and (358.5,49.53) .. (358.5,45.88) -- cycle ;
+%Shape: Circle [id:dp20116025262445836] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (386,100.38) .. controls (386,96.72) and (388.97,93.75) .. (392.63,93.75) .. controls (396.28,93.75) and (399.25,96.72) .. (399.25,100.38) .. controls (399.25,104.03) and (396.28,107) .. (392.63,107) .. controls (388.97,107) and (386,104.03) .. (386,100.38) -- cycle ;
+%Straight Lines [id:da7695830217123698] 
+\draw [color={rgb, 255:red, 65; green, 117; blue, 5 }  ,draw opacity=1 ]   (175,33.75) -- (448.5,216.75) ;
+%Straight Lines [id:da09456630945912003] 
+\draw [color={rgb, 255:red, 65; green, 117; blue, 5 }  ,draw opacity=1 ] [dash pattern={on 0.84pt off 2.51pt}]  (143,67.25) -- (395,234.25) ;
+%Straight Lines [id:da5936354951846885] 
+\draw [color={rgb, 255:red, 65; green, 117; blue, 5 }  ,draw opacity=1 ] [dash pattern={on 0.84pt off 2.51pt}]  (207.5,2.75) -- (447.5,167.75) ;
+%Straight Lines [id:da6389711771295175] 
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (363,158.75) -- (338.21,191.16) ;
+\draw [shift={(337,192.75)}, rotate = 307.40999999999997] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da5763440187465451] 
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (363,158.75) -- (384.3,130.35) ;
+\draw [shift={(385.5,128.75)}, rotate = 486.87] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (213.5,249.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0,0,0}{The }\textcolor[rgb]{0.25,0.46,0.02}{optimal hyperplane }\textcolor[rgb]{0,0,0}{ maximizes }\\\textcolor[rgb]{0,0,0}{the }\textcolor[rgb]{0.56,0.07,1}{margin }\textcolor[rgb]{0,0,0}{        
+ from the hyperplane.}};
+
+
+\end{tikzpicture}
+
+
+}
+
+
+\hfill \begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Hyperplane} $\rightarrow$ Decision boundaries that exist in $n$-dimensional space which help us classify data points. Data points falling on either side of a hyperplane can be attributed to different classes.
+\end{tcolorbox}
+
+\hfill \break It's important to note that although the given examples lie in $\mathbb{R}^2$, this learning method generalizes hyperplanes to $\mathbb{R}^N$.\\
+
+\textbf{If the problem is not linearly separable} but should still be described by a linear hyperplane, we introduce \textbf{slack variables}.\\
+
+We can introduce some sort of penalty for hyperplanes that deduct accuracy points for how far wrongly classified points lie from the hyperplane. Example:\\\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Straight Lines [id:da01796656186721346] 
+\draw    (211,240.83) -- (211,27.25) ;
+\draw [shift={(211,25.25)}, rotate = 450] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da2782396605078653] 
+\draw    (211,240.83) -- (470,240.83) ;
+\draw [shift={(472,240.83)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Square [id:dp3315314160826902] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (227,203) -- (237,203) -- (237,213) -- (227,213) -- cycle ;
+%Shape: Square [id:dp0016860256588290268] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (247,223) -- (257,223) -- (257,233) -- (247,233) -- cycle ;
+%Shape: Square [id:dp5936173874020919] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (247.5,207.5) -- (257.5,207.5) -- (257.5,217.5) -- (247.5,217.5) -- cycle ;
+%Shape: Square [id:dp9948970524491898] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (245,160.5) -- (255,160.5) -- (255,170.5) -- (245,170.5) -- cycle ;
+%Shape: Square [id:dp22512005205837982] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (276.5,225.5) -- (286.5,225.5) -- (286.5,235.5) -- (276.5,235.5) -- cycle ;
+%Shape: Circle [id:dp1467636690035563] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (322,79.88) .. controls (322,76.22) and (324.97,73.25) .. (328.63,73.25) .. controls (332.28,73.25) and (335.25,76.22) .. (335.25,79.88) .. controls (335.25,83.53) and (332.28,86.5) .. (328.63,86.5) .. controls (324.97,86.5) and (322,83.53) .. (322,79.88) -- cycle ;
+%Shape: Circle [id:dp042043022281902376] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (373.5,104.88) .. controls (373.5,101.22) and (376.47,98.25) .. (380.13,98.25) .. controls (383.78,98.25) and (386.75,101.22) .. (386.75,104.88) .. controls (386.75,108.53) and (383.78,111.5) .. (380.13,111.5) .. controls (376.47,111.5) and (373.5,108.53) .. (373.5,104.88) -- cycle ;
+%Shape: Circle [id:dp7213397614579665] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (406,120.38) .. controls (406,116.72) and (408.97,113.75) .. (412.63,113.75) .. controls (416.28,113.75) and (419.25,116.72) .. (419.25,120.38) .. controls (419.25,124.03) and (416.28,127) .. (412.63,127) .. controls (408.97,127) and (406,124.03) .. (406,120.38) -- cycle ;
+%Straight Lines [id:da24130497928153327] 
+\draw [color={rgb, 255:red, 65; green, 117; blue, 5 }  ,draw opacity=1 ]   (195,53.75) -- (468.5,236.75) ;
+%Straight Lines [id:da018442435199803597] 
+\draw [color={rgb, 255:red, 65; green, 117; blue, 5 }  ,draw opacity=1 ] [dash pattern={on 0.84pt off 2.51pt}]  (163,87.25) -- (415,254.25) ;
+%Straight Lines [id:da8988625347181801] 
+\draw [color={rgb, 255:red, 65; green, 117; blue, 5 }  ,draw opacity=1 ] [dash pattern={on 0.84pt off 2.51pt}]  (227.5,22.75) -- (467.5,187.75) ;
+%Straight Lines [id:da7951430137319083] 
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (383,178.75) -- (358.21,211.16) ;
+\draw [shift={(357,212.75)}, rotate = 307.40999999999997] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da47541606275337067] 
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (383,178.75) -- (404.3,150.35) ;
+\draw [shift={(405.5,148.75)}, rotate = 486.87] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Square [id:dp582014665137361] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (331,215) -- (341,215) -- (341,225) -- (331,225) -- cycle ;
+%Shape: Square [id:dp7351590540629533] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (287.5,177) -- (297.5,177) -- (297.5,187) -- (287.5,187) -- cycle ;
+%Shape: Square [id:dp6363191214824445] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (346,108.5) -- (356,108.5) -- (356,118.5) -- (346,118.5) -- cycle ;
+%Shape: Circle [id:dp8084153525154247] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (259.5,70.38) .. controls (259.5,66.72) and (262.47,63.75) .. (266.13,63.75) .. controls (269.78,63.75) and (272.75,66.72) .. (272.75,70.38) .. controls (272.75,74.03) and (269.78,77) .. (266.13,77) .. controls (262.47,77) and (259.5,74.03) .. (259.5,70.38) -- cycle ;
+%Shape: Circle [id:dp016747517759887365] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (313,203.38) .. controls (313,199.72) and (315.97,196.75) .. (319.63,196.75) .. controls (323.28,196.75) and (326.25,199.72) .. (326.25,203.38) .. controls (326.25,207.03) and (323.28,210) .. (319.63,210) .. controls (315.97,210) and (313,207.03) .. (313,203.38) -- cycle ;
+%Shape: Square [id:dp6589351747801206] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (221.5,111) -- (231.5,111) -- (231.5,121) -- (221.5,121) -- cycle ;
+%Shape: Circle [id:dp9527276371732271] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (289,133.88) .. controls (289,130.22) and (291.97,127.25) .. (295.63,127.25) .. controls (299.28,127.25) and (302.25,130.22) .. (302.25,133.88) .. controls (302.25,137.53) and (299.28,140.5) .. (295.63,140.5) .. controls (291.97,140.5) and (289,137.53) .. (289,133.88) -- cycle ;
+%Shape: Circle [id:dp027146634060734698] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (361,74.38) .. controls (361,70.72) and (363.97,67.75) .. (367.63,67.75) .. controls (371.28,67.75) and (374.25,70.72) .. (374.25,74.38) .. controls (374.25,78.03) and (371.28,81) .. (367.63,81) .. controls (363.97,81) and (361,78.03) .. (361,74.38) -- cycle ;
+%Shape: Circle [id:dp0005858333226763657] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (396,80.88) .. controls (396,77.22) and (398.97,74.25) .. (402.63,74.25) .. controls (406.28,74.25) and (409.25,77.22) .. (409.25,80.88) .. controls (409.25,84.53) and (406.28,87.5) .. (402.63,87.5) .. controls (398.97,87.5) and (396,84.53) .. (396,80.88) -- cycle ;
+%Shape: Circle [id:dp875011269786432] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (320,42.88) .. controls (320,39.22) and (322.97,36.25) .. (326.63,36.25) .. controls (330.28,36.25) and (333.25,39.22) .. (333.25,42.88) .. controls (333.25,46.53) and (330.28,49.5) .. (326.63,49.5) .. controls (322.97,49.5) and (320,46.53) .. (320,42.88) -- cycle ;
+%Straight Lines [id:da6997040311272985] 
+\draw [color={rgb, 255:red, 245; green, 166; blue, 35 }  ,draw opacity=1 ]   (141,131) -- (287,133.84) ;
+\draw [shift={(289,133.88)}, rotate = 181.11] [color={rgb, 255:red, 245; green, 166; blue, 35 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da6947878114702344] 
+\draw [color={rgb, 255:red, 245; green, 166; blue, 35 }  ,draw opacity=1 ]   (141,131) -- (343.51,114.41) ;
+\draw [shift={(345.5,114.25)}, rotate = 535.3199999999999] [color={rgb, 255:red, 245; green, 166; blue, 35 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da9309440088182815] 
+\draw [color={rgb, 255:red, 245; green, 166; blue, 35 }  ,draw opacity=1 ]   (141,131) -- (310.14,198.01) ;
+\draw [shift={(312,198.75)}, rotate = 201.61] [color={rgb, 255:red, 245; green, 166; blue, 35 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (26.5,100.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.96,0.65,0.14}{Apply some sort}\\\textcolor[rgb]{0.96,0.65,0.14}{of penalty for all}\\\textcolor[rgb]{0.96,0.65,0.14}{cases over the line}};
+
+
+\end{tikzpicture}
+}
+
+\subsubsection{If the Decision Boundary Is Not Linear}
+
+If the decision boundary itself is not linear, e.g. if we have something like this, it's not conventional to then establish some sort of bendy-looking hyperplane, like below.\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Straight Lines [id:da7593240158764352] 
+\draw    (191,237.33) -- (191,23.75) ;
+\draw [shift={(191,21.75)}, rotate = 450] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da9314079217566626] 
+\draw    (191,237.33) -- (450,237.33) ;
+\draw [shift={(452,237.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Square [id:dp6569522950579582] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (207,199.5) -- (217,199.5) -- (217,209.5) -- (207,209.5) -- cycle ;
+%Shape: Square [id:dp6645625332270019] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (227,219.5) -- (237,219.5) -- (237,229.5) -- (227,229.5) -- cycle ;
+%Shape: Square [id:dp5344188467985732] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (227.5,204) -- (237.5,204) -- (237.5,214) -- (227.5,214) -- cycle ;
+%Shape: Square [id:dp9711908633057964] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (225,157) -- (235,157) -- (235,167) -- (225,167) -- cycle ;
+%Shape: Square [id:dp16440098376925016] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (291,191.5) -- (301,191.5) -- (301,201.5) -- (291,201.5) -- cycle ;
+%Shape: Square [id:dp6295522422798431] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (256.5,222) -- (266.5,222) -- (266.5,232) -- (256.5,232) -- cycle ;
+%Shape: Circle [id:dp8088147286543861] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (354,141.71) .. controls (354,138.05) and (356.97,135.08) .. (360.63,135.08) .. controls (364.28,135.08) and (367.25,138.05) .. (367.25,141.71) .. controls (367.25,145.37) and (364.28,148.33) .. (360.63,148.33) .. controls (356.97,148.33) and (354,145.37) .. (354,141.71) -- cycle ;
+%Shape: Circle [id:dp1992577358895542] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (328.83,178.71) .. controls (328.83,175.05) and (331.8,172.08) .. (335.46,172.08) .. controls (339.12,172.08) and (342.08,175.05) .. (342.08,178.71) .. controls (342.08,182.37) and (339.12,185.33) .. (335.46,185.33) .. controls (331.8,185.33) and (328.83,182.37) .. (328.83,178.71) -- cycle ;
+%Shape: Circle [id:dp16246109141935272] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (307.33,137.37) .. controls (307.33,133.72) and (310.3,130.75) .. (313.96,130.75) .. controls (317.62,130.75) and (320.58,133.72) .. (320.58,137.37) .. controls (320.58,141.03) and (317.62,144) .. (313.96,144) .. controls (310.3,144) and (307.33,141.03) .. (307.33,137.37) -- cycle ;
+%Shape: Circle [id:dp8662536973301378] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (326.5,108.38) .. controls (326.5,104.72) and (329.47,101.75) .. (333.13,101.75) .. controls (336.78,101.75) and (339.75,104.72) .. (339.75,108.38) .. controls (339.75,112.03) and (336.78,115) .. (333.13,115) .. controls (329.47,115) and (326.5,112.03) .. (326.5,108.38) -- cycle ;
+%Shape: Circle [id:dp05370372919991773] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (380.67,168.88) .. controls (380.67,165.22) and (383.63,162.25) .. (387.29,162.25) .. controls (390.95,162.25) and (393.92,165.22) .. (393.92,168.88) .. controls (393.92,172.53) and (390.95,175.5) .. (387.29,175.5) .. controls (383.63,175.5) and (380.67,172.53) .. (380.67,168.88) -- cycle ;
+%Shape: Square [id:dp00830661912116315] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (261.67,56.33) -- (271.67,56.33) -- (271.67,66.33) -- (261.67,66.33) -- cycle ;
+%Shape: Square [id:dp7723754051562635] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (370.33,55) -- (380.33,55) -- (380.33,65) -- (370.33,65) -- cycle ;
+%Shape: Square [id:dp520347148909745] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (436.33,117) -- (446.33,117) -- (446.33,127) -- (436.33,127) -- cycle ;
+%Shape: Square [id:dp08076004458411945] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (390.33,75) -- (400.33,75) -- (400.33,85) -- (390.33,85) -- cycle ;
+%Shape: Circle [id:dp8683207709929821] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (282.5,93.04) .. controls (282.5,89.38) and (285.47,86.42) .. (289.13,86.42) .. controls (292.78,86.42) and (295.75,89.38) .. (295.75,93.04) .. controls (295.75,96.7) and (292.78,99.67) .. (289.13,99.67) .. controls (285.47,99.67) and (282.5,96.7) .. (282.5,93.04) -- cycle ;
+%Shape: Square [id:dp34029863343790434] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (245,177) -- (255,177) -- (255,187) -- (245,187) -- cycle ;
+%Shape: Square [id:dp8863610232387268] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (221.67,107.67) -- (231.67,107.67) -- (231.67,117.67) -- (221.67,117.67) -- cycle ;
+%Shape: Square [id:dp1334661665603727] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (241.67,127.67) -- (251.67,127.67) -- (251.67,137.67) -- (241.67,137.67) -- cycle ;
+%Shape: Circle [id:dp33186013093871825] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (302.5,113.04) .. controls (302.5,109.38) and (305.47,106.42) .. (309.13,106.42) .. controls (312.78,106.42) and (315.75,109.38) .. (315.75,113.04) .. controls (315.75,116.7) and (312.78,119.67) .. (309.13,119.67) .. controls (305.47,119.67) and (302.5,116.7) .. (302.5,113.04) -- cycle ;
+%Shape: Circle [id:dp5459936486339871] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (327.33,157.37) .. controls (327.33,153.72) and (330.3,150.75) .. (333.96,150.75) .. controls (337.62,150.75) and (340.58,153.72) .. (340.58,157.37) .. controls (340.58,161.03) and (337.62,164) .. (333.96,164) .. controls (330.3,164) and (327.33,161.03) .. (327.33,157.37) -- cycle ;
+%Shape: Circle [id:dp19118451063184194] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (348.83,198.71) .. controls (348.83,195.05) and (351.8,192.08) .. (355.46,192.08) .. controls (359.12,192.08) and (362.08,195.05) .. (362.08,198.71) .. controls (362.08,202.37) and (359.12,205.33) .. (355.46,205.33) .. controls (351.8,205.33) and (348.83,202.37) .. (348.83,198.71) -- cycle ;
+%Curve Lines [id:da7185389460482552] 
+\draw [color={rgb, 255:red, 65; green, 117; blue, 5 }  ,draw opacity=1 ]   (353,238.67) .. controls (156.33,18) and (328,22.67) .. (471.67,220.67) ;
+
+% Text Node
+\draw (334,253) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle x_{1}$};
+% Text Node
+\draw (154.67,130.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle x_{2}$};
+
+
+\end{tikzpicture}
+
+}
+
+\hfill \break Instead, we can simply transform the data into higher dimensional space, and attempt to establish a hyperplane there.\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Straight Lines [id:da4976815129846708] 
+\draw    (211,237.33) -- (211,23.75) ;
+\draw [shift={(211,21.75)}, rotate = 450] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da6215468482044874] 
+\draw    (211,237.33) -- (470,237.33) ;
+\draw [shift={(472,237.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Square [id:dp7650732726962683] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (227,199.5) -- (237,199.5) -- (237,209.5) -- (227,209.5) -- cycle ;
+%Shape: Square [id:dp2542887845385543] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (274.33,192.83) -- (284.33,192.83) -- (284.33,202.83) -- (274.33,202.83) -- cycle ;
+%Shape: Square [id:dp002216367259890495] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (252.33,184.17) -- (262.33,184.17) -- (262.33,194.17) -- (252.33,194.17) -- cycle ;
+%Shape: Square [id:dp4889930310875269] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (366.5,72.67) -- (376.5,72.67) -- (376.5,82.67) -- (366.5,82.67) -- cycle ;
+%Shape: Circle [id:dp5040609804719949] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (368.67,213.38) .. controls (368.67,209.72) and (371.63,206.75) .. (375.29,206.75) .. controls (378.95,206.75) and (381.92,209.72) .. (381.92,213.38) .. controls (381.92,217.03) and (378.95,220) .. (375.29,220) .. controls (371.63,220) and (368.67,217.03) .. (368.67,213.38) -- cycle ;
+%Shape: Circle [id:dp21530560373765883] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (437.17,195.71) .. controls (437.17,192.05) and (440.13,189.08) .. (443.79,189.08) .. controls (447.45,189.08) and (450.42,192.05) .. (450.42,195.71) .. controls (450.42,199.37) and (447.45,202.33) .. (443.79,202.33) .. controls (440.13,202.33) and (437.17,199.37) .. (437.17,195.71) -- cycle ;
+%Shape: Square [id:dp5926863681290168] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (339,100.33) -- (349,100.33) -- (349,110.33) -- (339,110.33) -- cycle ;
+%Shape: Square [id:dp4836124599093601] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (390.33,55) -- (400.33,55) -- (400.33,65) -- (390.33,65) -- cycle ;
+%Shape: Square [id:dp38407194535659794] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (431,35.67) -- (441,35.67) -- (441,45.67) -- (431,45.67) -- cycle ;
+%Shape: Square [id:dp057368776129545385] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ] (410.33,75) -- (420.33,75) -- (420.33,85) -- (410.33,85) -- cycle ;
+%Shape: Circle [id:dp686335363647088] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (379.83,183.04) .. controls (379.83,179.38) and (382.8,176.42) .. (386.46,176.42) .. controls (390.12,176.42) and (393.08,179.38) .. (393.08,183.04) .. controls (393.08,186.7) and (390.12,189.67) .. (386.46,189.67) .. controls (382.8,189.67) and (379.83,186.7) .. (379.83,183.04) -- cycle ;
+%Shape: Circle [id:dp9338176478167173] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (413.17,200.38) .. controls (413.17,196.72) and (416.13,193.75) .. (419.79,193.75) .. controls (423.45,193.75) and (426.42,196.72) .. (426.42,200.38) .. controls (426.42,204.03) and (423.45,207) .. (419.79,207) .. controls (416.13,207) and (413.17,204.03) .. (413.17,200.38) -- cycle ;
+%Shape: Circle [id:dp7380340003829592] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (350.17,196.71) .. controls (350.17,193.05) and (353.13,190.08) .. (356.79,190.08) .. controls (360.45,190.08) and (363.42,193.05) .. (363.42,196.71) .. controls (363.42,200.37) and (360.45,203.33) .. (356.79,203.33) .. controls (353.13,203.33) and (350.17,200.37) .. (350.17,196.71) -- cycle ;
+%Straight Lines [id:da4236226895450327] 
+\draw [color={rgb, 255:red, 65; green, 117; blue, 5 }  ,draw opacity=1 ]   (259.33,247.67) -- (483.67,48.67) ;
+
+% Text Node
+\draw (354,253) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle x_{1}$};
+% Text Node
+\draw (130.67,126.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle ( x_{1} +x_{2})^{4}$};
+
+
+\end{tikzpicture}
+
+}
+
+\subsubsection{SVMs in Scikit-Learn}
+
+\texttt{sklearn} also has the ability to produce SVM classifiers.\\
+
+
+{\centering
+\begin{lstlisting}[language=python]
+from sklearn import svm
+
+# Fit a default SVM classifier to fake data
+X = [[0, 0], [1, 1]]
+y = [0, 1]
+
+clf = svm.SVC()
+clf.fit(X, y)
+\end{lstlisting}
+}
+
+\section{Nonlinear Regression \& Regularization}
+
+So far, we have known linear regression as just 'drawing a line through our data', but it was in actuality a function of our input features.\\
+
+It may seem limited, but when you apply linear regression algorithms to non-linear features of input data, you can essentially create a non-linear prediction.\\
+
+Our \textbf{linear regression algorithm can be generalized to higher degree, non-linear functions as well}.
+
+\subsection{Generalization Error}
+
+The problem with the canonical machine learning problem (discussed earlier, is the following:
+
+$$ \underbrace{\sum_{i=1}^{m}{l((h_{\theta}(x^i)), y^i)}}_{\mathrm{minimize}}$$
+
+The whole point is to minimize the error on the \textit{training} data set, not on the \textit{validation set}. I.e. we're optimizing for the given training data by definition, not the new data that will be provided.\\
+
+\subsubsection{Training vs. Generalization Loss}
+
+Here, we should make an important distinction between training loss and generalization loss.\\
+
+As an example, as we increase the degree of our regression function, from $1$ to $2$ to $n$, we have to understand that\textbf{ at a certain point although we become more and more accurate in fitting a function to the training data, we start losing accuracy with new data that we need to classify.}\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Straight Lines [id:da05956360553502815] 
+\draw    (191,237.33) -- (191,23.75) ;
+\draw [shift={(191,21.75)}, rotate = 450] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da951863238215068] 
+\draw    (191,237.33) -- (450,237.33) ;
+\draw [shift={(452,237.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da37960579489360324] 
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ]   (191.67,48) .. controls (263.67,200.67) and (344.33,218.67) .. (439.67,224.67) ;
+%Curve Lines [id:da6900295471133798] 
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (192.33,44) .. controls (264.33,196.67) and (351,232) .. (439.67,165.33) ;
+
+% Text Node
+\draw (138,123) node [anchor=north west][inner sep=0.75pt]   [align=left] {Loss};
+% Text Node
+\draw (259.33,259) node [anchor=north west][inner sep=0.75pt]   [align=left] {Model Complexity};
+% Text Node
+\draw (239.14,86.5) node [anchor=north west][inner sep=0.75pt]  [rotate=-47.7] [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{Generalization}};
+% Text Node
+\draw (231.02,136.03) node [anchor=north west][inner sep=0.75pt]  [rotate=-45.18] [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{Training}};
+
+
+\end{tikzpicture}
+
+
+}
+
+\subsubsection{Cross-Validation}
+
+Although it is difficult to quantify the true generalization error, we can approximate it using \textbf{holdout cross-validation}.\\
+
+We want to split the dataset into a training set and a 'holdout' set- we train our algorithm on the training set and evaluate on the holdout set.\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp8876375748948402] 
+\draw  [fill={rgb, 255:red, 184; green, 233; blue, 134 }  ,fill opacity=1 ] (101.33,112.67) -- (571,112.67) -- (571,181.33) -- (101.33,181.33) -- cycle ;
+%Shape: Rectangle [id:dp8252875670245605] 
+\draw  [fill={rgb, 255:red, 80; green, 227; blue, 194 }  ,fill opacity=1 ] (101.33,112.67) -- (409,112.67) -- (409,181.33) -- (101.33,181.33) -- cycle ;
+
+% Text Node
+\draw (177.33,138) node [anchor=north west][inner sep=0.75pt]   [align=left] {Training Set (E.g. $\displaystyle 70\%)$};
+% Text Node
+\draw (425.33,127.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Holdout / Validation\\set (E.g. $\displaystyle 30\%)$};
+% Text Node
+\draw (96.67,199) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle \underbrace{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }_{All\ data}$};
+
+
+\end{tikzpicture}
+
+
+}
+
+\subsection{Regularization}
+
+We have previously seen that the degree of a polynomial acts as a natural measure of the 'complexity' of a model: \textbf{higher degree polynomials are more complex}.\\
+
+However, we can notice that fitting these models also requires \textbf{extremely large coefficients on these very high degree polynomials}. Thus, we can look at an alternative way to control model complexity: by keeping weights small.
+
+\subsection{Unsupervised Learning}
+
+Previously, we learned about the Supervised Learning paradigm. Here it is again.\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Straight Lines [id:da6934013484644858] 
+\draw    (59,40.33) -- (190.33,40.33) ;
+%Straight Lines [id:da22235545874167506] 
+\draw    (255,40.33) -- (386.33,40.33) ;
+%Straight Lines [id:da7620370986062277] 
+\draw    (447.67,40.33) -- (579,40.33) ;
+%Straight Lines [id:da5092396514647811] 
+\draw    (315.67,153.33) -- (331.83,90.6) ;
+\draw [shift={(332.33,88.67)}, rotate = 464.45] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Rectangle [id:dp7402750968279076] 
+\draw   (48.67,5.33) -- (205,5.33) -- (205,296.67) -- (48.67,296.67) -- cycle ;
+%Shape: Rectangle [id:dp05887269365061776] 
+\draw   (242,5.33) -- (398.33,5.33) -- (398.33,296.67) -- (242,296.67) -- cycle ;
+%Shape: Rectangle [id:dp2515662723024984] 
+\draw   (433.33,6.67) -- (589.67,6.67) -- (589.67,298) -- (433.33,298) -- cycle ;
+%Straight Lines [id:da11949475196221093] 
+\draw    (205,148.33) -- (239.67,148.33) ;
+\draw [shift={(241.67,148.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da6197911001911289] 
+\draw    (397.67,148.33) -- (430.33,148.33) ;
+\draw [shift={(432.33,148.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (82,19.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Training Data};
+% Text Node
+\draw (276.67,19.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {ML Algorithm};
+% Text Node
+\draw (474.67,19.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Predictions};
+% Text Node
+\draw (87.33,49.73) node [anchor=north west][inner sep=0.75pt]    {$\left( x^{1} ,y^{1}\right)$};
+% Text Node
+\draw (68,81.73) node [anchor=north west][inner sep=0.75pt]    {$\left( x^{2} ,y^{2}\right)$};
+% Text Node
+\draw (85.33,137.73) node [anchor=north west][inner sep=0.75pt]    {$\left( x^{4} ,y^{4}\right)$};
+% Text Node
+\draw (112.67,105.73) node [anchor=north west][inner sep=0.75pt]    {$\left( x^{3} ,y^{3}\right)$};
+% Text Node
+\draw (116,169.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {.\\.\\.};
+% Text Node
+\draw (88,239.07) node [anchor=north west][inner sep=0.75pt]    {$\left( x^{n} ,y^{n}\right)$};
+% Text Node
+\draw (278.67,157.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {Hypothesis\\function\\formed\\based on \\the given\\training data};
+% Text Node
+\draw (284,60) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle y^{i}$$\displaystyle =h\left( x^{i}\right)$};
+% Text Node
+\draw (451.33,50.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {Given a new input};
+% Text Node
+\draw (497.33,73.07) node [anchor=north west][inner sep=0.75pt]    {$x_{new}$};
+% Text Node
+\draw (450,107.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {The algorithm will\\predict what it\\ends up as};
+% Text Node
+\draw (462,179.07) node [anchor=north west][inner sep=0.75pt]    {$y_{new} =h( x_{new})$};
+
+$$
+
+
+\end{tikzpicture}
+
+
+}
+
+
+\hfill \break Now, we can introduce the Unsupervised Learning paradigm. It's basically \textbf{equivalent to the Supervised Learning paradigm, but our training data no longer has valid answers mapped to it}.\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Straight Lines [id:da6934013484644858] 
+\draw    (59,40.33) -- (190.33,40.33) ;
+%Straight Lines [id:da22235545874167506] 
+\draw    (255,40.33) -- (386.33,40.33) ;
+%Straight Lines [id:da7620370986062277] 
+\draw    (447.67,40.33) -- (579,40.33) ;
+%Straight Lines [id:da5092396514647811] 
+\draw    (315.67,153.33) -- (331.83,90.6) ;
+\draw [shift={(332.33,88.67)}, rotate = 464.45] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Rectangle [id:dp7402750968279076] 
+\draw   (48.67,5.33) -- (205,5.33) -- (205,296.67) -- (48.67,296.67) -- cycle ;
+%Shape: Rectangle [id:dp05887269365061776] 
+\draw   (242,5.33) -- (398.33,5.33) -- (398.33,296.67) -- (242,296.67) -- cycle ;
+%Shape: Rectangle [id:dp2515662723024984] 
+\draw   (433.33,6.67) -- (589.67,6.67) -- (589.67,298) -- (433.33,298) -- cycle ;
+%Straight Lines [id:da11949475196221093] 
+\draw    (205,148.33) -- (239.67,148.33) ;
+\draw [shift={(241.67,148.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da6197911001911289] 
+\draw    (397.67,148.33) -- (430.33,148.33) ;
+\draw [shift={(432.33,148.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (82,19.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Training Data};
+% Text Node
+\draw (276.67,19.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {ML Algorithm};
+% Text Node
+\draw (474.67,19.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Predictions};
+% Text Node
+\draw (87.33,49.73) node [anchor=north west][inner sep=0.75pt]    {$\left( x^{1}\right)$};
+% Text Node
+\draw (68,81.73) node [anchor=north west][inner sep=0.75pt]    {$\left( x^{2}\right)$};
+% Text Node
+\draw (85.33,137.73) node [anchor=north west][inner sep=0.75pt]    {$\left( x^{4}\right)$};
+% Text Node
+\draw (112.67,105.73) node [anchor=north west][inner sep=0.75pt]    {$\left( x^{3}\right)$};
+% Text Node
+\draw (116,169.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {.\\.\\.};
+% Text Node
+\draw (88,239.07) node [anchor=north west][inner sep=0.75pt]    {$\left( x^{n}\right)$};
+% Text Node
+\draw (278.67,157.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {Hypothesis\\function\\formed\\based on \\the given\\training data};
+% Text Node
+\draw (284,60) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle y^{i}$$\displaystyle =h\left( x^{i}\right)$};
+% Text Node
+\draw (451.33,50.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {Given a new input};
+% Text Node
+\draw (497.33,73.07) node [anchor=north west][inner sep=0.75pt]    {$x_{new}$};
+% Text Node
+\draw (450,107.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {The algorithm will\\predict what it\\ends up as};
+% Text Node
+\draw (462,179.07) node [anchor=north west][inner sep=0.75pt]    {$y_{new} =h( x_{new})$};
+
+$$
+
+
+\end{tikzpicture}
+
+
+}
+
+\hfill \break In a less formal sense, virtually all unsupervised learning algorithms can be considered in the same manner as supervised learning.\\
+
+Define a hypothesis function, define a loss function, and define how to optimize the loss function. The question is: \textbf{What do the hypothesis function and loss function signify in unsupervised learning?}\\
+
+The goal of unsupervised learning is to pick some restricted class of hypothesis functions that extract soe kind of \textbf{structure} from the data that isn't explicitly given to us. Examples of this type of algorithm are K-means and Principal Component Analysis.\\
+
+\subsection{K-Means Clustering}
+
+The K-Means Algorithm is easy to visualize. If we are given some collection of data points, we want to find $k$ 'center' points such that all points are close to at least one of these 'centers'.\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Circle [id:dp49730200176650663] 
+\draw   (184.5,122) .. controls (184.5,119.51) and (182.49,117.5) .. (180,117.5) .. controls (177.51,117.5) and (175.5,119.51) .. (175.5,122) .. controls (175.5,124.49) and (177.51,126.5) .. (180,126.5) .. controls (182.49,126.5) and (184.5,124.49) .. (184.5,122) -- cycle ;
+%Straight Lines [id:da019959509989611823] 
+\draw    (136,188.75) -- (175.39,129.91) ;
+\draw [shift={(176.5,128.25)}, rotate = 483.8] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp6027620182293444] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (431.5,158.5) .. controls (431.5,156.01) and (429.49,154) .. (427,154) .. controls (424.51,154) and (422.5,156.01) .. (422.5,158.5) .. controls (422.5,160.99) and (424.51,163) .. (427,163) .. controls (429.49,163) and (431.5,160.99) .. (431.5,158.5) -- cycle ;
+%Straight Lines [id:da47278888790990925] 
+\draw [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ]   (383,225.25) -- (422.39,166.41) ;
+\draw [shift={(423.5,164.75)}, rotate = 483.8] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (122,127.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{x}};
+% Text Node
+\draw (142,147.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{x}};
+% Text Node
+\draw (161.33,107) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{x}};
+% Text Node
+\draw (181.33,153.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{x}};
+% Text Node
+\draw (210,91.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{x}};
+% Text Node
+\draw (227.33,115) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{x}};
+% Text Node
+\draw (126.67,85) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{x}};
+% Text Node
+\draw (184.67,70.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{x}};
+% Text Node
+\draw (121,187.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle \mu _{1}$};
+% Text Node
+\draw (373.67,121.5) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,opacity=1 ] [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{x}};
+% Text Node
+\draw (368,224) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle \mu _{2}$};
+% Text Node
+\draw (393.67,141.5) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,opacity=1 ] [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{x}};
+% Text Node
+\draw (426.67,176) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,opacity=1 ] [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{x}};
+% Text Node
+\draw (467.17,117.5) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,opacity=1 ] [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{x}};
+% Text Node
+\draw (464.17,153.5) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,opacity=1 ] [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{x}};
+% Text Node
+\draw (380.67,177) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,opacity=1 ] [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{x}};
+% Text Node
+\draw (414.17,97) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,opacity=1 ] [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{x}};
+% Text Node
+\draw (464.17,193.5) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,opacity=1 ] [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{x}};
+% Text Node
+\draw (410.67,193) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,opacity=1 ] [align=left] {\textcolor[rgb]{0.29,0.56,0.89}{x}};
+
+
+\end{tikzpicture}
+
+
+}
+
+
+\hfill \break Here, The centers that we have identified in this 2-means clustering variant are labeled with $\mu$. he 'centers' are known as centroids. We can formally define clusters and centroids here.
+
+\hfill \begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Cluster} $\rightarrow$ A collection of data points aggregated together because of certain similarities.\\
+\textbf{Centroid} $\rightarrow$ The imaginary or real location representing the center of the cluster.
+\end{tcolorbox}
+
+
+
+\subsubsection{How K-Means fits Into the Unsupervised Framework Paradigm}
+
+\begin{itemize}
+	\item \textbf{Parameters} of K-Means are the choice of centers $\theta = \{\mu_1, ... \mu_k\}$ where $\mu_i \in \mathbb{R}^n$.
+	\item \textbf{Hypothesis} function is a function that decides the center closest to a point $x$. Formally: $$ h_{\theta}(x)= \underbrace{argmin}_{\mu \in \{\mu_1, ... \mu_k\}} ||\mu -x||_2^2 $$
+	\item \textbf{Loss function} is squared error between input and hypothesis. Formally: $$l(h_{\theta}(x),x)=||h_{\theta}(x)-x||_2^2$$
+	\item \textbf{Optimization problem} will therefore be: $$ \underbrace{minimize}_{\text{for } \mu_1, ... \mu_k} \sum_{i=1}^{m}{||h_{\theta}(x_i)-x_i||_2^2}$$
+\end{itemize}
+
+\subsubsection{K-Means Clustering Algorithm}
+
+To process learning data, the K-Means algorithm starts with a group of randomly selected centroids, which are used as the beginning points for every cluster, then performs iterative, repetetive calculations to optimize the positions of the centroids.\\
+
+It \textbf{halts} when either the \textbf{centroids have 'stabilized'}, meaning that there is (basically) no change in their values because the clustering has been successful, or \textbf{when the defined number of iterations has been completed}.
 
 \section{Footnotes}
 
