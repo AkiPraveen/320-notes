@@ -165,7 +165,7 @@
 \contentsline {subsection}{Support Vector Machines}{81}{lstnumber.-5.9}
 \contentsline {subsubsection}{If the Decision Boundary Is Not Linear}{83}{lstnumber.-5.9}
 \contentsline {subsubsection}{SVMs in Scikit-Learn}{84}{lstnumber.-5.9}
-\contentsline {section}{\numberline {16}Nonlinear Regression \& Regularization}{84}{section.16}
+\contentsline {section}{\numberline {16}Nonlinear Regression \& Regularization (L22 + 23)}{84}{section.16}
 \contentsline {subsection}{Generalization Error}{84}{section.16}
 \contentsline {subsubsection}{Training vs. Generalization Loss}{85}{section.16}
 \contentsline {subsubsection}{Cross-Validation}{85}{section.16}
@@ -177,4 +177,16 @@
 \contentsline {subsubsection}{How Do We Select $k$?}{88}{section.16}
 \contentsline {subsubsection}{Example of K-Means Clustering}{88}{section.16}
 \contentsline {subsection}{Principal Component Analysis}{89}{section.16}
-\contentsline {section}{\numberline {17}Footnotes}{89}{section.17}
+\contentsline {subsubsection}{3-Dimensional Example}{89}{section.16}
+\contentsline {subsubsection}{17-Dimensional Example}{92}{section.16}
+\contentsline {subsection}{General Notes}{93}{section.16}
+\contentsline {subsection}{Recommender Systems}{94}{section.16}
+\contentsline {subsection}{Collaborative Filtering}{94}{section.16}
+\contentsline {subsubsection}{Overview}{94}{section.16}
+\contentsline {subsubsection}{Approaches}{95}{section.16}
+\contentsline {subsection}{Association Rules}{96}{section.16}
+\contentsline {subsubsection}{Examples}{96}{section.16}
+\contentsline {subsubsection}{Basic Concepts of Association Rules}{96}{section.16}
+\contentsline {subsubsection}{Miscellaneous}{97}{table.caption.1}
+\contentsline {subsubsection}{In Practice}{97}{table.caption.1}
+\contentsline {section}{\numberline {17}Footnotes}{97}{section.17}

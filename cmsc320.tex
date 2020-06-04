@@ -4949,7 +4949,7 @@ clf.fit(X, y)
 \end{lstlisting}
 }
 
-\section{Nonlinear Regression \& Regularization}
+\section{Nonlinear Regression \& Regularization (L22 + 23)}
 
 So far, we have known linear regression as just 'drawing a line through our data', but it was in actuality a function of our input features.\\
 
@@ -5331,6 +5331,392 @@ The following example is K-Means Clustering performed on the MNIST digit classif
 
 \subsection{Principal Component Analysis}
 
+\textbf{Large datasets} are increasingly common and are often \textbf{difficult to interpret}. More on this excellent example (along with interactive components) can be found at the following website:\\
+
+\texttt{https://setosa.io/ev/principal-component-analysis/}
+
+\hfill \begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Principal Component Analysis} $\rightarrow$ technique for reducing the dimensionality of large and complex datasets.
+\end{tcolorbox}
+
+Principal Component Analysis, or \textbf{PCA}, accomplishes this by creating new (uncorrelated) variables that successively maximize variance.\\
+
+It provides us the answer to the question: \textbf{Can we combine raw features into new features that yield a simpler description of the same system?}
+
+\subsubsection{3-Dimensional Example}
+
+PCA really reveals its usefulness in 3 dimensions, because it's hard to see through a cloud of data. In the following example, the original data are plotted in 3d.\\
+
+{
+\centering
+
+\includegraphics[scale=0.65]{img/pca3dbefore.png} 
+
+}
+
+\hfill \break You can project this data into 2 dimensions using a transformation. (This particular transformation is no different than finding a different camera angle: rotate the axes to find a better angle.)\\
+
+So what's this 'better' angle? Usually, the one with the most variance. Here's a visual explanation. Here's the above dataset projected into 2 dimensions (unchanged).\\
+
+{
+\centering
+
+\includegraphics[scale=0.65]{img/pca2dbefore.png} 
+
+}
+
+Our goal is the apply a transformation (adjust the camera angle) such that the 3 dimensions that are available to us are arranged as such:
+
+\begin{itemize}
+	\item The horizontal axis, PC1, has the most variation
+	\item The vertical axis, PC2, has the second most
+	\item The third axis, PC3, has the least
+\end{itemize}
+
+Once we've found this optimal camera angle that ensures these three conditions are met with the most variance in PC1 and the least in PC3, we have something like this:\\
+
+{
+\centering
+
+\includegraphics[scale=0.65]{img/pca3dafter.png} 
+
+}
+
+\hfill \break The real beauty of this transformation can be seen when we return to the two dimensional point of view, where it can be observed that we've maximized variance.\\
+
+{
+\centering
+
+\includegraphics[scale=0.65]{img/pca2dafter.png} 
+
+}
+
+\hfill \break From here, in order to reduce dimensionality from 3 to 2, we simply just drop PC3. Below is an alternative visualization of the data.\\
+
+First, let's examine the variance given the default configuration of the axes, with no PCA applied.\\
+
+
+{
+\centering
+
+\includegraphics[scale=0.5]{img/pcaanalysisbefore.png} 
+
+}
+
+\hfill \break After the transformation, we can see that with the new axes specified by PCA, the variance in PC1 is maximized.\\
+
+{
+\centering
+
+\includegraphics[scale=0.5]{img/pcaanalysisafter.png}
+
+}
+
+\subsubsection{17-Dimensional Example}
+
+More realistically, our data will have far more dimensions (and thus, it won't be such a huge and clear loss of information to move down a few dimensions, relative to what we're given.)\\
+
+In the given table is data for the average consumption of 17 types of food per person per week for every country in the U.K. (\textit{grams per person})\\
+
+{
+\centering
+
+\includegraphics[scale=0.6]{img/17dtable.png} 
+
+}
+
+\hfill \break We can glean some information from this table, and it shows us some interesting variations, but \textbf{overall differences aren't very notable}. PCA may be able to help us eliminate dimensions to help us emphasize how countries differ.\\
+
+E.g. here is the plot of the data for the first principal component. We can see that Northern Ireland is looking different from the others.
+
+
+
+\hfill \break (This is a number line, as we're only observing a one dimensional slice of the 17 dimensional data)
+
+{
+\centering
+
+\includegraphics[scale=0.6]{img/17dpc1.png} 
+
+}
+
+\hfill \break We can take this analysis further by looking at the first and second principal components.\\
+
+{
+\centering
+
+\includegraphics[scale=0.6]{img/17dpc2.png} 
+
+}
+
+\hfill \break We can see that in the first and second principal components, Northern Ireland is a major outlier. This makes sense: the Northern Irish have such differing diets from the rest of these countries because it's the only one of the four countries not found on the island of Great Britain.\\
+
+We've come to a conclusion that reflects real-world geography.
+
+\subsection{General Notes}
+
+Unsupervised learning methods are useful for Exploratory Data Analysis. You're able to cluster or reduce your data to a few dimensions and visualize. Usually, this stuff is a means to an end, not an end within itself.\\
+
+Examples:
+
+\begin{itemize}
+	\item Run PCA and transform your data to optimize for variance while reducing dimensions, then run an appropriate supervised classifier.
+	\item Use k-Means to set up radial basis functions by getting $k$ centers, then creating the RBF Features as needed.
+\end{itemize}
+
+
+\subsection{Recommender Systems}
+
+In simple terms, a recommender system is just a system that predicts a user's rating of an item.\\
+
+Little bit of a mix between supervised learning and unsupervised learning.
+\begin{itemize}
+	\item Like \textbf{Supervised Learning} in that we have some semblance of labels there
+	\item Like \textbf{Unsupervised Learning} in that we are trying to find some latent structure within the data
+\end{itemize}
+
+Generally, this sort of analysis falls somewhere in between information filtering and retrieval. However, this \textbf{does not stop us} from phrasing the problem in terms of hypothesis classes, loss functions, and optimization problems.
+
+\subsection{Collaborative Filtering}
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Collaborative Filtering} $\rightarrow$ recommender systems that predict based only on the expressed preferences of other users for an item. 
+\end{tcolorbox}
+
+\subsubsection{Overview}
+\hfill \break Collaborative filtering is a technique that can filter out items that a user might like on the basis of reactions by similar users. It works by searching a large group of people and finding a smaller set of users with tastes similar to a particular user.\\
+
+Note the following visual example, where users 1 through 4 have ratings for items 1 through 4 if applicable.\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Square [id:dp9693485852887019] 
+\draw   (198.33,53.67) -- (363,53.67) -- (363,218.33) -- (198.33,218.33) -- cycle ;
+%Straight Lines [id:da06411415670338638] 
+\draw    (489.67,79.33) -- (362.17,24.79) ;
+\draw [shift={(360.33,24)}, rotate = 383.15999999999997] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da3176791358547847] 
+\draw    (426.33,186) .. controls (325.51,332.6) and (170.56,317.49) .. (166.22,225.39) ;
+\draw [shift={(166.17,224)}, rotate = 448.26] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (218.67,15.4) node [anchor=north west][inner sep=0.75pt]    {$i_{1}$};
+% Text Node
+\draw (254.33,15.4) node [anchor=north west][inner sep=0.75pt]    {$i_{2}$};
+% Text Node
+\draw (297.5,15.4) node [anchor=north west][inner sep=0.75pt]    {$i_{3}$};
+% Text Node
+\draw (336,15.4) node [anchor=north west][inner sep=0.75pt]    {$i_{4}$};
+% Text Node
+\draw (156.67,70.73) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$u_{1}$};
+% Text Node
+\draw (156.67,107.73) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$u_{2}$};
+% Text Node
+\draw (156.67,140.9) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$u_{3}$};
+% Text Node
+\draw (156.67,177.4) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$u_{4}$};
+% Text Node
+\draw (220.17,70.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 1}};
+% Text Node
+\draw (337.5,70.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 3}};
+% Text Node
+\draw (255.83,107.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 2}};
+% Text Node
+\draw (299,107.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 5}};
+% Text Node
+\draw (255.83,140.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 3}};
+% Text Node
+\draw (337.5,140.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 5}};
+% Text Node
+\draw (220.17,177) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 4}};
+% Text Node
+\draw (299,177) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 4}};
+% Text Node
+\draw (495.33,70.83) node [anchor=north west][inner sep=0.75pt]   [align=left] {Columns are items};
+% Text Node
+\draw (392,165) node [anchor=north west][inner sep=0.75pt]   [align=left] {Rows are users};
+
+
+\end{tikzpicture}
+
+
+}
+
+\hfill \break The blanks indicate where users have not left ratings. very simply, our job is to figure out what these users \textit{could} rate the items that they haven't rated. In other words, we are \textbf{predicting what they will rate items based on the expressed preferences of others}.\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Square [id:dp9693485852887019] 
+\draw   (202.33,54.33) -- (367,54.33) -- (367,219) -- (202.33,219) -- cycle ;
+%Straight Lines [id:da06411415670338638] 
+\draw    (489.67,79.33) -- (362.17,24.79) ;
+\draw [shift={(360.33,24)}, rotate = 383.15999999999997] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da3176791358547847] 
+\draw    (426.33,186) .. controls (325.51,332.6) and (170.56,317.49) .. (166.22,225.39) ;
+\draw [shift={(166.17,224)}, rotate = 448.26] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (218.67,15.4) node [anchor=north west][inner sep=0.75pt]    {$i_{1}$};
+% Text Node
+\draw (254.33,15.4) node [anchor=north west][inner sep=0.75pt]    {$i_{2}$};
+% Text Node
+\draw (297.5,15.4) node [anchor=north west][inner sep=0.75pt]    {$i_{3}$};
+% Text Node
+\draw (336,15.4) node [anchor=north west][inner sep=0.75pt]    {$i_{4}$};
+% Text Node
+\draw (156.67,70.73) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$u_{1}$};
+% Text Node
+\draw (156.67,107.73) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$u_{2}$};
+% Text Node
+\draw (156.67,140.9) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$u_{3}$};
+% Text Node
+\draw (156.67,177.4) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$u_{4}$};
+% Text Node
+\draw (220.17,70.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 1}};
+% Text Node
+\draw (337.5,70.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 3}};
+% Text Node
+\draw (255.83,107.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 2}};
+% Text Node
+\draw (299,107.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 5}};
+% Text Node
+\draw (255.83,140.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 3}};
+% Text Node
+\draw (337.5,140.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 5}};
+% Text Node
+\draw (220.17,177) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 4}};
+% Text Node
+\draw (299,177) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\fontfamily{pcr}\selectfont 4}};
+% Text Node
+\draw (495.33,70.83) node [anchor=north west][inner sep=0.75pt]   [align=left] {Columns are items};
+% Text Node
+\draw (392,165) node [anchor=north west][inner sep=0.75pt]   [align=left] {Rows are users};
+% Text Node
+\draw (299,70.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{{\fontfamily{pcr}\selectfont ?}}};
+% Text Node
+\draw (255.83,70.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{{\fontfamily{pcr}\selectfont ?}}};
+% Text Node
+\draw (220.17,107.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{{\fontfamily{pcr}\selectfont ?}}};
+% Text Node
+\draw (220.17,140.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{{\fontfamily{pcr}\selectfont ?}}};
+% Text Node
+\draw (299,140.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{{\fontfamily{pcr}\selectfont ?}}};
+% Text Node
+\draw (337.5,107.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{{\fontfamily{pcr}\selectfont ?}}};
+% Text Node
+\draw (337.5,177) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{{\fontfamily{pcr}\selectfont ?}}};
+% Text Node
+\draw (255.83,177) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0.82,0.01,0.11}{{\fontfamily{pcr}\selectfont ?}}};
+
+
+\end{tikzpicture}
+
+
+}
+
+The basic goal is to \textbf{fill in the matrix} as best we can. In terms of data structures, this is usually stored as a sparse matrix.
+
+\subsubsection{Approaches}
+
+There are three main ways to approach Collaborative Filtering. \textbf{User-user}, \textbf{Item-item}, and \textbf{Matrix factorization}.
+
+\begin{itemize}
+	\item \textbf{Item-Based CF} $\rightarrow$ Here, we want to calculate the similarity between two items and then decide that users will rate it based on that. \textbf{We have done this before in a different context.} First, we should \textbf{only consider users who have rated both items}. For each user in that list, we should calculate the difference in ratings for the two items, and then take the average of this difference over the users. We \textbf{can also find the cosine similarity of these items}.
+	\item \textbf{User-Based CF} $\rightarrow$ This approach is very similar to the previous one, we just do the converse of it.
+	\item \textbf{Matrix Factorization} $\rightarrow$ This one's a little more formal in nature. We \textbf{want} all the entries $i, j$ of the ratings matrix $X \in \mathbb{R}^{m \times n}$.\\
+	\begin{myproof}
+	\textbf{Idea:} Approximate this as $u_i^T \cdot v_j$, where $u_i \in \mathbb{R}^k$ represents the user-specific weights (we're using the transpose of this matrix), and $u_j \in \mathbb{R}^k$ represents the item-specific weights.\\\\
+	\textbf{Hypothesis function:} We want this to produce a matrix built to our specifications, i.e. $h_{\theta}(i,j)=u_i^T \cdot v_j$\\\\
+	\textbf{Loss function:} Least squares on observed entries, i.e. $l(h_{\theta}(i,j),X_{ij})=(h_{\theta}(i,j)-X_{ij})^2$\\\\
+	\textbf{Optimization problem:} Where $S$ is the observed entries, we need to minimize $\theta$ on $$\sum_{i,j \in S}{l(h_{\theta}(i,j),X_{ij})}$$
+	\end{myproof}
+	
+\end{itemize}
+
+Matrix factorization as a problem is known to not be a convex function, i.e. there's no one optimal solution that we're going to nail every time. Therefore, we won't go for perfect results.\\
+
+Essentially, we are factorizing the ratings matrix $X$ as $X = UV$ where $U \in \mathbb{R}^{m \times k}$ and $V \in \mathbb{R}^{k \times n}$ but only penalizing mismatches between $UV$ and $X$ at the observed entries in $X$.
+
+\subsection{Association Rules}
+
+We can also find rules that \textbf{associate} the presence of one set of items with that of another set of item.\\
+
+\begin{myproof}
+An excellent example of this is the Amazon 'Customers also bought' section.
+\end{myproof}
+
+Association rules are usually represented in the form $X \rightarrow Y$, where $X$ (rule antecedent) and $Y$ (rule consequent) are disjoint conjunctions of features. Rule quality is usually measured by rule support and confidence.\\
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Rule support} $\rightarrow$ The percentage of records containing both $X$ and $Y$.\\\\
+\textbf{Rule confidence} $\rightarrow$ The conditional probability of finding $Y$ given $X$, i.e. the conditional probability that a transaction will contain $Y$ given that it contains $X$. It describes the strength of the implication, and is given by $$c(X \rightarrow Y) = \frac{s(X \rightarrow Y)}{s(X)}$$ 
+\end{tcolorbox}
+
+\subsubsection{Examples}
+\begin{itemize}
+	\item buys(x, bread) $\land$ buys(x, eggs) $\rightarrow$ buys(x, milk) <support: 0.6\%, confidence: 65\%>
+	\item age="30-45", income="50k-75k" $\rightarrow$ car="SUV"
+\end{itemize}
+
+\subsubsection{Basic Concepts of Association Rules}
+
+To explain these concepts, we'll make use of the following table.\\
+
+{
+\centering
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Transaction ID} & \textbf{Items Purchased}  \\ \hline
+1                       & Bread, Milk               \\ \hline
+2                       & Bread, Diaper, Beer, Eggs \\ \hline
+3                       & Milk, Diaper, Beer, Coke  \\ \hline
+4                       & Bread, Milk, Diaper, Beer \\ \hline
+5                       & Bread, Milk, Diaper, Coke \\ \hline
+\end{tabular}
+\end{table}
+
+}
+
+
+
+\begin{itemize}
+	\item \textbf{Itemset} $\rightarrow$ A set of one or more items. E.g. \{Milk, Bread, Diaper\}. 
+	\item \textbf{K-itemset} $\rightarrow$ An itemset that contains $k$ items.
+	\item \textbf{Support Count ($\sigma$)} $\rightarrow$ Frequency of occurrence of an itemset- the number of transactions in which it appears. E.g. $\sigma$(\{Milk, Bread, Diaper\}) = 2
+	\item \textbf{Support} $\rightarrow$ Fraction of the transactions in which an itemset appears. E.g. s(\{Milk, Bread, Diaper\}) = $\frac{2}{5}$
+	\item \textbf{Frequent Itemset} $\rightarrow$ An itemset whose support is greater than or equal to a minsup threshold.
+\end{itemize}
+
+\subsubsection{Miscellaneous}
+
+There are other considerations of how 'interesting' a rule is, including \textbf{lift}, \textbf{conviction}, etc. 
+
+\subsubsection{In Practice}
+
+\texttt{Orange3} is a GUI and Python API that enumerates frequent itemsets and performs association mining. It plays nicely with \texttt{sklearn}.\\
+
+Generally, we can make use of Association Rules for interpretable, fast data mining. However, this sort of analysis typically doesn't consider order or scalability issues.
+
+
+
 \section{Footnotes}
 
 Taken and compiled by Akilesh Praveen.\\
@@ -5345,6 +5731,7 @@ References:
 	\item Hackerearth.com
 	\item Softwaretestinghelp.com
 	\item CSE 591 - Stonybrook University
+	\item setosa.io
 \end{itemize}
 
 \end{document}
