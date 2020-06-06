@@ -112,7 +112,7 @@
 
 
 \newtcolorbox{myproof}[1][]{
-   enhanced,arc=0pt, frame hidden, borderline west = {1pt}{0pt}{black}, #1
+   enhanced,arc=0pt, frame hidden, borderline west = {1pt}{0pt}{black}, #1,breakable
 }
 
 \begin{document}
@@ -3544,7 +3544,13 @@ Python provides us with lots of options in terms of machine learning libraries.\
 
 \subsection{(Stochastic) Gradient Descent}
 
-Recall that the \textbf{gradient} always points in the \textit{local} direction of steepest ascent.\\
+First, let's establish this definition.\\
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Stochastic} $\rightarrow$ Randomly determined; having a random probability distribution or pattern that may be analyzed statistically, but may not be predicted precisely.
+\end{tcolorbox}
+
+\hfill \break Recall that the \textbf{gradient} always points in the \textit{local} direction of steepest ascent.\\
 
 As such, we need to get to the 'lowest' point on our multivariate $n$-dimensional plane by taking minute steps \textit{against} the gradient.
 
@@ -5715,6 +5721,281 @@ There are other considerations of how 'interesting' a rule is, including \textbf
 
 Generally, we can make use of Association Rules for interpretable, fast data mining. However, this sort of analysis typically doesn't consider order or scalability issues.
 
+\section{Big Data and MapReduce (L24)}
+
+\subsection{Big Data}
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Big Data} $\rightarrow$ extremely large data sets that may be analyzed computationally to reveal patterns, trends, and associations, especially relating to human behavior and interactions.
+\end{tcolorbox}
+
+\hfill \break There is no formal point where we say, 'oh, that is now \textbf{big data}.' However, we can look at a few notable inflection points in terms of how large your actual data is. \\
+
+\textit{Note how we're going based on disk and RAM sizes. This is because the definition of big data will inevitably vary with the amount of data we can easily manage.}
+
+\begin{itemize}
+	\item[1.] Your data fits in RAM on a single machine.
+	\item[2.] Your data fits in disk on a single machine.
+	\item[3.] Your data fits in RAM or disk on a small cluster of machines.
+	\item[4.] Your data fits in RAM or disk on a large cluster of machines.
+\end{itemize}
+
+It's probably reasonable to refer to 3 and 4 as big data, but many would only consider 4 as big data. Again, the definition varies.
+
+\textbf{Distributed Computing} rose to prominence in the 70s and 80s, and was made possible in part by innovations in computer architecture like the \textbf{Message Passing Interface}, a key technology that allowed multiple computer systems to work together on problems.\\
+
+\textbf{MPI} is extremely powerful but is complicated and brittle- it's imperfect.
+
+\subsection{MapReduce}
+
+\subsubsection{Overview}
+
+When Google first started building their datacenters, they used clusters of off-the-shelf commodity hardware. Machines had different speeds and failures were common given cluster sizes.\\
+
+Data itself was distributed redundantly over many machines, they \textbf{wanted as much as possible to perform the computation on the machine where the data was stored}.\\
+
+This led to the development of the \textbf{MapReduce} framework at Google, which was made popular through the Apache Hadoop open source implementation.\\
+
+\subsubsection{Hadoop}
+
+\begin{myproof}
+Hadoop (owned by Apache) is an open-source framework designed for distributed storage and processing of very large data sets across clusters of computers. Apache Hadoop consists of components including:
+
+\begin{itemize}
+	\item \textbf{Hadoop Distributed File System} (HDFS), the bottom layer component for storage. HDFS breaks up files into chunks and distributes them across the nodes of the cluster.
+	\item \textbf{Yarn} for job scheduling and cluster resource management.
+	\item \textbf{MapReduce} for parallel processing.
+	\item Other libraries.
+\end{itemize}
+
+\end{myproof}
+
+
+\subsubsection{MapReduce Details}
+
+
+Initially used for analyzing search results, \textbf{MapReduce gained popularity due to its ability to split and process terabytes of data in parallel, achieving quicker results}.\\
+
+At the core of MapReduce are two functions: Map and Reduce. Here are their definitions in relation to this algorithm.\\
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Map} $\rightarrow$ The mapper reads in data from the filesystem and outputs modified data.\\\\
+\textbf{Reduce} $\rightarrow$ The reducer collects all of the mappers' outputs on the keys, and then outputs 'reduced' data.
+\end{tcolorbox}
+
+\hfill \break Mappers and reducers are the Hadoop servers that run the Map and Reduce functions respectively.\\
+
+\subsubsection{How MapReduce Works}
+
+\includegraphics[scale=0.47]{img/mapreduce.jpg} \\
+
+\begin{itemize}
+	\item \textbf{Map} $\rightarrow$ The input data is first split into smaller blocks, and then each block is assigned to a \textbf{mapper} for processing. Mappers read in a chunk of data provided by the splitter (typically 64MB), and then emit a set of data derived from the input.
+	\item \textbf{Combine} $\rightarrow$ This is an optional process. The \textbf{combiner} is a reducer that runs individually on each mapper server. It reduces the data on each mapper further to a more simplified form before passing it downstream.
+	\item \textbf{Partition} $\rightarrow$ This is the process that translates the kv pairs from mappers to another set of kv pairs to feed into the reducer. It decides how the data has to be presented to the reducer and assigns it to a particular reducer.
+	\item \textbf{Reduce} $\rightarrow$ After all the mappers complete processing, the framework shuffles and sorts the results before passing them onto the reducers. \textit{Note that a reducer cannot start while a mapper is still in progress}. This is the last step in the process, and the dataset that reducers produce is typically written to disk.
+\end{itemize}
+
+\subsubsection{Key Notes about Mappers/Reducers}
+
+\begin{itemize}
+	\item Mappers and reducers are typically single threaded and deterministic. Determinism allows for the restarting of failed jobs, or \textit{speculative execution}.
+	\item If you need to handle more data, you can just add more mappers or reducers.
+	\begin{itemize}
+		\item No need to handle multi-threaded code.
+		\item Since these systems are all independent of each other, you can run a nearly arbitrary number of nodes.
+		\item A machine typically has a few nodes that can be allotted to mappers and reducers, it's usually one mapper or reducer per processor core.
+	\end{itemize}
+	\item Mappers/reducers run entirely independently of each other. (in the case of Hadoop, they run in separate JVMs)
+\end{itemize}
+
+\subsubsection{MapReduce's Pros and Cons}
+
+\begin{itemize}
+	\item \textbf{Pros}
+	\begin{itemize}
+		\item All you need to do is write a mapper and reducer; they can then be scaled as much as you need.
+		\item Can get away with not exposing any of the internals if you're using a premade engine.
+	\end{itemize}
+	\item \textbf{Cons}
+	\begin{itemize}
+		\item Lots of reading and writing from disk
+		\item Sometimes, communication between processes is necessary
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{MapReduce in Python}
+
+Python's \texttt{mrjob} library allows you to write mappers and reducers in Python, which you can then deploy on Hadoop systems, Amazon Elastic MR, and Google Cloud.
+
+\section{Probability Review (L25)}
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Statistical Inference} $\rightarrow$ The discipline that concerns itself with the development of procedures, methods, and theorems that allow us to extract meaning from data taht has been generated by stochastic (random) processes.
+\end{tcolorbox}
+
+\hfill \break It's like going from real life, to data, and then back to real life again. The goal is often \textbf{to develop a statistical model of the real world}.\\
+
+Usually, we'll end up with one of the following.
+\begin{itemize}
+	\item An estimate
+	\item A Confidence Interval
+	\item Rejection of a hypothesis
+	\item Clustering or Classification of data points into groups
+\end{itemize}
+
+\subsection{Review of Probability}
+
+\textbf{Probability} is concerned with the outcome of a \textit{trial}. (i.e. experiment, observation)\\
+
+\subsubsection{Basics}
+
+\begin{tcolorbox}[title=Definitions:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Sample space} $\rightarrow$ Set of all possible outcomes of a trial.\\\\
+\textbf{Event} $\rightarrow$ specification of the outcome of a trial.
+\end{tcolorbox}
+
+\hfill \break As such, the probability of the sample space will always be 1. \textit{(Recall that probability is measured on a float scale from 0 to 1)}\\
+
+Example:\\
+
+\begin{myproof}
+Trial = Tossing a coin; Sample space = \{Heads, Tails\}; Event = Heads
+\end{myproof}
+
+\hfill \break If two events $E$ and $F$ are \textbf{independent} then the probability of $E$ does not change if $F$ has already happened. I.e. for \textbf{two independent events $E$ and $F$:} $$ P(E|F) = P(E) $$
+
+Additionally, if two events $E$ and $F$ are \textbf{mutually exclusive}, then: $$P(E \union F) = P(E) + P(F)$$
+
+\subsubsection{Bayes Theorem}
+
+\textbf{Bayes Theorem} is a very simple equation, but it's fundamental to \textbf{Bayesian Inference}.\\
+
+\begin{tcolorbox}[title=Aside: Bayes' Theorem,colframe=black,colback=white,arc=0pt,fonttitle=\bfseries]
+\textbf{Bayes' Theorem} describes the probability of an event, based on prior knowledge of conditions that might be related to the event.
+
+$$ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} $$
+\end{tcolorbox}
+
+\hfill \break \textbf{Conditional Independence} is the idea that events $A$ and $B$ are conditionally independent given $C$ if the probability of $A$ and $B$ happening given that $C$ happened is the same as the probability that $A$ happened given that $C$ happened, times the probability that $B$ happened given that $C$ happened. Formally: $$P(A \land B | C) = P(A|C) \cdot P(B|C)$$\\
+
+\textbf{Entropy} is a measure of the uncertainty in a probability distribution.
+
+\subsection{Hypothesis Testing}
+
+This is the process in which we \textbf{accept} or \textbf{reject} a statistical hypothesis about a population.\\
+
+We will refer to $H_0$ as the null hypothesis, and $H_1$ as the alternative hypothesis.\\
+
+\subsubsection{Background Information}
+
+\begin{tcolorbox}[title=Definition:,colframe=red!75!black,colback=red!5!white,arc=0pt,fonttitle=\bfseries]
+\textbf{Null Hypothesis} $\rightarrow$ A statement about a population parameter. We can test the likelihood of this statement being true in order to decide whether to accept or reject our alternative hypothesis. \textit{Can include $=, \leq, or \geq$ sign.}\\\\
+\textbf{Alternative Hypothesis} $\rightarrow$ A statement that directly contradicts the null hypothesis. We determine whether or not to accept or reject this statement based on the likelihood of the null hypothesis being true. \textit{Can include $=, <, or >$ sign.}\\\\
+\textbf{P-value} $\rightarrow$ The probability of obtaining the observed results of a test, assuming that the null hypothesis is correct; a smaller p-value means that there is stronger evidence in favor of the alternative hypothesis.\\\\
+\textbf{Alpha} $\rightarrow$ The significance level; the probability of rejecting the null hypothesis when it is true. Also known as the \textit{Type 1 Error}.
+\end{tcolorbox}
+
+\hfill \break To elaborate, the \textbf{null hypothesis} is the hypothesis that sample observations result purely from chance. The null hypothesis tends to state that there is no change. The \textbf{Alternative hypothesis}, on the other hand, is the hypothesis that sample observations are influenced by some non-random cause.\\
+
+We can map these definitions to the following example from \textit{towardsdatascience} for better understanding.\\
+
+\begin{myproof}
+Imagine that you and your friend play a game. If a coin lands on heads, you win \$5 and if it lands on tails he wins \$5.\\
+
+Let’s say the first two coin tosses landed on tails, meaning your friend won \$10. Should you be worried that he’s using a rigged coin? Well, the probability of the coin landing on tails two times in a row is 25\% (see above) which is not unlikely.\\
+
+What if the coin landed on tails six times in a row? The probability of that occurring is approximately 1.56\% (see above), which is highly unlikely. At this point, it would be fair to assume that the coin is rigged. Typically, one would set a threshold, usually 5\%, to determine if an event occurred by chance or not (if you learned this before, this is known as the alpha!)\\
+
+In this case:
+\begin{itemize}
+	\item The \textbf{null hypothesis} in our example is that the coin is a fair coin and that the observations result purely from chance
+	\item The \textbf{alternative hypothesis} would then be that the coin is not fair, and that the scenario did not happen by chance.
+	\item The \textbf{p-value} in the scenario of flipping tails 2 times in a row is 25\%, (it's 1.56\% when you're flipping tails 6 times in a row)
+	\item The \textbf{alpha}, or level of significance would be 5\%.
+\end{itemize}
+\end{myproof}
+
+\subsubsection{Rejecting vs. Not Rejecting the Null}
+
+The main rule in deciding whether or not you reject the null hypothesis is \textbf{PGADRN}.\\
+
+If the \textbf{P} value is \textbf{G}reater than the \textbf{A}lpha, \textbf{D}o not \textbf{R}eject the \textbf{N}ull.\\
+
+\begin{myproof}
+In the case of flipping tails 2 times in a row, we \textbf{would not} reject the null, since 25\% (the chance of that case happening) is greater than 5\% (our $\alpha$ value).\\
+
+In the case of flipping tails 6 times in a row, we \textbf{would} reject the null hypothesis, since 1.56\% < 5\% (our $\alpha$ value).
+\end{myproof}
+
+\subsubsection{What's the Point?}
+
+Now we understand the terminology and the use through an example, so what's the point of this process?\\
+
+It's used \textbf{to determine how likely or unlikely a hypothesis is for a given sample of data}. That last part is key, because more often than not, you won't be able to get an infinite amount of data, or even data that represents the \textit{entire} population.
+
+\subsubsection{General Steps}
+
+Here are the steps for performing a hypothesis test in a general sense.
+\begin{itemize}
+	\item[1.] State your null and alternative hypotheses. \textit{Usually, null states that everything is as normally was; that nothing has changed; alternative states that something has indeed changed.}
+	\item[2.] Set your significance level, the $\alpha$. \textit{This is at which point you say "okay, the probability that this event occurred is a bit abnormal".} (Usually set to 5\%)
+	\item[3.] Collect sample data and calculate sample statistics.
+	\item[4.] Calculate the p-value given those sample statistics. Once you get the sample statistics, you can determine the p-value through different methods. Most commonly, we use T-score and Z-score given a normal distribution of data.
+	\item[5.] Reject or do not reject the null hypothesis. (Using \textbf{PGADRN})
+\end{itemize}
+
+\subsection{Sample Statistics}
+
+To be more consistent with standard statistics notation, we will introduce the notion of a \textit{population} and a \textit{sample}.\\
+
+{
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Ellipse [id:dp1941426265750391] 
+\draw  [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ] (90.67,58.67) .. controls (90.67,29.58) and (193.57,6) .. (320.5,6) .. controls (447.43,6) and (550.33,29.58) .. (550.33,58.67) .. controls (550.33,87.75) and (447.43,111.33) .. (320.5,111.33) .. controls (193.57,111.33) and (90.67,87.75) .. (90.67,58.67) -- cycle ;
+%Shape: Ellipse [id:dp8575198252885649] 
+\draw  [fill={rgb, 255:red, 80; green, 227; blue, 194 }  ,fill opacity=1 ] (342.67,55.67) .. controls (342.67,41.49) and (358.34,30) .. (377.67,30) .. controls (397,30) and (412.67,41.49) .. (412.67,55.67) .. controls (412.67,69.84) and (397,81.33) .. (377.67,81.33) .. controls (358.34,81.33) and (342.67,69.84) .. (342.67,55.67) -- cycle ;
+%Straight Lines [id:da6374615822579148] 
+\draw    (181,152.67) -- (189.96,105.96) ;
+\draw [shift={(190.33,104)}, rotate = 460.86] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da7589563988427739] 
+\draw    (452.33,152.67) -- (395.55,78.26) ;
+\draw [shift={(394.33,76.67)}, rotate = 412.65] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (138,156.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{Population}};
+% Text Node
+\draw (425.33,156.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{Sample}};
+% Text Node
+\draw (144.67,195) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle \mu =\mathbf{E}[ X]$};
+% Text Node
+\draw (409.33,178.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle \overline{x} =\frac{1}{m}\sum\limits ^{m}_{i=1} x^{( i)}$};
+% Text Node
+\draw (63.33,196) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{Mean}};
+% Text Node
+\draw (42,259.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{Variance}};
+% Text Node
+\draw (121.33,257.17) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle \sigma =\mathbf{E}\left[( X-\mu )^{2}\right]$};
+% Text Node
+\draw (367.33,242.17) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle s^{2} =\frac{1}{m-1}\sum\limits ^{m}_{i=1}\left( x^{( i)} -\overline{x}\right)^{2}$};
+
+
+\end{tikzpicture}
+
+
+}
+
+
+
+
 
 
 \section{Footnotes}
@@ -5731,7 +6012,10 @@ References:
 	\item Hackerearth.com
 	\item Softwaretestinghelp.com
 	\item CSE 591 - Stonybrook University
-	\item setosa.io
+	\item Setosa.io
+	\item Talend.com
+	\item Mapr.com
+	\item Towardsdatascience.com
 \end{itemize}
 
 \end{document}
