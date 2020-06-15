@@ -1,0 +1,150 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{scribe}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage[many]{tcolorbox}
+
+\Scribe{Akilesh Praveen}
+\Lecturer{John Denero}
+\LectureNumber{1}
+\LectureDate{Fall 2019}
+\LectureTitle{Declarative Programming: SQL}
+
+\lstset{style=mystyle}
+
+% custom colorbox
+\newtcolorbox{aside}[1][]{
+   enhanced,arc=0pt, frame hidden, borderline west = {1pt}{0pt}{black}, #1,breakable
+}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+	\MakeScribeTop
+
+%#############################################################
+%#############################################################
+%#############################################################
+%#############################################################
+
+\section{Declarative Languages}
+
+\subsection{Why Declarative?}
+
+Systems is a general area of research that works on things like OS (the most important application), but the runner-up is a \textbf{database management system}.\\
+
+A database is a collection of tables, and tables are where you put that data. A DBMS is what helps you manipulate that.\\
+
+The \textbf{Structured Query Language} is the most widely used language that we use to extract information that we want to use from these database, so we can make decisions based on that information.\\
+
+\textbf{SQL is a declarative language.}
+
+\subsection{Declarative vs. Imperative}
+
+In \textbf{declarative languages} like SQL and Prolog, a 'program' is a description of a result that you want, and it's the interpreter's job to figure out how to generate that result.\\
+
+In \textbf{imperative languages} such as Python and Java, a 'program' is a description of computational processes. The interpreter simply carries out execution based on preset evaluation rules.\\
+
+For this reason, \textbf{there's more flexibility in a declarative langauge interpreter}.\\
+
+For example: In an imperative language, if you write a quadratic time algorithm by specifying a computational process, it'll probably just run in quadratic time. However, in a declarative language, you simply tell the interpreter what you want, and it'll decide which of the options that it has (e.g. linear, quadratic, etc.) in order to compute what you want as efficiently as possible.\\
+
+\begin{aside}
+A lot of the interesting research in declarative programming involves deciding what methods to use to produce the data you want based on the queries you make, and how to make that as efficient as possible.
+\end{aside}
+
+\subsection{Structured Query Language}
+
+SQL is super common, just because lots of people do database management.
+
+\begin{itemize}
+	\item A \textbf{select} statement creates a new table, either from scratch or by \textit{projecting} a table. Always composed of a comma separated list of column descriptions.\\\\
+	As such, the following would create a two-column table of literals.
+	\begin{lstlisting}[language=sql]
+	    select [expression] as [name], [expression] as [name}\end{lstlisting}
+	    To create a multi-row table of literals, just union these statements together.
+	    \begin{lstlisting}[language=sql]
+	    select "abraham" as parent, "barack" as child union
+	    select "abraham" as parent, "clinton" as child;\end{lstlisting}
+	\item A \textbf{create table} statement gives a global name to a table. A select statement displays a result to the user, but if you want to give it a name and \textbf{store it}, you just use a create table command.
+	\begin{lstlisting}[language=sql]
+	create table parents as
+	    select "abraham" as parent, "barack" as child union
+	    select "abraham" as parent, "clinton" as child;\end{lstlisting}
+	 
+\end{itemize}
+
+\textbf{All SQL statements end in semicolons.}\\
+
+Lots of other statements exist, but they're not too important for understanding the heart of how SQL works.
+
+\section{Projecting Tables}
+
+\texttt{select} statements can specify an \textit{input}, using a \texttt{from} clause. For example, you can do the following:\\
+
+\begin{lstlisting}[language=sql]
+select [columns] from [table] where [condition] order by [order];
+\end{lstlisting}
+
+Here, the \texttt{[columns]} label I made refers to a column description, which can be the same as the \texttt{select} statements I made above with abraham, barack and clinton.\\
+
+Every select statement creates a new table with rows and columns. So you could say something like this:
+
+\begin{lstlisting}[language=sql]
+select parents from parents where parent = "abraham";
+\end{lstlisting}
+
+\section{Arithmetic}
+
+\textbf{Select expressions can also perform arithmetic.}\\
+
+When we make a select expression, we can also include arithmetic in it. This can be done when we're projecting from another table to do some neat calculations.\\
+
+\begin{lstlisting}[language=sql]
+create table lift as
+    select 101 as chair, 2 as single, 2 as couple union
+    select 102         , 0          , 3           union
+    select 103         , 4          , 1;
+
+select chair, single + 2 * couple as total from lift;
+\end{lstlisting}
+
+\hfill \break We can see SQL used here to do arithmetic to produce a table of the total amount of riders.\\
+
+The above SQL commands would produce the following table.
+
+\begin{center}
+\begin{tabular}{ |c|c| } 
+ \hline
+ \textbf{chair} & \textbf{total} \\
+ \hline 
+ 101 & 6 \\ 
+ 102 & 6 \\
+ 103 & 6\\ 
+ \hline
+\end{tabular}
+\end{center}
+
+Union works the same way as it does in set theory, where it discards duplicates.\\
+
+
+
+
+
+
+
+
+%\begin{lstlisting}[language=sql]
+%create table cities as
+%    select 38 as latitude, 122 as longitude, "UMD" as name union
+%\end{lstlisting}
+
+
+
+
+
+%%%%%%%%%%% end of doc
+\end{document}
